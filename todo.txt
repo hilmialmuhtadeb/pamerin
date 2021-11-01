@@ -1,0 +1,7 @@
+1. user biasa masih bisa login di tempat seniman
+2. berikan middleware pada aksi2 tertentu
+
+users.update {
+  code 1 : update profile
+  code 2 : update password
+}
