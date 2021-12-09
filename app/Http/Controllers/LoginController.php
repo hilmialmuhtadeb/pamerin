@@ -31,6 +31,9 @@ class LoginController extends Controller
             if (Auth::user()->type === 2) {
                 return redirect(route('artists.index'));
             }
+            if (Auth::user()->type === 1) {
+                return redirect(route('admin.index'));
+            }
         }
         
         throw ValidationException::withMessages([

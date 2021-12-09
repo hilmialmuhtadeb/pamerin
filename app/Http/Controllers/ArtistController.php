@@ -27,4 +27,8 @@ class ArtistController extends Controller
         $artworks = Artwork::where('user_id', Auth::user()->id)->where('price', '!=', null)->get();
         return view('users.artists.artworks.sell', compact('artworks'));
     }
+    public function accept()
+    {
+        return view('users.artists.artworks.accept');
+    }
 }

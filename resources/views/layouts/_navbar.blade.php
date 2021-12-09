@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
-
     <a class="navbar-brand" href="{{ route('home') }}">
-      <img src="/img/logo/pamerin-logo.png">
+        <img src="/img/logo/pamerin-logo.png">
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +95,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{{ route('artists.artworks') }}">Karya Seni</a></li>
               <li><a class="dropdown-item" href="{{ route('artists.artworks.sell') }}">Dijual</a></li>
-              <li><a class="dropdown-item" href="#">Pesanan Diterima</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.artworks.accept') }}">Pesanan Diterima</a></li>
               <li><a class="dropdown-item" href="#">Perlu Dikirim</a></li>
               <li><a class="dropdown-item" href="#">Selesai</a></li>
             </ul>
@@ -134,16 +133,41 @@
         @if (Auth::user()->type === 1)    
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="{{ route('home') }}">Home</a>
+            <a class="nav-link{{ str_contains(request()->path(), 'exhibitions') ? ' active' : '' }}" href="{{ route('admin.pengguna') }}">Pengguna</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Kelola Pameran
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('admin.pengajuan') }}">Pengajuan</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.publikasi') }}">Publikasi</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.berlangsung') }}">Sedang Berlangsung</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.selesai') }}">Selesai</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Kelola Karya Seni
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('admin.tersedia') }}">Tersedia</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.dikirim') }}">Dikirim</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.finish') }}">Selesai</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Kelola Lelang
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('admin.sedia') }}">Tersedia</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.kirim') }}">Dikirim</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.done') }}">Selesai</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link{{ str_contains(request()->path(), 'exhibitions') ? ' active' : '' }}" href="{{ route('exhibitions.index') }}">Pameran</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{{ str_contains(request()->path(), 'artworks') ? ' active' : '' }}" href="{{ route('artworks.index') }}">Karya</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lelang</a>
+            <a class="nav-link{{ str_contains(request()->path(), 'artworks') ? ' active' : '' }}" href="{{ route('admin.artikel') }}">Kelola Artikel</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">

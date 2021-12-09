@@ -1,5 +1,5 @@
-<x-app-layout title="Dashboard">
-
+<x-app-layout title="Home Admin PamerIn">
+    
   @slot('style')
       <style>
         .box-container {
@@ -37,7 +37,7 @@
   <div class="container">
 
     <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-      <h1 class="text-center page-title"><span class="thin-page-title">Hai, </span>{{ Auth::user()->name }}</h1>  
+      <h1 class="text-center page-title"><span class="thin-page-title">Hai,ADMIN</h1>  
       <span class="underline-page-title text-center"></span>
     </div>
 
@@ -59,5 +59,4 @@
     </div>
 
   </div>
-  
-</x-app-layout>
+  </x-app-layout>
