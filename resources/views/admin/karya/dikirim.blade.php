@@ -51,11 +51,28 @@
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">
-                <i class="text-navy">Dikirim</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
+                <i class="text-warning">Dikirim</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-dikirim"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr>
           </tbody>
       </table>
+
+      <x-modal name="info-dikirim">
+        <div class="d-flex justify-content-center flex-column align-items-center mb-5">
+          <h1 class="text-center page-title">Informasi Pengiriman Karya Seni</h1>
+          <span class="underline-page-title text-center"></span>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-8">
+            <p>Status : <b class="text-warning">#</b></p>
+            <p>ID Pesanan : <b>#</b></p>
+            <p>ID Karya : <b>#</b></p>
+            <p>Nama Pemesanan : <b>#</b></p>
+            <p>Total Pembayaran : <b>#</b></p>
+            <p>Alamat : <b>#</b></p>
+          </div>
+        </div>
+      </x-modal>
   </div>
   </x-app-layout>

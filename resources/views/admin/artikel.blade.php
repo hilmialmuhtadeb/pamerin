@@ -2,6 +2,7 @@
 
     @slot('style')
         <style>
+          }
           .add-button {
             text-decoration: none;
             padding: 5px 15px;
@@ -108,7 +109,7 @@
       </div>
   
       <div class="ms-auto text-end">
-        <a href="{{ route('admin.artikel-create') }}" class="add-button btn-orange rounded"><i class="fas fa-plus"></i> Artikel</a>
+        <a href="{{ route('admin.artikel-create') }}" class="add-button btn-orange rounded"><i class="fas fa-plus"></i> Karya</a>
       </div>
       <p class="text-danger my-4"></p>
 
@@ -131,125 +132,18 @@
             </tr>
           </tbody>
         </table>
-        {{-- modal --}}
-
-  <x-modal name="tambah-seniman">
-    <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-      <h1 class="text-center page-title">Tambah Seniman</h1>
-      <span class="underline-page-title text-center"></span>
-      <div class="row justify-content-center">
-        <div class="col-8">
-        
-          <form action="#" method="post">
-          @csrf
-          @method('patch')
-          <div class="mb-2">
-            <label for="price" class="form-label">Nama</label>
-            <input type="number" name="nama" class="form-control" id="price">
-            @error('price')
-                  <span class="error-message">#</span>
-            @enderror
-            <label for="price" class="form-label">Email</label>
-            <input type="number" name="email" class="form-control" id="price">
-            <label for="price" class="form-label">Password</label>
-            <input type="number" name="password" class="form-control" id="price">
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </x-modal>
-  <x-modal name="tambah-pengunjung">
-    <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-      <h1 class="text-center page-title">Tambah Pengunjung</h1>
-      <span class="underline-page-title text-center"></span>
-      <div class="row justify-content-center">
-        <div class="col-8">
-        
-          <form action="#" method="post">
-          @csrf
-          @method('patch')
-          <div class="mb-2">
-            <label for="price" class="form-label">Nama</label>
-            <input type="number" name="nama" class="form-control" id="price">
-            @error('price')
-                  <span class="error-message">#</span>
-            @enderror
-            <label for="price" class="form-label">Email</label>
-            <input type="number" name="email" class="form-control" id="price">
-            <label for="price" class="form-label">Password</label>
-            <input type="number" name="password" class="form-control" id="price">
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </x-modal>
-  <x-modal name="info-admin">
-    <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-    <h1 class="text-center page-title">Informasi Admin</h1>
-    <span class="underline-page-title text-center"></span>
-    <div class="row justify-content-center">
-      <div class="col-8">
-        
-        <form action="#" method="post">
-          @csrf
-          @method('patch')
-          <div class="mb-2">
-              <label for="price" class="form-label">Nama</label>
-              <input type="number" name="nama" class="form-control" id="price">
-              @error('nama')
-                    <span class="error-message">#</span>
-              @enderror
-              <label for="price" class="form-label">Email</label>
-              <input type="number" name="email" class="form-control" id="price">
-              <label for="price" class="form-label">Password</label>
-              <input type="number" name="password" class="form-control" id="price">
-          </div>
-          
-        </form>
-
-      </div>
-    </div>
+{{-- modal --}}
+<x-modal name="trash-modal">
+  <p class="text-center m-title">PERHATIAN!</p>
+  <p class="text-center m-description">Apakah Anda yakin akan menghapus Artikel tersebut dari daftar?</p>
+  <div class="d-flex justify-content-center">
+    <form action="#" method="post">
+      @csrf
+      @method('delete')
+      <button type="submit" class="confirm-button">Ya</button>
+    </form>
+    <button type="button" class="decline-button bg-orange" data-bs-dismiss="modal">Tidak</button>
   </div>
-  </x-modal>
-  <x-modal name="trash-modal">
-    <p class="text-center m-title">PERHATIAN!</p>
-    <p class="text-center m-description">Apakah Anda yakin akan menghapus Artikel tersebut dari daftar?</p>
-    <div class="d-flex justify-content-center">
-      <form action="#" method="post">
-        @csrf
-        @method('delete')
-        <button type="submit" class="confirm-button">Ya</button>
-      </form>
-      <button type="button" class="decline-button bg-orange" data-bs-dismiss="modal">Tidak</button>
-    </div>
-  </x-modal>
-
-    <x-modal name="tambah-admin">
-      <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-        <h1 class="text-center page-title">Tambah Admin</h1>
-        <span class="underline-page-title text-center"></span>
-      <div class="row justify-content-center">
-        <div class="col-8">
-          
-          <form action="#" method="post">
-            @csrf
-            @method('patch')
-            <div class="mb-2">
-              <label for="price" class="form-label">Nama</label>
-              <input type="number" name="nama" class="form-control" id="price">
-              @error('price')
-                    <span class="error-message">#</span>
-              @enderror
-              <label for="price" class="form-label">Email</label>
-              <input type="number" name="email" class="form-control" id="price">
-              <label for="price" class="form-label">Password</label>
-              <input type="number" name="password" class="form-control" id="price">
-            </div>
-          </form>
-        </div>
-      </div>
-    </x-modal>
+</x-modal>
     </div>    
   </x-app-layout>

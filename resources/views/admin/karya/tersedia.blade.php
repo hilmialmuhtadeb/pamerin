@@ -63,12 +63,10 @@
               <td class="align-middle text-center">
               <button type="submit" class="submit-button bg-orange rounded ">Konfirmasi</button>
               <td class="align-middle text-center">
-                <i class="text-green">Sudah Bayar</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
+                <i class="text-warning">Sudah Bayar</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
               </td>
-            </tr>
-          </tbody>
-          <tbody>   
+            </tr> 
             <tr>
               <td scope="row" class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
@@ -76,11 +74,62 @@
               <td class="align-middle text-center">
               
               <td class="align-middle text-center">
-                <i class="text-navy">Terkonfirmasi</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
+                <i class="text-warning">Terkonfirmasi</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row" class="align-middle text-center">#</td>
+              <td class="align-middle text-center">#</td>
+              <td class="align-middle text-center">#</td>
+              <td class="align-middle text-center">
+              
+              <td class="align-middle text-center">
+                <i class="text-warning">Sudah Bayar</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row" class="align-middle text-center">#</td>
+              <td class="align-middle text-center">#</td>
+              <td class="align-middle text-center">#</td>
+              <td class="align-middle text-center">
+              
+              <td class="align-middle text-center">
+                <i class="text-warning">Dijual</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row" class="align-middle text-center">#</td>
+              <td class="align-middle text-center">#</td>
+              <td class="align-middle text-center">#</td>
+              <td class="align-middle text-center">
+              
+              <td class="align-middle text-center">
+                <i class="text-warning">Belum Bayar</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr>
           </tbody>
       </table>
+      <x-modal name="info-sedia">
+        <div class="d-flex justify-content-center flex-column align-items-center mb-5">
+          <h1 class="text-center page-title">Informasi Pembayaran Lelang</h1>
+          <span class="underline-page-title text-center"></span>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-8">
+            <p>Status : <b class="text-warning">#</b></p>
+            <p>ID Lelang : <b>#</b></p>
+            <p>ID Karya : <b>#</b></p>
+            <p>Nama Pemesan : <b>#</b></p>
+            <p>Total Pembayaran : <b>#</b></p>
+            <p>Alamat : <b>#</b></p>
+            <p>Bukti Pembayaran : </p>
+            <img src="">
+          </div>
+        </div>
+      </x-modal>
   </div>
   </x-app-layout>

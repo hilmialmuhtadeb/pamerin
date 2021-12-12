@@ -62,8 +62,8 @@
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">
-                <i class="text-navy">Publikasi</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
+                <i class="text-warning">Publikasi</i>
+                <a href="{{ route('admin.detail-publikasi') }}" type="button" class="btn info-button mx-2" ><i class="fa fa-info-circle"></i></a>
               </td>
             </tr>
           </tbody>
