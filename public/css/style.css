@@ -56,6 +56,27 @@ body {
   padding: 10px;
 }
 
+/* card-pameran */
+
+.card-exhibition-body {
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.247);
+  background-color: rgb(255, 255, 255,0.5);
+  border-radius: 5px;
+}
+
+.card-exhibition-button {
+  background-color: #F6AE2D;
+  color: white;
+  text-decoration: none;
+  transition: .2s;
+  bottom: 0;
+}
+
+.card-exhibition-button:hover {
+  background-color: #cf8d11;
+  color: white;
+}
+
 /* alert */
 .alert-message {
   color: white;
@@ -191,3 +212,5 @@ a.page-link {
     color: #828282;
   }
 }
+
+  

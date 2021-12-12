@@ -5,6 +5,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ArtistLoginController;
 use App\Http\Controllers\ArtistRegistrationController;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ShippingCostController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 
 Route::resource('exhibitions', ExhibitionController::class);
+Route::resource('auctions', AuctionController::class);
 Route::resource('articles', ArticleController::class);
 Route::resource('artworks', ArtworkController::class);
 Route::resource('categories', CategoryController::class);
@@ -39,6 +42,15 @@ Route::resource('carts', CartController::class);
 Route::resource('details', DetailController::class);
 Route::resource('users', UserController::class);
 Route::resource('banks', BankController::class);
+Route::resource('tickets', TicketController::class);
+Route::resource('commissions', CommissionController::class);
+
+Route::get('exhibitions/detail', [ExhibitionController::class])->name('exhibitions.detail');
+
+Route::get('tickets/confirm', [TicketController::class], 'confirm')->name('tickets.confirm');
+Route::get('tickets/join', [TicketController::class])->name('tickets.join');
+
+Route::get('commissions/confirm', [CommissionController::class], 'confirm')->name('commissions.confirm');
 
 Route::get('artists/bank', [BankController::class, 'create'])->name('artists.bank');
 Route::get('artists/dashboard', [ArtistController::class, 'index'])->name('artists.index');

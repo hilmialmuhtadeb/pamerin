@@ -16,15 +16,6 @@
           <li class="nav-item">
             <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="{{ route('home') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link{{ str_contains(request()->path(), 'exhibitions') ? ' active' : '' }}" href="{{ route('exhibitions.index') }}">Pameran</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{{ str_contains(request()->path(), 'artworks') ? ' active' : '' }}" href="{{ route('artworks.index') }}">Karya</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lelang</a>
-          </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -47,7 +38,7 @@
             <a class="nav-link{{ str_contains(request()->path(), 'artworks') ? ' active' : '' }}" href="{{ route('artworks.index') }}">Karya</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Lelang</a>
+            <a class="nav-link{{ str_contains(request()->path(), 'auctions') ? ' active' : '' }}" href="{{ route('auctions.index') }}">Lelang</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -58,14 +49,22 @@
               @endif
             </a>
           </li>
+          <li class="nav-item drop">
+            <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+              <i class="fa fa-bell me-1"></i>
+              {{ Auth::user()->name }}</a>
+            <ul>
+              <li><a class="dropdown-item">
+
+            </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">Profil</a></li>
-              <li><a class="dropdown-item" href="#">Tiket Saya</a></li>
-              <li><a class="dropdown-item" href="#">Pesanan Saya</a></li>
+              <li><a class="dropdown-item" href="{{ route('tickets.show', Auth::user()) }}">Tiket Saya</a></li>
+              <li><a class="dropdown-item" href="{{ route('commissions.show', Auth::user()) }}">Pesanan Saya</a></li>
               <li>
                 <form action="{{ route('logout') }}" method="post">
                   @csrf
@@ -143,7 +142,7 @@
             <a class="nav-link{{ str_contains(request()->path(), 'artworks') ? ' active' : '' }}" href="{{ route('artworks.index') }}">Karya</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Lelang</a>
+            <a class="nav-link{{ str_contains(request()->path(), 'auctions') ? ' active' : '' }}" href="{{ route('auctions.index') }}">Lelang</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
