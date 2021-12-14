@@ -83,9 +83,9 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="#">Pengajuan</a></li>
-              <li><a class="dropdown-item" href="#">Publikasi</a></li>
-              <li><a class="dropdown-item" href="#">Sedang Berlangsung</a></li>
-              <li><a class="dropdown-item" href="#">Selesai</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.fair.publikasi') }}">Publikasi</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.fair.berlangsung') }}">Sedang Berlangsung</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.fair.selesai') }}">Selesai</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -96,8 +96,8 @@
               <li><a class="dropdown-item" href="{{ route('artists.artworks') }}">Karya Seni</a></li>
               <li><a class="dropdown-item" href="{{ route('artists.artworks.sell') }}">Dijual</a></li>
               <li><a class="dropdown-item" href="{{ route('artists.artworks.accept') }}">Pesanan Diterima</a></li>
-              <li><a class="dropdown-item" href="#">Perlu Dikirim</a></li>
-              <li><a class="dropdown-item" href="#">Selesai</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.artworks.send') }}">Perlu Dikirim</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.artworks.finish') }}">Selesai</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -105,10 +105,10 @@
               Kelola Lelang
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Sedang Berlangsung</a></li>
-              <li><a class="dropdown-item" href="#">Pesanan Diterima</a></li>
-              <li><a class="dropdown-item" href="#">Perlu Dikirim</a></li>
-              <li><a class="dropdown-item" href="#">Selesai</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.auction.lelang') }}">Sedang Berlangsung</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.auction.terima') }}">Pesanan Diterima</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.auction.kirim') }}">Perlu Dikirim</a></li>
+              <li><a class="dropdown-item" href="{{ route('artists.auction.done') }}">Selesai</a></li>
             </ul>
           </li>
         </ul>

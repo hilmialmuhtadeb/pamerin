@@ -48,7 +48,8 @@ Route::get('/artikel-ubah', [AdminController::class, 'artikelubah'])->name('admi
 Route::get('/sedia', [AdminController::class, 'sedia'])->name('admin.sedia');
 Route::get('/kirim', [AdminController::class, 'kirim'])->name('admin.kirim');
 Route::get('/done', [AdminController::class, 'done'])->name('admin.done');
-Route::get('/detail-pameran', [AdminController::class, 'detailpameran'])->name('admin.detail-pameran');
+Route::get('/karya-pameran', [AdminController::class, 'karyapameran'])->name('admin.karya-pameran');
+Route::get('/tiket-pameran', [AdminController::class, 'tiketpameran'])->name('admin.tiket-pameran');
 Route::get('/detail-publikasi', [AdminController::class, 'detailpublikasi'])->name('admin.detail-publikasi');
 Route::get('/coba', [AdminController::class, 'coba'])->name('admin.coba');
 
@@ -66,6 +67,17 @@ Route::get('artists/dashboard', [ArtistController::class, 'index'])->name('artis
 Route::get('artists/artworks', [ArtistController::class, 'artwork'])->name('artists.artworks');
 Route::get('artists/artworks/sell', [ArtistController::class, 'sell'])->name('artists.artworks.sell');
 Route::get('artists/artworks/accept', [ArtistController::class, 'accept'])->name('artists.artworks.accept');
+Route::get('artists/artworks/send', [ArtistController::class, 'send'])->name('artists.artworks.send');
+Route::get('artists/artworks/finish', [ArtistController::class, 'finish'])->name('artists.artworks.finish');
+
+Route::get('artists/fair/selesai', [ArtistController::class, 'selesai'])->name('artists.fair.selesai');
+Route::get('artists/fair/berlangsung', [ArtistController::class, 'berlangsung'])->name('artists.fair.berlangsung');
+Route::get('artists/fair/publikasi', [ArtistController::class, 'publikasi'])->name('artists.fair.publikasi');
+
+Route::get('artists/auction/done', [ArtistController::class, 'done'])->name('artists.auction.done');
+Route::get('artists/auction/kirim', [ArtistController::class, 'kirim'])->name('artists.auction.kirim');
+Route::get('artists/auction/terima', [ArtistController::class, 'terima'])->name('artists.auction.terima');
+Route::get('artists/auction/lelang', [ArtistController::class, 'lelang'])->name('artists.auction.lelang');
 
 Route::get('artworks/{artwork}/shipping', [ShippingCostController::class, 'create'])->name('artworks.shipping');
 Route::post('artworks/{artwork}/shipping', [ShippingCostController::class, 'store']);

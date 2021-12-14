@@ -1,4 +1,4 @@
-<x-app-layout title="Seniman Karya Pesanan Diterima">
+<x-app-layout title="Seniman Lelang Diterima">
     @slot('style')
     <style>
       .table-custom thead {
@@ -34,13 +34,13 @@
     <div class="container">
   
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-        <h1 class="text-center page-title">Daftar Karya Seni : Pesanan Masuk</h1>
+        <h1 class="text-center page-title">Daftar Lelang : Pesanan Masuk</h1>
         <span class="underline-page-title text-center"></span>
       </div>
       <table class="table-custom table table-borderless table-striped">
           <thead>
             <tr>
-              <th scope="col" class="text-center">ID Pesanan</th>
+              <th scope="col" class="text-center">ID Lelang</th>
               <th scope="col" class="text-center">ID Karya</th>
               <th scope="col" class="text-center">Nama Karya</th>
               <th scope="col" class="text-center">Status</div>
@@ -52,7 +52,7 @@
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">
-                <i class="text-warning">Belum Dikirim</i>
+                <i class="text-warning">Belum Bayar</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-dikirim"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr>
@@ -60,7 +60,7 @@
       </table>
       <x-modal name="info-dikirim">
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-          <h1 class="text-center page-title">Informasi Pengiriman Karya Seni</h1>
+          <h1 class="text-center page-title">Informasi Lelang</h1>
           <span class="underline-page-title text-center"></span>
         </div>
         <div class="row justify-content-center">

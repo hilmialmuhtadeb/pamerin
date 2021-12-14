@@ -72,10 +72,10 @@
       <td class="align-middle text-center">#</td>
       <td class="align-middle text-center">#</td>
       <td class="align-middle text-center">
-      <button type="submit" class="submit-button bg-orange rounded ">Publikasi</button>
+      <a href="{{ route('admin.detail-publikasi') }}" type="submit" class="submit-button bg-orange rounded ">Publikasi</button>
       <td class="align-middle text-center">
         <i class="text-orange">Telah Disetujui</i>
-        <a href="{{ route('admin.detail-pameran') }}" type="button" class="btn info-button mx-2" ><i class="fa fa-info-circle"></i></button>
+        <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
       </td>
     </tr>
   </tbody>
@@ -98,7 +98,7 @@
       <p>No.Handphone : <b>#</b></p>
       <p>Email : <b>#</b></p>
       <p>Jumlah Karya : <b>#</b></p>
-        <a href="{{ route('admin.artikel-create') }}" class=" add-button btn-orange rounded"><i></i> Lihat Deatil</a>
+        <a href="{{ route('admin.karya-pameran') }}" class=" add-button btn-orange rounded"><i></i> Lihat Deatil</a>
 
     </div>
   </div>

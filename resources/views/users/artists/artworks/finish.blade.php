@@ -1,4 +1,4 @@
-<x-app-layout title="Seniman Karya Pesanan Diterima">
+<x-app-layout title="Seniman Dikirim Karya">
     @slot('style')
     <style>
       .table-custom thead {
@@ -15,13 +15,12 @@
         background-color: white;
       }
       .info-button {
-        color: #888888;
+        color: rgb(196, 196, 196);
         border-radius: 5px;
         transition: .3s;
       }
       .info-button:hover {
-        background-color: #888888;
-        color: white;
+          color: rgb(0, 0, 0);
       }
       .modal-body {
         padding: 80px 0;
@@ -34,7 +33,7 @@
     <div class="container">
   
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-        <h1 class="text-center page-title">Daftar Karya Seni : Pesanan Masuk</h1>
+        <h1 class="text-center page-title">Daftar Karya Seni : Selesai</h1>
         <span class="underline-page-title text-center"></span>
       </div>
       <table class="table-custom table table-borderless table-striped">
@@ -58,9 +57,10 @@
             </tr>
           </tbody>
       </table>
+
       <x-modal name="info-dikirim">
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-          <h1 class="text-center page-title">Informasi Pengiriman Karya Seni</h1>
+          <h1 class="text-center page-title">Informasi Karya Seni</h1>
           <span class="underline-page-title text-center"></span>
         </div>
         <div class="row justify-content-center">
@@ -70,7 +70,6 @@
             <p>ID Karya : <b>#</b></p>
             <p>Nama Karya : <b>#</b></p>
             <p>Total Pembayaran : <b>#</b></p>
-            <p>Pemesan : <b>#</b></p>
           </div>
         </div>
       </x-modal>
