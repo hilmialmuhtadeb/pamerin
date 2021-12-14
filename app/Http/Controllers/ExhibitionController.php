@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use App\Models\Exhibition;
 use Illuminate\Http\Request;
 
@@ -34,10 +35,11 @@ class ExhibitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        return view('exhibitions.detail');
-    }
+    // public function ticket(Request $request)
+    // {
+    //     $ticket = Ticket::find($request->ticket_id);
+    //     return view('tickets.detail');
+    // }
 
     /**
      * Display the specified resource.
@@ -48,6 +50,12 @@ class ExhibitionController extends Controller
     public function show(Exhibition $exhibition)
     {
         return view('exhibitions.show', compact('exhibition'));
+    }
+
+    public function detail(Request $request)
+    {
+        $exhibition = Exhibition::find($request->exhibition_id);
+        return view('exhibitions.detail', compact('exhibition'));
     }
 
     /**

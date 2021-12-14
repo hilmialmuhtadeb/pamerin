@@ -19,6 +19,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ShippingCostController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,12 +65,14 @@ Route::resource('banks', BankController::class);
 Route::resource('tickets', TicketController::class);
 Route::resource('commissions', CommissionController::class);
 
-Route::get('exhibitions/detail', [ExhibitionController::class])->name('exhibitions.detail');
+Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 
-Route::get('tickets/confirm', [TicketController::class], 'confirm')->name('tickets.confirm');
-Route::get('tickets/join', [TicketController::class])->name('tickets.join');
+Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
 
-Route::get('commissions/confirm', [CommissionController::class], 'confirm')->name('commissions.confirm');
+Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
+Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
+
 
 Route::get('artists/bank', [BankController::class, 'create'])->name('artists.bank');
 Route::get('artists/dashboard', [ArtistController::class, 'index'])->name('artists.index');

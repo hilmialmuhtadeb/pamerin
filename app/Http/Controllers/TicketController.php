@@ -13,21 +13,20 @@ class TicketController extends Controller
     {
         return view('tickets.show');
     }
-    public function store()
-    {
-        // $exhibition = Exhibition::where('id', request('exhibitions_id'))->first();
-        // Ticket::create([
-        //     'tickets_id' => Auth::user()->ticket->id,
-        //     'exhibitions_id' => request('exhibitions_id'),
-        //     'price' => $exhibition->price,
-        // ]);
+    // public function store()
+    // {
+    //     // $exhibition = Exhibition::where('id', request('exhibitions_id'))->first();
+    //     // Ticket::create([
+    //     //     'tickets_id' => Auth::user()->ticket->id,
+    //     //     'exhibitions_id' => request('exhibitions_id'),
+    //     //     'price' => $exhibition->price,
+    //     // ]);
 
-        return redirect(route('tickets.show'));
-    }
+    //     return redirect(route('tickets.show'));
+    // }
 
     public function confirm()
-    {
-        
+    { 
         return view('tickets.confirm');
         
     }

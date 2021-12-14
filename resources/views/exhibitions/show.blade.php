@@ -71,13 +71,13 @@
             <i class="text-grey far fa-calendar-alt"></i> <span class="ms-2 text-orange">{{ date_format(date_create($exhibition->date), "l, d F Y") }}</span>
           </p>
           <p class="exhibition-info">
-            <i class="text-grey far fa-clock"></i> <span class="ms-2 text-orange">{{ $exhibition->start }}{{ $exhibition->end }}</span>
+            <i class="text-grey far fa-clock"></i> <span class="ms-2 text-orange">{{ $exhibition->start }} - {{ $exhibition->end }}</span>
           </p>
           <p class="exhibition-sold"><b>Terjual</b> 20 Tiket</p>
           <p class="title-2 text-red">Rp{{ number_format($exhibition->price) }}</p>
           <p class="exhibition-description">{{ $exhibition->description }}</p>
           <div class="d-grid">
-          <form action="{{ route('exhibitions.store') }}" method="post">
+          <form action="{{ route('exhibitions.detail') }}" method="post">
               @csrf
               <input type="hidden" name="exhibition_id" value="{{ $exhibition->id }}">
               <div class="d-grid">

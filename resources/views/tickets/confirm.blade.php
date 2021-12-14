@@ -43,20 +43,20 @@
       </style>
   @endslot
 
-  <div class="container">
+  <div class="container w-25">
     <div class="d-flex flex-column align-items-center justify-content-center mb-5">
       <h1 class="text-center page-title">Kirim Bukti Pembayaran</h1>
       <span class="underline-page-title text-center"></span>
     </div>
 
-    <h5>Total Pembayaran : Rp. 50.198</h5>
+    <h5>Total Pembayaran : <b>Rp. 50.198</b></h5>
     <span>Metode Pembayaran :</span>
     <div class="form-check">
     <input class="form-check-input" type="radio" name="flexRadioDefault" value="BRI" id="BRI">
             <label class="form-check-label" for="BRI">
             <b>BANK BRI</b> 1029382131923<br>(DEODIA LORENSA)
             </label></div>
-            <div class="form-check">
+            <div class="form-check mb-5">
             <input class="form-check-input" type="radio" name="flexRadioDefault" value="Dana" id="Dana">
             <label class="form-check-label" for="Dana">
             <b>OVO & DANA</b> 085612345678<br>(DEODIA LORENSA)
@@ -68,6 +68,9 @@
             @error('thumbnail')
                   <span class="error-message">{{ $message }}</span>
             @enderror
+            <div class="mb-3 mt-5">
+               <a href="{{ route('tickets.show') }}" class="rounded btn-orange btn-address" >Simpan</a>
+            </div>
           </div>
     
   </div>
