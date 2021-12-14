@@ -55,19 +55,19 @@ class ArtistController extends Controller
     }
     public function done()
     {
-        return view('users.artists.auction.done');
+        return view('users.artists.sale.done');
     }
     public function kirim()
     {
-        return view('users.artists.auction.kirim');
+        return view('users.artists.sale.kirim');
     }
     public function terima()
     {
-        return view('users.artists.auction.terima');
+        return view('users.artists.sale.terima');
     }
     public function lelang()
     {
-        return view('users.artists.auction.lelang');
+        return view('users.artists.sale.lelang');
     }
 
 }

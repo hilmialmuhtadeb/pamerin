@@ -9,5 +9,9 @@
     <li class="breadcrumb-item"><a href="{{ route('artworks.index') }}">Karya</a></li>
     <li class="breadcrumb-item text-black">{{ $artwork->name }}</li>
     @endisset
+    @isset($auction)
+    <li class="breadcrumb-item"><a href="{{ route('auctions.index') }}">Lelang</a></li>
+    <li class="breadcrumb-item text-black">{{ $auction->name }}</li>
+    @endisset
   </ol>
 </nav>

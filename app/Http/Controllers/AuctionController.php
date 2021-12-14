@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
-use App\Models\Exhibition;
+use App\Models\Auction;
 use Illuminate\Http\Request;
 
-class ExhibitionController extends Controller
+class AuctionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,9 @@ class ExhibitionController extends Controller
      */
     public function index()
     {
-        $exhibitions = Exhibition::paginate(9);
-        return view('exhibitions.index', compact('exhibitions'));
+        $auctions = Auction::all();
+        dd($auctions);
+        return view('auctions.index', compact('auctions'));
     }
 
     /**
@@ -35,36 +35,29 @@ class ExhibitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function ticket(Request $request)
-    // {
-    //     $ticket = Ticket::find($request->ticket_id);
-    //     return view('tickets.detail');
-    // }
+    public function store(Request $request)
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function show(Exhibition $exhibition)
+    public function show(Auction $auction)
     {
-        return view('exhibitions.show', compact('exhibition'));
-    }
-
-    public function detail(Request $request)
-    {
-        $exhibition = Exhibition::find($request->exhibition_id);
-        return view('exhibitions.detail', compact('exhibition'));
+        return view('auctions.show', compact('auction'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exhibition $exhibition)
+    public function edit(Auction $auction)
     {
         //
     }
@@ -73,10 +66,10 @@ class ExhibitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exhibition $exhibition)
+    public function update(Request $request, Auction $auction)
     {
         //
     }
@@ -84,10 +77,10 @@ class ExhibitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exhibition $exhibition)
+    public function destroy(Auction $auction)
     {
         //
     }

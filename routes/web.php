@@ -6,6 +6,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ArtistLoginController;
 use App\Http\Controllers\ArtistRegistrationController;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -16,7 +17,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ShippingCostController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +57,7 @@ Route::get('/detail-publikasi', [AdminController::class, 'detailpublikasi'])->na
 Route::get('/coba', [AdminController::class, 'coba'])->name('admin.coba');
 
 Route::resource('exhibitions', ExhibitionController::class);
+Route::resource('auctions', AuctionController::class);
 Route::resource('articles', ArticleController::class);
 Route::resource('artworks', ArtworkController::class);
 Route::resource('categories', CategoryController::class);
@@ -61,6 +65,17 @@ Route::resource('carts', CartController::class);
 Route::resource('details', DetailController::class);
 Route::resource('users', UserController::class);
 Route::resource('banks', BankController::class);
+Route::resource('tickets', TicketController::class);
+Route::resource('commissions', CommissionController::class);
+
+Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
+
+Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
+
+Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
+Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
+
 
 Route::get('artists/bank', [BankController::class, 'create'])->name('artists.bank');
 Route::get('artists/dashboard', [ArtistController::class, 'index'])->name('artists.index');
@@ -74,10 +89,10 @@ Route::get('artists/fair/selesai', [ArtistController::class, 'selesai'])->name('
 Route::get('artists/fair/berlangsung', [ArtistController::class, 'berlangsung'])->name('artists.fair.berlangsung');
 Route::get('artists/fair/publikasi', [ArtistController::class, 'publikasi'])->name('artists.fair.publikasi');
 
-Route::get('artists/auction/done', [ArtistController::class, 'done'])->name('artists.auction.done');
-Route::get('artists/auction/kirim', [ArtistController::class, 'kirim'])->name('artists.auction.kirim');
-Route::get('artists/auction/terima', [ArtistController::class, 'terima'])->name('artists.auction.terima');
-Route::get('artists/auction/lelang', [ArtistController::class, 'lelang'])->name('artists.auction.lelang');
+Route::get('artists/sale/done', [ArtistController::class, 'done'])->name('artists.sale.done');
+Route::get('artists/sale/kirim', [ArtistController::class, 'kirim'])->name('artists.sale.kirim');
+Route::get('artists/sale/terima', [ArtistController::class, 'terima'])->name('artists.sale.terima');
+Route::get('artists/sale/lelang', [ArtistController::class, 'lelang'])->name('artists.sale.lelang');
 
 Route::get('artworks/{artwork}/shipping', [ShippingCostController::class, 'create'])->name('artworks.shipping');
 Route::post('artworks/{artwork}/shipping', [ShippingCostController::class, 'store']);

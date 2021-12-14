@@ -71,30 +71,37 @@
             <i class="text-grey far fa-calendar-alt"></i> <span class="ms-2 text-orange">{{ date_format(date_create($exhibition->date), "l, d F Y") }}</span>
           </p>
           <p class="exhibition-info">
-            <i class="text-grey far fa-clock"></i> <span class="ms-2 text-orange">{{ $exhibition->start }}{{ $exhibition->end }}</span>
+            <i class="text-grey far fa-clock"></i> <span class="ms-2 text-orange">{{ $exhibition->start }} - {{ $exhibition->end }}</span>
           </p>
           <p class="exhibition-sold"><b>Terjual</b> 20 Tiket</p>
           <p class="title-2 text-red">Rp{{ number_format($exhibition->price) }}</p>
           <p class="exhibition-description">{{ $exhibition->description }}</p>
           <div class="d-grid">
-            <a href="#" class="exhibition-button btn rounded-3">
-              Pesan Sekarang
-            </a>
+          <form action="{{ route('exhibitions.detail') }}" method="post">
+              @csrf
+              <input type="hidden" name="exhibition_id" value="{{ $exhibition->id }}">
+              <div class="d-grid">
+                <button type="submit" class="exhibition-button btn rounded-3">Pesan Sekarang</button>
+              </div>
+            </form>
+          </div>
           </div>
         </div>
       </div>
 
-    </div>
-
-    <div class="row">
+    
+    <div class="row justify-content-md-center">
       <div class="col">
         <h2 class="title-2">Tentang Seniman</h2>
         <p class="exhibition-user">
           <i class="fas fa-user"></i> {{ $exhibition->artist->name }}, {{ $exhibition->artist->region }}
         </p>
       </div>
+      <div class="col-md-3 mt-2 mb-3">
+        <img src="{{ $exhibition->thumbnail }}" class="img-exhibition rounded">
+      </div>
     </div>
-    
+  </div>
   </div>
   
 </x-app-layout>
