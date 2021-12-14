@@ -51,6 +51,8 @@ Route::get('/artikel-ubah', [AdminController::class, 'artikelubah'])->name('admi
 Route::get('/sedia', [AdminController::class, 'sedia'])->name('admin.sedia');
 Route::get('/kirim', [AdminController::class, 'kirim'])->name('admin.kirim');
 Route::get('/done', [AdminController::class, 'done'])->name('admin.done');
+Route::get('/detail-pameran', [AdminController::class, 'detailpameran'])->name('admin.detail-pameran');
+Route::get('/detail-publikasi', [AdminController::class, 'detailpublikasi'])->name('admin.detail-publikasi');
 Route::get('/coba', [AdminController::class, 'coba'])->name('admin.coba');
 
 Route::resource('exhibitions', ExhibitionController::class);

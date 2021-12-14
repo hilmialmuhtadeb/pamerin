@@ -57,7 +57,7 @@
               </div>
 
             <div class="mb-2">
-              <label for="description" class="form-label label-small">Deskripsi (maks 100 kata)</label>
+              <label for="description" class="form-label label-small">Deskripsi</label>
               <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
               @error('description')
                     <span class="error-message">{{ $message }}</span>
@@ -69,7 +69,7 @@
   
         <div class="button-wrapper">
           <button type="submit" class="submit-button bg-grey rounded mb-5">Batal</button>
-          <button type="submit" class="submit-button bg-orange rounded mb-5">Tambah</button>
+          <button type="submit" class="submit-button bg-orange rounded mb-5">Update</button>
           </div>
       </form>
   

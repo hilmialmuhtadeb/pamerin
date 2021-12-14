@@ -65,7 +65,7 @@
               <button type="submit" class="submit-button bg-orange rounded ">Lihat Pameran</button>
               <td class="align-middle text-center">
                 <i class="text-orange">Sedang Berlangsung</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
+                <a class="info-button mx-2"><i class="fa fa-info-circle"></i></a>
               </td>
             </tr>
           </tbody>

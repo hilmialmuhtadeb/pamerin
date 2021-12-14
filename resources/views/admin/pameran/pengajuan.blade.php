@@ -64,11 +64,45 @@
       <button type="submit" class="submit-button bg-orange rounded ">Setuju</button>
       <td class="align-middle text-center">
         <i class="text-orange">Pengajuan</i>
-        <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
+        <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-pengajuan"><i class="fa fa-info-circle"></i></button>
+      </td>
+    </tr>
+    <tr>
+      <td scope="row" class="align-middle text-center">#</td>
+      <td class="align-middle text-center">#</td>
+      <td class="align-middle text-center">#</td>
+      <td class="align-middle text-center">
+      <button type="submit" class="submit-button bg-orange rounded ">Publikasi</button>
+      <td class="align-middle text-center">
+        <i class="text-orange">Telah Disetujui</i>
+        <a href="{{ route('admin.detail-pameran') }}" type="button" class="btn info-button mx-2" ><i class="fa fa-info-circle"></i></button>
       </td>
     </tr>
   </tbody>
 </table>
+<x-modal name="info-pengajuan">
+  <div class="d-flex justify-content-center flex-column align-items-center mb-5">
+    <h1 class="text-center page-title">Detail Pameran</h1>
+    <span class="underline-page-title text-center"></span>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <p>Nama Pameran : <b>#</b></p>
+      <p>Poster Pameran : </p>
+      <img src="">
+      <p>Tanggal : <b>#</b></p>
+      <p>Waktu Mulai : <b>#</b></p>
+      <p>Waktu Berakhir : <b>#</b></p>
+      <p>Harga Tiket : <b>#</b></p>
+      <p>Deskripsi : <b>#</b></p>
+      <p>No.Handphone : <b>#</b></p>
+      <p>Email : <b>#</b></p>
+      <p>Jumlah Karya : <b>#</b></p>
+        <a href="{{ route('admin.artikel-create') }}" class=" add-button btn-orange rounded"><i></i> Lihat Deatil</a>
+
+    </div>
+  </div>
+</x-modal>
 
 </div>
       </x-app-layout>

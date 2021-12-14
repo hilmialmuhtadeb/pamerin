@@ -74,4 +74,12 @@ class AdminController extends Controller
     {
         return view('admin.artikel-ubah');
     }
+    public function detailpameran()
+    {
+        return view('admin.pameran.detail-pameran');
+    }
+    public function detailpublikasi()
+    {
+        return view('admin.pameran.detail-publikasi');
+    }
 }
