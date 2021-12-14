@@ -135,7 +135,7 @@ a.page-link {
   background-color: #390099;
 }
 .text-navy {
-  color: #390099;
+  color: #390099 !important;
 }
 .bg-tosca {
   background-color: #56D3D2;
@@ -147,7 +147,7 @@ a.page-link {
   background-color: #FF7171;
 }
 .text-guava {
-  color: #FF7171;
+  color: #FF7171 !important;
 }
 .bg-red {
   background-color: #EB5757;
