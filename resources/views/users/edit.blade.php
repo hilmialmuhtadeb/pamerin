@@ -15,6 +15,17 @@
           font-size: 12px;
           box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.185);
         }
+        .detail-button {
+          background-color: #F6AE2D;
+          color: white;
+          font-size: 14px;
+          font-weight: 700;
+          transition: .2s;
+        }
+        .detail-button:hover {
+          background-color: #cf8d11;
+          color: white;
+        }
       </style>
   @endslot
 
@@ -28,9 +39,9 @@
       <div class="col-10">
         <form action="{{ route('users.update', Auth::user()) }}" method="post" class="my-5">
     
-          <div class="row justify-content-between">
+          <div class="row justify-content-center">
     
-            <div class="col-md-5">
+            <div class="col-md-4 me-5">
     
               <h5>Informasi Pribadi</h5>
     
@@ -69,11 +80,21 @@
                   <input type="text" name="" class="form-control" id="zip-custom">
                 </div>
               </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                <form action="#" method="post">
+              @csrf
+              <input type="hidden" name="alamat" value="alamat">
+              <div class="d-grid">
+                <button type="submit" class="detail-button btn rounded-3">Konfirmasi</button>
+              </div>
+            </form>
+                </div>
+              </div>
             </div>
-    
-            </div>
-    
-            <div class="col-md-5">
+
+
+            <div class="col-md-4">
     
               <h5>Ubah Kata Sandi</h5>
     
@@ -87,10 +108,21 @@
                   <input type="password" name="repassword" class="form-control" id="repassword">
                 </div>
               </div>
-    
+              <div class="row mt-5">
+                <div class="col-12">
+                <form action="#" method="post">
+              @csrf
+              <input type="hidden" name="ubahpassword" value="ubahpassword">
+              <div class="d-grid">
+                <button type="submit" class="detail-button btn rounded-3">Ubah Kata Sandi</button>
+              </div>
+            </form>
+                </div>
+              </div>
             </div>
+      </div>
             
-          </div>
+          
     
         </form>
       </div>

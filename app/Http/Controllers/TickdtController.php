@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tickdt;
 use App\Models\Exhibition;
+use App\Models\Tickdt;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ExhibitionController extends Controller
+class TickdtController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class ExhibitionController extends Controller
      */
     public function index()
     {
-        $exhibitions = Exhibition::paginate(9);
-        return view('exhibitions.index', compact('exhibitions'));
+        //
     }
 
     /**
@@ -36,42 +34,36 @@ class ExhibitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function ticket(Request $request)
-    // {
-    //     $ticket = Ticket::find($request->ticket_id);
-    //     return view('tickets.detail');
-    // }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Exhibition  $exhibition
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Exhibition $exhibition)
+    public function store()
     {
-        return view('exhibitions.show', compact('exhibition'));
-    }
-
-    public function detail(Request $request)
-    {
-    
         $exhibition = Exhibition::where('id', request('exhibition_id'))->first();
         Tickdt::create([
             'ticket_id' => Auth::user()->ticket->id,
             'exhibition_id' => request('exhibition_id'),
             'price' => $exhibition->price,
         ]);
-        return view('exhibitions.detail', compact('exhibition'));
+
+        return redirect(route('exhibitions.index'))->with('success', 'Yeay, karya seni berhasil dimasukkan keranjang');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Tickdt  $tickdt
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Tickdt $tickdt)
+    {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exhibition $exhibition)
+    public function edit(Tickdt $tickdt)
     {
         //
     }
@@ -80,10 +72,10 @@ class ExhibitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exhibition $exhibition)
+    public function update(Request $request, Tickdt $tickdt)
     {
         //
     }
@@ -91,11 +83,14 @@ class ExhibitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Exhibition  $exhibition
+     * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exhibition $exhibition)
+    public function destroy(Tickdt $tickdt)
     {
-        //
+        {
+            $tickdt->delete();
+            return redirect(route('tickets.show'))->with('success', 'Barang berhasil dihapus');
+        }
     }
 }

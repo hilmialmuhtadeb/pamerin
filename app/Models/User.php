@@ -58,6 +58,10 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
 
+    public function ticket(){
+        return $this->hasMany(Ticket::class);
+    }
+
     public function address() {
         return $this->hasOne(Address::class);
     }
@@ -76,5 +80,10 @@ class User extends Authenticatable
     {
         $address = Address::where('user_id', $this->id)->first();
         return $address->region;
+    }
+    public function getTicketAttribute()
+    {
+        $ticket = Ticket::where('user_id', $this->id)->first();
+        return $ticket;
     }
 }

@@ -10,8 +10,6 @@ class Ticket extends Model
     use HasFactory;
 
     public $fillable = [
-        'user_id',
-        'unique_code',
         'status',
     ];
 
@@ -20,9 +18,9 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function details()
+    public function tickdt()
     {
-        return $this->hasMany(Detail::class);
+        return $this->hasMany(Tickdt::class);
     }
     public function getDetailsCountAttribute()
     {

@@ -18,6 +18,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ShippingCostController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TickdtController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommissionController;
 use Illuminate\Support\Facades\Route;

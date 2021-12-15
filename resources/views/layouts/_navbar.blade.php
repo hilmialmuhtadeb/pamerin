@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item drop">
-                    <a class="nav-link dropdown-toggle" href="#"><i class="fa fa-bell me-1"></i></a></li>
+                    <a class="nav-link" href="#"><i class="fa fa-bell me-1"></i></a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
