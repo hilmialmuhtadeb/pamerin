@@ -124,7 +124,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">Profil</a></li>
-                      <li><a class="dropdown-item" href="#">Portofolio</a></li>
+                      <li><a class="dropdown-item" href="{{ route('artists.porto', Auth::user()) }}">Portofolio</a></li>
                       <li>
                           <form action="{{ route('logout') }}" method="post">
                               @csrf

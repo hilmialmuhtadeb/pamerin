@@ -77,6 +77,7 @@ Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->nam
 Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
 
 
+Route::get('artists/porto', [ArtistController::class, 'porto'])->name('artists.porto');
 Route::get('artists/bank', [BankController::class, 'create'])->name('artists.bank');
 Route::get('artists/dashboard', [ArtistController::class, 'index'])->name('artists.index');
 Route::get('artists/artworks', [ArtistController::class, 'artwork'])->name('artists.artworks');

@@ -69,5 +69,11 @@ class ArtistController extends Controller
     {
         return view('users.artists.sale.lelang');
     }
-
+    public function porto()
+    {
+        
+        $artworks=Artwork::where('user_id',Auth::user()->id)->get();
+        //dd($artworks);
+        return view('users.artists.porto',compact('artworks'));
+    }
 }
