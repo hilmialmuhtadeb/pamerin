@@ -96,10 +96,6 @@
       <a href="{{ route('carts.edit', $cart) }}" class="rounded btn-orange btn-address">Isi Alamat</a>
     </div>
 
-    <?php  
-      
-      $subtotal=0;
-    ?>
     <div class="row justify-content-end">
       <div class="col-md-5">
         <h5 class="cart-amount-title">Total Keranjang</h5>
@@ -107,7 +103,7 @@
         <table class="table-amount">
           <tr>
             <th>Subtotal</th>
-            <td class="align-middle">Rp{{ number_format($detail->price)}}</td>
+              <td class="align-middle">Rp. {{ number_format($subtotal)}}</td>
           </tr>
           <tr>
             <th>Ongkos Kirim</th>
@@ -115,11 +111,11 @@
           </tr>
           <tr>
             <th>Kode Unik</th>
-            <td>Rp120</td>
+            <td>Rp. {{$unique}}</td>
           </tr>
           <tr>
             <th>TOTAL</th>
-            <td>Rp350.120</td>
+            <td>Rp{{ number_format($subtotal + $unique)}}</td>
           </tr>
         </table>
         

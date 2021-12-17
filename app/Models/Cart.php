@@ -31,4 +31,5 @@ class Cart extends Model
         $detailsCount = Detail::where('cart_id', $this->id)->count();
         return $detailsCount;
     }
+    
 }

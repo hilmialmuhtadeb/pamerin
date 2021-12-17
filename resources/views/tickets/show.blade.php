@@ -146,13 +146,13 @@
                     <tr>
                         <td class="align-middle text-center">{{ $tiket->pivot->code}}</td>
                         <td class="align-middle text-center">{{$tiket->name}}</td>
-                        <td class="align-middle text-center">{{$tiket->price}}</td>
+                        <td class="align-middle text-center">Rp. {{ number_format($tiket->price)}}</td>
                         <td class="align-middle text-center">
                             <a href="{{ route('tickets.confirm') }}" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
                         </td>
                         <td class="align-middle text-center text-red"><i>Menunggu Pembayaran</i>
                             <button type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#info-modal"><i class="fas fa-info"></i></button>
+                                data-bs-target="#info{{ $tiket->id }}"><i class="fas fa-info"></i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -162,7 +162,8 @@
         </div>
     </div>
     </div>
-    <x-modal name="info-modal">
+    @foreach($user->exhibition as $tiket)
+    <x-modal name="info{{ $tiket->id }}">
 
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
             <h1 class="text-center page-title">Informasi Karya Seni</h1>
@@ -170,18 +171,19 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-8">
+        <div class="col-8">
 
-                <p>ID Tiket : <b>2496732E</b></p>
-                <p>Nama Pameran : <b>Kahuripan Exhibition</b></p>
-                <p>Tanggal Pameran : <b>Selasa, 14 September 2021</b></p>
-                <p>Waktu Pameran : <b>13.00-19.00 WIB</b></p>
-                <p>Total Harga : <b>Rp. 100.000</b></p>
-                <p>Status : <i>Menunggu Pembayaran</i></p>
+                <p>ID Tiket : <b>{{ $tiket->pivot->code}}</b></p>
+                <p>Nama Pameran : <b>{{$tiket->name}}</b></p>
+                <p>Tanggal Pameran : <b>{{$tiket->date}}</b></p>
+                <p>Waktu Pameran : <b>{{$tiket->start}}-{{$tiket->end}}</b></p>
+                <p>Total Harga : <b>Rp.{{ number_format($tiket->price)}}</b></p>
+                <p>Status : <i>Menunggu Pembayaran</i></p> 
 
             </div>
         </div>
-
+        
     </x-modal>
+    @endforeach
 
 </x-app-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Detail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -49,7 +50,15 @@ class CartController extends Controller
     public function show(Cart $cart)
     {
         $details = Detail::where('cart_id', $cart->id)->get();
-        return view('carts.show', compact('cart', 'details'));
+    
+        $subtotal = 0;
+        for ($item=0; $item < count($details); $item++) {
+            $subtotal += (float)$details[$item]->price;
+        }
+
+        $unique = random_int(100, 999);
+        
+        return view('carts.show', compact('cart', 'details', 'subtotal', 'unique'));
     }
 
     /**
