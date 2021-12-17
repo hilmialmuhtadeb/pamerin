@@ -57,11 +57,6 @@ class ExhibitionController extends Controller
     {
     
         $exhibition = Exhibition::where('id', request('exhibition_id'))->first();
-        Tickdt::create([
-            'ticket_id' => Auth::user()->ticket->id,
-            'exhibition_id' => request('exhibition_id'),
-            'price' => $exhibition->price,
-        ]);
         return view('exhibitions.detail', compact('exhibition'));
     }
 

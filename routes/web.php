@@ -67,12 +67,14 @@ Route::resource('users', UserController::class);
 Route::resource('banks', BankController::class);
 Route::resource('tickets', TicketController::class);
 Route::resource('commissions', CommissionController::class);
+Route::resource('tickdt', TickdtController::class);
+
 
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 
 Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
 
-Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('tickets/show/{id}', [TicketController::class, 'show'])->name('tickets.show');
 Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
 Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
 

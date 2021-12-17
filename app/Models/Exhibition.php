@@ -18,4 +18,12 @@ class Exhibition extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function tickdts(){
+        return $this->hasOne(Tickdt::class);
+    }
+    public function user()
+    {
+        return $this->belongsToMany(User::class)->withPivot('code');
+    }
 }

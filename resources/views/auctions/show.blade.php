@@ -81,6 +81,9 @@
           background-color: #cf8d11;
           color: white;
         }
+        .bidding-section {
+
+        }
     </style>
     @endslot
 
@@ -119,6 +122,11 @@
                 <div class="h-100 card-info p-3">
                     <h1 class="detail-title">Bidder</h1>
                     <hr>
+                    <div class="col-12 rounded border my-2">
+                        <span class="text-black flex justify-start my-2">Rp.</span>
+                    
+                    </div>
+                    <hr>
                     <div class="row">
                         <div class="col-md-8">
                             <form action="#" method="post">
@@ -136,5 +144,4 @@
             </div>
         </div>
     </div>
-
 </x-app-layout>

@@ -131,7 +131,7 @@
                  <span class="exhibition-description">Rp. 50.198</span>
               </div>
               </div>
-              <form action="{{ route('tickets.store') }}" method="post">
+              <form action="{{ route('tickdt.store') }}" method="post">
               @csrf
               <input type="hidden" name="exhibition_id" value="{{ $exhibition->id }}">
               

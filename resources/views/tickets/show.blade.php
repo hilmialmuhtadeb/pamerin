@@ -142,11 +142,11 @@
                 </thead>
 
                 <tbody>
-                    @foreach($tickdt)
+                    @foreach($user->exhibition as $tiket)
                     <tr>
-                        <td class="align-middle text-center">2496732E</td>
-                        <td class="align-middle text-center">{{ $tickdt->exhibition->name }}</td>
-                        <td class="align-middle text-center">Rp.{{ number_format($tickdt->exhibition->price) }}</td>
+                        <td class="align-middle text-center">{{ $tiket->pivot->code}}</td>
+                        <td class="align-middle text-center">{{$tiket->name}}</td>
+                        <td class="align-middle text-center">{{$tiket->price}}</td>
                         <td class="align-middle text-center">
                             <a href="{{ route('tickets.confirm') }}" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
                         </td>
@@ -155,7 +155,7 @@
                                 data-bs-target="#info-modal"><i class="fas fa-info"></i></button>
                         </td>
                     </tr>
-                @endforeach 
+                    @endforeach
                 </tbody>
             </table>
 

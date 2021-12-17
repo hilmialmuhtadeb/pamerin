@@ -44,22 +44,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function exhibitions()
+    public function exhibition()
     {
-        return $this->hasMany(Exhibition::class);
+        return $this->belongsToMany(Exhibition::class)->withPivot('code');
     }
 
-    public function artworks()
+    public function artwork()
     {
-        return $this->hasMany(Artwork::class);
+        return $this->belongsToMany(Artwork::class);
     }
 
     public function carts() {
-        return $this->hasMany(Cart::class);
+        return $this->belongsToMany(Cart::class);
     }
 
     public function ticket(){
-        return $this->hasMany(Ticket::class);
+        return $this->belongsToMany(Ticket::class);
     }
 
     public function address() {

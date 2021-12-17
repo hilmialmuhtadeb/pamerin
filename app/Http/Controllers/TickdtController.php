@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Exhibition;
 use App\Models\Tickdt;
+use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TickdtController extends Controller
 {
@@ -34,16 +37,18 @@ class TickdtController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {
-        $exhibition = Exhibition::where('id', request('exhibition_id'))->first();
-        Tickdt::create([
-            'ticket_id' => Auth::user()->ticket->id,
-            'exhibition_id' => request('exhibition_id'),
-            'price' => $exhibition->price,
-        ]);
 
-        return redirect(route('exhibitions.index'))->with('success', 'Yeay, karya seni berhasil dimasukkan keranjang');
+    public function store(Request $request)
+    {
+        $id=$request->exhibition_id;
+        $exhibition=Exhibition::find($id);
+        $id_tiket= Str::random(8);
+
+        $user=auth()->user()->id;
+        
+        $post= $exhibition->user()->attach($user,['code' =>$id_tiket]);
+
+        return redirect(route('exhibitions.index'))->with('success', 'Silahkan melanjutkan ke pembayaran');
     }
 
     /**
@@ -52,10 +57,10 @@ class TickdtController extends Controller
      * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function show(Tickdt $tickdt)
-    {
-        //
-    }
+    // public function show(Tickdt $tickdt)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -93,4 +98,12 @@ class TickdtController extends Controller
             return redirect(route('tickets.show'))->with('success', 'Barang berhasil dihapus');
         }
     }
+
+public static function boot()
+{
+    parent::boot();
+    self::creating(function ($model) {
+        $model->ticket_id = Tickdt::where('exhibition_id', $model->exhibition_id)->max('ticket_id') + 1;
+    });
+}
 }
