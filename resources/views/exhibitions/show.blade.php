@@ -101,6 +101,14 @@
         <img src="{{ $exhibition->thumbnail }}" class="img-exhibition rounded">
       </div>
     </div>
+    {{-- <div class=malasngoding-slider> --}}
+      {{-- <div class=isi-slider > --}}
+       {{-- <div class="card col-md-3 mt-2 mb-3" > --}}
+      {{-- <img class="card-img-top" src="{{ $exhibition->thumbnail }}" alt="Card image cap"> --}}
+        {{-- </div> --}}
+      {{-- </div> --}}
+      {{-- </div> --}}
+    </div>
   </div>
   </div>
   

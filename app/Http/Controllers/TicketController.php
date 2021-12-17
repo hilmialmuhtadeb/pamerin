@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tickdt;
 use App\Models\Ticket;
 use App\Models\User;
-use Webpatser\Uuid\Uuid;
+use App\Models\Exhibition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

@@ -96,6 +96,10 @@
       <a href="{{ route('carts.edit', $cart) }}" class="rounded btn-orange btn-address">Isi Alamat</a>
     </div>
 
+    <?php  
+      
+      $subtotal=0;
+    ?>
     <div class="row justify-content-end">
       <div class="col-md-5">
         <h5 class="cart-amount-title">Total Keranjang</h5>

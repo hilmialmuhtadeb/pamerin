@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +38,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $request->all();
+        $attr['password'] = bcrypt($request->password);
+        User::create($attr);
+
+        return back()->with('success', 'Berhasil menambahkan admin baru');
     }
 
     /**
@@ -48,7 +53,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        // ()->validate([
+            // 'name' => 'required',
+            // 'email' => 'required|email',
+            // 'phone' => 'required|numeric'
+        
     }
 
     /**
@@ -58,12 +67,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {
+    {   
+        $address = Address::where('user_id', $user->id)->first();
         if ($user->type === 3) {
-            return view('users.edit', compact('user'));
+            return view('users.edit', compact('user', 'address'));
         }
         if ($user->type === 2) {
-            return view('users.artists.edit', compact('user'));
+            return view('users.artists.edit', compact('user', 'address'));
         }
     }
 
@@ -94,7 +104,6 @@ class UserController extends Controller
 
             return back()->with('success', 'Profile berhasil diperbarui.');
         }
-
         if ($request->code == 2) {
             if ($request->password === $request->repassword) {
                 $user->update([
@@ -108,6 +117,16 @@ class UserController extends Controller
                 return back()->with('error', 'Password yang Anda masukkan tidak sama');
             }
         }
+
+        $attr = $request->all();
+        if ($request->password == null) {
+            $attr['password'] = $user->password;
+        } else {
+            $attr['password'] = bcrypt($request->password);
+        }
+        $user->update($attr);
+        return back()->with('success', 'Informasi berhasil diperbarui');
+
     }
 
     /**
@@ -118,6 +137,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return back()->with('success', 'Berhasil menghapus' + $user->name + ' dari daftar.');
     }
+
 }

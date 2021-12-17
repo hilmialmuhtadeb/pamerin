@@ -57,10 +57,10 @@ class TickdtController extends Controller
      * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    // public function show(Tickdt $tickdt)
-    // {
-    //     //
-    // }
+    public function show(Tickdt $tickdt)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.

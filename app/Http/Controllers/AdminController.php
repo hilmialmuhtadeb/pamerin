@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -56,7 +57,15 @@ class AdminController extends Controller
     }
     public function pengguna()
     {
-        return view('admin.pengguna');
+        return view('admin.pengguna', [
+            'users' => User::orderBy('type')->get(),
+            'admins' => User::where('type', 1)->get(),
+            'artists' => User::where('type', 2)->get(),
+            'guests' => User::where('type', 3)->get(),
+            'role' => ['Admin', 'Seniman', 'Pengunjung'],
+            'color' => ['text-warning', 'text-guava', 'text-navy'],
+            'modal' => ['info-admin', 'edit-seniman', 'edit-pengunjung'],
+        ]);
     }
     public function sedia()
     {
@@ -74,12 +83,16 @@ class AdminController extends Controller
     {
         return view('admin.artikel-ubah');
     }
-    public function detailpameran()
+    public function karyapameran()
     {
-        return view('admin.pameran.detail-pameran');
+        return view('admin.pameran.karya-pameran');
     }
     public function detailpublikasi()
     {
         return view('admin.pameran.detail-publikasi');
+    }
+    public function tiketpameran()
+    {
+        return view('admin.pameran.tiket-pameran');
     }
 }

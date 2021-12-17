@@ -52,7 +52,8 @@ Route::get('/artikel-ubah', [AdminController::class, 'artikelubah'])->name('admi
 Route::get('/sedia', [AdminController::class, 'sedia'])->name('admin.sedia');
 Route::get('/kirim', [AdminController::class, 'kirim'])->name('admin.kirim');
 Route::get('/done', [AdminController::class, 'done'])->name('admin.done');
-Route::get('/detail-pameran', [AdminController::class, 'detailpameran'])->name('admin.detail-pameran');
+Route::get('/karya-pameran', [AdminController::class, 'karyapameran'])->name('admin.karya-pameran');
+Route::get('/tiket-pameran', [AdminController::class, 'tiketpameran'])->name('admin.tiket-pameran');
 Route::get('/detail-publikasi', [AdminController::class, 'detailpublikasi'])->name('admin.detail-publikasi');
 Route::get('/coba', [AdminController::class, 'coba'])->name('admin.coba');
 
@@ -79,11 +80,41 @@ Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->nam
 Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
 
 
+Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
+
+Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
+
+Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
+Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
+
+
+Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
+
+Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
+
+Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
+Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
+
+
+Route::get('artists/porto', [ArtistController::class, 'porto'])->name('artists.porto');
 Route::get('artists/bank', [BankController::class, 'create'])->name('artists.bank');
 Route::get('artists/dashboard', [ArtistController::class, 'index'])->name('artists.index');
 Route::get('artists/artworks', [ArtistController::class, 'artwork'])->name('artists.artworks');
 Route::get('artists/artworks/sell', [ArtistController::class, 'sell'])->name('artists.artworks.sell');
 Route::get('artists/artworks/accept', [ArtistController::class, 'accept'])->name('artists.artworks.accept');
+Route::get('artists/artworks/send', [ArtistController::class, 'send'])->name('artists.artworks.send');
+Route::get('artists/artworks/finish', [ArtistController::class, 'finish'])->name('artists.artworks.finish');
+
+Route::get('artists/fair/selesai', [ArtistController::class, 'selesai'])->name('artists.fair.selesai');
+Route::get('artists/fair/berlangsung', [ArtistController::class, 'berlangsung'])->name('artists.fair.berlangsung');
+Route::get('artists/fair/publikasi', [ArtistController::class, 'publikasi'])->name('artists.fair.publikasi');
+
+Route::get('artists/sale/done', [ArtistController::class, 'done'])->name('artists.sale.done');
+Route::get('artists/sale/kirim', [ArtistController::class, 'kirim'])->name('artists.sale.kirim');
+Route::get('artists/sale/terima', [ArtistController::class, 'terima'])->name('artists.sale.terima');
+Route::get('artists/sale/lelang', [ArtistController::class, 'lelang'])->name('artists.sale.lelang');
 
 Route::get('artworks/{artwork}/shipping', [ShippingCostController::class, 'create'])->name('artworks.shipping');
 Route::post('artworks/{artwork}/shipping', [ShippingCostController::class, 'store']);

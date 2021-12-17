@@ -61,7 +61,7 @@ class User extends Authenticatable
     public function ticket(){
         return $this->belongsToMany(Ticket::class);
     }
-
+    
     public function address() {
         return $this->hasOne(Address::class);
     }

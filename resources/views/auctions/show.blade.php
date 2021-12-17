@@ -81,9 +81,6 @@
           background-color: #cf8d11;
           color: white;
         }
-        .bidding-section {
-
-        }
     </style>
     @endslot
 
