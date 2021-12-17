@@ -131,10 +131,13 @@
                  <span class="exhibition-description">Rp. 50.198</span>
               </div>
               </div>
-              <form action="{{ route('tickets.show')}}" method="post" class="d-grid mt-5 my-2">
+              <form action="{{ route('tickets.store') }}" method="post">
               @csrf
-              <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-              <button type="submit" class="card-exhibition-button  btn-checkout rounded-3">Bayar</button>
+              <input type="hidden" name="exhibition_id" value="{{ $exhibition->id }}">
+              
+              <div class="d-grid my-4">
+                <button type="submit" class="card-exhibition-button  btn-checkout rounded-3">Pesan Sekarang</button>
+              </div>
             </form>
             </div>
         </div>

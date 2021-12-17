@@ -24,6 +24,10 @@ class Ticket extends Model
     {
         return $this->hasMany(Detail::class);
     }
+    public function tickdt()
+    {
+        return $this->hasMany(Tickdt::class);
+    }
     public function getDetailsCountAttribute()
     {
         $detailsCount = Detail::where('ticket_id', $this->id)->count();

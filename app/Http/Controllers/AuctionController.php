@@ -14,8 +14,7 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::all();
-        dd($auctions);
+        $auctions = Auction::paginate(9);
         return view('auctions.index', compact('auctions'));
     }
 
