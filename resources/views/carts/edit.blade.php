@@ -50,36 +50,36 @@
     </div>
 
     <h5>Alamat Pengiriman</h5>
-    <form action="" method="post">
-
+    <form action="/carts/edit/{{$cart->id}}" method="post">
+          @csrf
       <div class="row">
 
         <div class="col-md-6">
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="address-type" id="default" value="default">
+            <input class="form-check-input" type="radio" name="address-type" id="default" value="default"  >
             <label class="form-check-label" for="default">Alamat Saya</label>
           </div>
 
           <div class="form-box">
             <div>
               <label for="alamat-default" class="form-label label-small">Alamat</label>
-              <input type="text" class="form-control" id="alamat-default">
+              <input type="text" class="form-control" id="alamat-default" name="alamat_default" value="{{$user->address->street}}" readonly>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <label for="kota-default" class="form-label label-small">Kota/Kabupaten</label>
-                <input type="text" class="form-control" id="kota-default">
+                <input type="text" class="form-control" id="kota-default" value="{{$user->address->city}}" readonly>
               </div>
               <div class="col-md-6">
                 <label for="provinsi-default" class="form-label label-small">Provinsi</label>
-                <input type="text" class="form-control" id="provinsi-default">
+                <input type="text" class="form-control" id="provinsi-default" value="{{$user->address->region}}" readonly>
               </div>
             </div>
             <div class="row">
               <div class="col-6">
                 <label for="zip-default" class="form-label label-small">Kode Pos</label>
-                <input type="text" class="form-control" id="zip-default">
+                <input type="text" class="form-control" id="zip-default" value="{{$user->address->zipcode}}" readonly>
               </div>
             </div>
           </div>

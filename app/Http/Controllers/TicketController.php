@@ -14,10 +14,16 @@ class TicketController extends Controller
     public function show(Ticket $ticket, $id)
     {
         $user=User::find($id);
+        
         // $tickdt = Tickdt::where('user_id', $user)->get();
         return view('tickets.show', compact('user'));
     }
-
+    
+    public function joinDetail(Ticket $ticket, $id)
+    {
+        $user=User::find($id);
+        return view('tickets.join');
+    }
     public function store(Request $request)
     {
         // $exhibition = Exhibition::find($request->exhibition_id);
@@ -31,16 +37,13 @@ class TicketController extends Controller
         // return redirect(route('exhibitions.index', $exhibition));
     }
 
-    public function confirm()
-    { 
-        return view('tickets.confirm');
+    public function confirm($id)
+    {
+        $exhibition=Exhibition::find($id);
+        return view('tickets.confirm', compact('exhibition'));
         
     }
 
-    public function join()
-    {
-        return redirect(route('tickets.join'));
-    }
 
     public function destroy(Ticket $ticket)
     {

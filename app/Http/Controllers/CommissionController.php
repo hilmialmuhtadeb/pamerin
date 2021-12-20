@@ -14,13 +14,6 @@ class CommissionController extends Controller
     }
     public function store()
     {
-        // $exhibition = Exhibition::where('id', request('exhibitions_id'))->first();
-        // Commission::create([
-        //     'commissions_id' => Auth::user()->commission->id,
-        //     'exhibitions_id' => request('exhibitions_id'),
-        //     'price' => $exhibition->price,
-        // ]);
-
         return redirect(route('commissions.show'));
     }
 

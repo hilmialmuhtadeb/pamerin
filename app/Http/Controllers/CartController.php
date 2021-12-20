@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Detail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Http\Controllers\redirect;
 
 class CartController extends Controller
 {
@@ -37,8 +39,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        // $artwork_id = $request->artwork_id;
-        // $cart = Cart::where()
+        return view('commissions.show');
     }
 
     /**
@@ -50,15 +51,7 @@ class CartController extends Controller
     public function show(Cart $cart)
     {
         $details = Detail::where('cart_id', $cart->id)->get();
-    
-        $subtotal = 0;
-        for ($item=0; $item < count($details); $item++) {
-            $subtotal += (float)$details[$item]->price;
-        }
-
-        $unique = random_int(100, 999);
-        
-        return view('carts.show', compact('cart', 'details', 'subtotal', 'unique'));
+        return view('carts.show', compact('cart', 'details'));
     }
 
     /**
@@ -69,7 +62,9 @@ class CartController extends Controller
      */
     public function edit(Cart $cart)
     {
-        return view('carts.edit', compact($cart));
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        return view('carts.edit', compact('cart','user'));
     }
 
     /**
@@ -94,4 +89,17 @@ class CartController extends Controller
     {
         //
     }
+
+    public function edit_alamat($id, Request $request)
+    {
+        // $detail = Detail::where('cart_id', $id)->get();
+
+        Detail::where('cart_id', $id)
+            ->update([
+                'street'=>$request->alamat_default,
+        ]);
+
+        return redirect(route('artworks.index'))->with('success', 'Barang berhasil dihapus');
+    }
+
 }

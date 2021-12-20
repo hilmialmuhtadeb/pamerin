@@ -13,7 +13,7 @@
     <div class="row my-4 justify-content-center">
       <div class="col-lg-10">
 
-        <div class="row">
+        <div class="row" >
           @foreach ($artworks as $artwork)
           <div class="col-md-4 my-4">
 

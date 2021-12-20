@@ -68,23 +68,40 @@
 
           <div class="mb-2">
             <label for="media" class="form-label label-small">Media</label>
-            <input type="text" name="media" class="form-control" id="media">
+            <select class="form-select" name="media" aria-label="Default select example">
+              <option disabled selected>Pilih Satu!</option>
+              <option value="Kanvas">Kanvas</option>
+              <option value="Kertas">Kertas</option>
+              <option value="Digital">Digital</option>
+              <option value="Kaca">Kaca</option>
+              <option value="Lain-lain">Lain-lain</option>
+              </select>
             @error('media')
-                  <span class="error-message">{{ $message }}</span>
+            <span class="error-message">{{ $message }}</span>
             @enderror
           </div>
 
           <div class="mb-2">
             <label for="size" class="form-label label-small">Ukuran</label>
-            <input type="text" name="size" class="form-control" id="size">
+            <select class="form-select" name="size" aria-label="Default select example">
+              <option disabled selected>Pilih Satu!</option>
+              <option value="10x10cm">10x10cm</option>
+              <option value="10x20cm">10x20cm</option>
+              <option value="20x20cm">20x20cm</option>
+              <option value="20x30cm">20x30cm</option>
+              <option value="30x30cm">30x30cm</option>
+              <option value="30x40cm">30x40cm</option>
+              <option value="40x60cm">40x60cm</option>
+              <option value="Lain-lain">Lain-lain</option>
+            </select>
             @error('size')
-                  <span class="error-message">{{ $message }}</span>
+            <span class="error-message">{{ $message }}</span>
             @enderror
           </div>
 
           <div class="mb-2">
             <label for="year" class="form-label label-small">Tahun Karya Dibuat</label>
-            <input type="number" name="year" class="form-control" id="year">
+            <input name="year" class="form-control" id="year">
             @error('year')
                   <span class="error-message">{{ $message }}</span>
             @enderror

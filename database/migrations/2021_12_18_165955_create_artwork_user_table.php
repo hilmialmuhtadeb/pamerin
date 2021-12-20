@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExhibitionUserTable extends Migration
+class CreateArtworkUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateExhibitionUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('exhibition_user', function (Blueprint $table) {
+        Schema::create('artwork_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exhibition_id');
+            $table->foreignId('artwork_id');
             $table->foreignId('user_id');
             $table->string('code');
-            
+            $table->string('street');
+            $table->string('city');
+            $table->string('region');
+            $table->string('zipcode');
+            $table->integer('status_id');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreateExhibitionUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exhibition_user');
+        Schema::dropIfExists('artwork_user');
     }
 }

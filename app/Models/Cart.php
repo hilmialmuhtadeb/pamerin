@@ -26,10 +26,10 @@ class Cart extends Model
     {
         return $this->hasMany(Detail::class);
     }
+    
     public function getDetailsCountAttribute()
     {
         $detailsCount = Detail::where('cart_id', $this->id)->count();
         return $detailsCount;
     }
-    
 }

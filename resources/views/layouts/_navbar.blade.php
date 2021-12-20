@@ -60,7 +60,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">Profil</a></li>
-                    <li><a class="dropdown-item" href="{{ route('tickets.show', Auth::user()) }}">Tiket Saya</a></li>
+                    <li><a class="dropdown-item" href="/tickets/show/{{auth()->user()->id}}">Tiket Saya</a></li>
                     <li><a class="dropdown-item" href="{{ route('commissions.show', Auth::user()) }}">Pesanan Saya</a></li>    
                     <li>
                         <form action="{{ route('logout') }}" method="post">

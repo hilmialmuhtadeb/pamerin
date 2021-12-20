@@ -24,6 +24,6 @@ class Exhibition extends Model
     }
     public function user()
     {
-        return $this->belongsToMany(User::class)->withPivot('code');
+        return $this->belongsToMany(User::class)->withPivot('code', 'bukti', 'subtotal', 'unique', 'summary', 'status_id');
     }
 }

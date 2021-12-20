@@ -71,31 +71,34 @@ Route::resource('commissions', CommissionController::class);
 Route::resource('tickdt', TickdtController::class);
 
 
+// Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
+Route::get('exhibitions/event', [ExhibitionController::class, 'event'])->name('exhibitions.event');
 
+// Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
 Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
 
 Route::get('tickets/show/{id}', [TicketController::class, 'show'])->name('tickets.show');
-Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
+// Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
 Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
 
+// mengirim edit untuk unggah bukti pembayaran
+Route::post('tickets/show/{id}/{idtiket}', [TickdtController::class, 'unggahBayar']);
+
+Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('tickets/confirm/payment/{id}', [TicketController::class, 'confirm'])->name('tickets.confirm');
+
+
+// Route untuk edit alamat cart
+Route::post('carts/edit/{id}', [CartController::class, 'edit_alamat']);
 
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 
 Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
 
 Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
-Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
-Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
-
-
-Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
-
-Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
-
-Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
-Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
-Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
+// Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
+Route::get('ticketsdetail', [TicketController::class, 'joinDetail'])->name('tickets.join');
 
 
 Route::get('artists/porto', [ArtistController::class, 'porto'])->name('artists.porto');

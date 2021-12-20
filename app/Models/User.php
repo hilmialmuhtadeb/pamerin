@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function exhibition()
     {
-        return $this->belongsToMany(Exhibition::class)->withPivot('code');
+        return $this->belongsToMany(Exhibition::class)->withPivot('code', 'bukti', 'subtotal', 'unique', 'summary', 'status_id');
     }
 
     public function artwork()

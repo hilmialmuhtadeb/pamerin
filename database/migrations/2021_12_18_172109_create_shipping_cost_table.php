@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShippingCostsTable extends Migration
+class CreateShippingCostTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,7 @@ class CreateShippingCostsTable extends Migration
             $table->id();
             $table->foreignId('artwork_id');
             $table->integer('jawa');
+            $table->integer('sumatera');
             $table->integer('kalimantan');
             $table->integer('sulawesi');
             $table->integer('papua');
@@ -31,6 +32,6 @@ class CreateShippingCostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipping_costs');
+        Schema::dropIfExists('shipping_cost');
     }
 }

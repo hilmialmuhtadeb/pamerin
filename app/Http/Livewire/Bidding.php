@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Auction;
 
 class Bidding extends Component
 {
@@ -11,8 +12,9 @@ class Bidding extends Component
             
         ]
     ];
-    public function render()
+    public function render(Auction $auction)
     {
-        return view('livewire.bidding');
+        // $auction = Auction::where('slug', $auction->slug)->get();
+        return view('livewire.bidding', compact('auction'));
     }
 }

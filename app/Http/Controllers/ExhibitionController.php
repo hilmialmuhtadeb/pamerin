@@ -53,11 +53,16 @@ class ExhibitionController extends Controller
         return view('exhibitions.show', compact('exhibition'));
     }
 
+    public function event(Exhibition $exhibition)
+    {
+        return view('exhibitions.event', compact('exhibition'));
+    }
+
     public function detail(Request $request)
     {
-    
+        $unique = random_int(190, 199);
         $exhibition = Exhibition::where('id', request('exhibition_id'))->first();
-        return view('exhibitions.detail', compact('exhibition'));
+    return view('exhibitions.detail', compact('exhibition','unique'));
     }
 
     /**
