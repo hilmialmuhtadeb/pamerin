@@ -59,7 +59,7 @@
             <tr>
               <td scope="row" class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
-              <td class="py-2 text-center"><img src="#" height="100px"></td>
+              <td class="py-2 text-center"><img src="{{asset('#')}}" height="100px"></td>
               <td class="align-middle text-center">
               <button type="submit" class="submit-button bg-orange rounded ">Lihat Pameran</button>
               <td class="align-middle text-center">
