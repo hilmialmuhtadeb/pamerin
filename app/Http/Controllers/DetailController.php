@@ -24,6 +24,7 @@ class DetailController extends Controller
         $check_cartId = Auth::user()->cart->id;
         $details = Detail::where('cart_id', $check_cartId)->get();
         
+        // $ongkir = Detail::where('artwork_id', $detail->shipping)->get();
         $subtotal = 0;
         for ($item=0; $item < count($details); $item++) {
             $subtotal += (float)$details[$item]->price;
@@ -41,6 +42,28 @@ class DetailController extends Controller
                 'status' => 1,
             ]);
 
+        // # 3. ambil data cart_id yang masih ada
+        // $details = Detail::where('cart_id', $check_cartId)->get();
+
+        // $ongkir = 0;
+        // for ($item=0; $item < count($details); $item++) {
+        //     $ongkir += (float)$details[$item]->shipping;
+        // }
+
+        //   #5. update data pada cart setelah dilakukan looping
+        // # 5.1 hapus data ketika data tidak kosong
+        // if (count($details))
+        // {   
+        //     Cart::where('id', $check_cartId)
+        //         ->update([
+        //             'ongkir' => $ongkir,
+        //         ]);
+        // } else {
+        //     Cart::where('id', $check_cartId)
+        //     ->update([
+        //         'ongkir' => 0,
+        //         ]);
+        // }
         
         return redirect(route('artworks.index'))->with('success', 'Yeay, karya seni berhasil dimasukkan keranjang');
     }

@@ -1,4 +1,4 @@
-<x-app-layout title="coba">
+<x-app-layout title="Pameran">
 
   @slot('style')
       <style>
@@ -10,9 +10,9 @@
   @endslot
 
   <div class="container">
-  @foreach($user->exhibition as $tiket)
+ 
     <div class="d-flex justify-content-center flex-column align-items-center">
-      <h1 class="text-center page-title">{{$tiket->name}}</h1>
+      <h1 class="text-center page-title">Pameran</h1>
       <span class="underline-page-title text-center"></span>
     </div>
         
@@ -21,14 +21,16 @@
     <iframe src="https://i.simmer.io/@denysgamers46/virtualkarya" style="width:960px;height:600px;border:0"></iframe>
     </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-6">
+        <p>Mahera Lim, Sumatera Utara</p>
       </div>
-      <div class="col-6">
-         
+      <div class="col-3 justify-content-beetwen">
+         <button type="submit"><i class="fa fa-thumbs-up"></i></button>
+         <button type="submit"><i class="fa fa-thumbs-down"></i></button>
       </div>
     </div>
-    @endforeach
+
   </div>
   
 </x-app-layout>

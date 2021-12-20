@@ -12,9 +12,14 @@ class ShippingCost extends Model
     protected $fillable = [
         'artwork_id',
         'jawa',
+        'sumatera',
         'kalimantan',
         'sulawesi',
         'papua',
     ];
     
+    public function artwork()
+    {
+        return $this->hasOne(Artwork::class, 'artwork_id');
+    }
 }

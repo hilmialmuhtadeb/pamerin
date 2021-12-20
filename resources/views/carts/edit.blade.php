@@ -50,14 +50,14 @@
     </div>
 
     <h5>Alamat Pengiriman</h5>
-    <form action="/carts/edit/{{$cart->id}}" method="post">
+    <form action="/carts/edit/{{$artwork->id}}" method="post">
           @csrf
       <div class="row">
 
         <div class="col-md-6">
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="address-type" id="default" value="default"  >
+            <input class="form-check-input" type="radio" name="address_type" id="default" value="default"  >
             <label class="form-check-label" for="default">Alamat Saya</label>
           </div>
 
@@ -69,17 +69,17 @@
             <div class="row">
               <div class="col-md-6">
                 <label for="kota-default" class="form-label label-small">Kota/Kabupaten</label>
-                <input type="text" class="form-control" id="kota-default" value="{{$user->address->city}}" readonly>
+                <input type="text" class="form-control" id="kota-default" name="kota_default" value="{{$user->address->city}}" readonly>
               </div>
               <div class="col-md-6">
                 <label for="provinsi-default" class="form-label label-small">Provinsi</label>
-                <input type="text" class="form-control" id="provinsi-default" value="{{$user->address->region}}" readonly>
+                <input type="text" class="form-control" name="provinsi_default" id="provinsi-default" value="{{$user->address->region}}" readonly>
               </div>
             </div>
             <div class="row">
               <div class="col-6">
                 <label for="zip-default" class="form-label label-small">Kode Pos</label>
-                <input type="text" class="form-control" id="zip-default" value="{{$user->address->zipcode}}" readonly>
+                <input type="text" class="form-control" name="kodepos_default" id="zip-default" value="{{$user->address->zipcode}}" readonly>
               </div>
             </div>
           </div>
@@ -89,29 +89,29 @@
         <div class="col-md-6">
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="address-type" id="custom" value="custom">
+            <input class="form-check-input" type="radio" name="address_type" id="custom" value="custom">
             <label class="form-check-label" for="custom">Tambah Alamat</label>
           </div>
 
           <div class="form-box">
             <div>
               <label for="alamat-custom" class="form-label label-small">Alamat</label>
-              <input type="text" class="form-control" id="alamat-custom">
+              <input type="text" class="form-control" name="alamat" id="alamat-custom">
             </div>
             <div class="row">
               <div class="col-md-6">
                 <label for="kota-custom" class="form-label label-small">Kota/Kabupaten</label>
-                <input type="text" class="form-control" id="kota-custom">
+                <input type="text" class="form-control" name="kabupaten" id="kota-custom">
               </div>
               <div class="col-md-6">
                 <label for="provinsi-custom" class="form-label label-small">Provinsi</label>
-                <input type="text" class="form-control" id="provinsi-custom">
+                <input type="text" class="form-control" name="provinsi" id="provinsi-custom">
               </div>
             </div>
             <div class="row">
               <div class="col-6">
                 <label for="zip-custom" class="form-label label-small">Kode Pos</label>
-                <input type="text" class="form-control" id="zip-custom">
+                <input type="text" class="form-control" name="kodepos" id="zip-custom">
               </div>
             </div>
           </div>
@@ -124,34 +124,40 @@
         <div class="col-md-6">
           <h5>Pilihan Ongkos Pengiriman (Karya dikirim dari Kalimantan)</h5>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="jawa" id="jawa">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->jawa}}" id="jawa">
             <label class="form-check-label" for="jawa">
-              Area Jawa Bali | Rp50.000
+              Area Jawa Bali | Rp {{number_format($artwork->shippingCost->jawa)}}
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="jawa" id="jawa">
-            <label class="form-check-label" for="jawa">
-              Area Sulawesi | Rp40.000
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->sumatera}}" id="sumatera">
+            <label class="form-check-label" for="sumatera">
+              Area Sumatera | Rp {{number_format($artwork->shippingCost->sumatera)}}
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="jawa" id="jawa">
-            <label class="form-check-label" for="jawa">
-              Area Kalimantan | Rp20.000
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->sulawesi}}" id="sulawesi">
+            <label class="form-check-label" for="sulawesi">
+              Area Sulawesi | Rp {{number_format($artwork->shippingCost->sulawesi)}}
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="jawa" id="jawa">
-            <label class="form-check-label" for="jawa">
-              Area Papua | Rp80.000
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->kalimantan}}" id="kalimantan">
+            <label class="form-check-label" for="kalimantan">
+              Area Kalimantan | Rp {{number_format($artwork->shippingCost->kalimantan)}}
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->papua}}" id="papua">
+            <label class="form-check-label" for="papua">
+              Area Papua | Rp {{number_format($artwork->shippingCost->papua)}}
             </label>
           </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-end mb-5">
-        <a href="{{ route('carts.show', Auth::user()->cart) }}" class="btn-cancel me-3">Batal</a>
+        <a href="{{ route('carts.show', Auth::user()->cart) }}" class="btn-cancel me-3">Kembali</a>
         <button type="submit" class="btn-orange">Simpan</button>
       </div>
       

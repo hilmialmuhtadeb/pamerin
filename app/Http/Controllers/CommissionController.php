@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commission;
+use App\Models\Detail;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommissionController extends Controller
 {
-    public function show()
+    public function show(Detail $detail, $id)
     {
+        $user=User::find($id);
         return view('commissions.show');
     }
     public function store()

@@ -88,6 +88,8 @@ Route::post('tickets/show/{id}/{idtiket}', [TickdtController::class, 'unggahBaya
 Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
 Route::get('tickets/confirm/payment/{id}', [TicketController::class, 'confirm'])->name('tickets.confirm');
 
+// route untuk edit alamat pesanan per artwork id 
+Route::get('editalamat/{id}', [CartController::class, 'editAlamat']);
 
 // Route untuk edit alamat cart
 Route::post('carts/edit/{id}', [CartController::class, 'edit_alamat']);

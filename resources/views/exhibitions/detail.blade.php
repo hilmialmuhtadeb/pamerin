@@ -96,7 +96,7 @@
 
         <tbody>   
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{ $exhibition->thumbnail }}" class="img-fluid ms-2 img-exhibition rounded"></td>
+            <td scope="row" class="text-center py-2"><img src="{{asset('$exhibition->thumbnail') }}" class="img-fluid ms-2 img-exhibition rounded"></td>
             <td class="align-middle text-left">
             <ul>
               <span class="ms-2 text-black"><b>{{ $exhibition->name }}</b></span><br>

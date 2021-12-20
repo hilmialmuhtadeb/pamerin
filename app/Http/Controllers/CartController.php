@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Detail;
 use App\Models\User;
+use App\Models\Artwork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\redirect;
@@ -50,6 +51,7 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
+        
         $details = Detail::where('cart_id', $cart->id)->get();
         return view('carts.show', compact('cart', 'details'));
     }
@@ -62,6 +64,7 @@ class CartController extends Controller
      */
     public function edit(Cart $cart)
     {
+        // $ship = ShippingCost::where('artwork_id', $artwork->id)->get();
         $id=Auth()->user()->id;
         $user=User::find($id); 
         return view('carts.edit', compact('cart','user'));
@@ -94,12 +97,64 @@ class CartController extends Controller
     {
         // $detail = Detail::where('cart_id', $id)->get();
 
-        Detail::where('cart_id', $id)
+        if($request->address_type == 'default'){
+            Detail::where('artwork_id', $id)
+                ->update([
+                    'street'=>$request->alamat_default,
+                    'city'=>$request->kota_default,
+                    'region'=>$request->provinsi_default,
+                    'zipcode'=>$request->kodepos_default,
+                    'shipping'=>$request->flexRadioDefault,
+            ]);
+        }
+        else {
+            Detail::where('artwork_id', $id)
             ->update([
-                'street'=>$request->alamat_default,
+                'street'=>$request->alamat,
+                'city'=>$request->kabupaten,
+                'region'=>$request->provinsi,
+                'zipcode'=>$request->kodepos,
+                'shipping'=>$request->flexRadioDefault,
         ]);
 
-        return redirect(route('artworks.index'))->with('success', 'Barang berhasil dihapus');
+        // $check_cartId = Auth::user()->cart->id;
+        
+        // # 3. ambil data cart_id yang masih ada
+        // $details = Detail::where('cart_id', $check_cartId)->get();
+
+        // $ongkir = 0;
+        // for ($item=0 ; $item < count($details); $item++) {
+        //     $ongkir += (float)$details[$item]->shipping;
+        // }
+
+        //   #5. update data pada cart setelah dilakukan looping
+        // # 5.1 hapus data ketika data tidak kosong
+        // if (count($details))
+        // {   
+        //     Cart::where('id', $check_cartId)
+        //         ->update([
+        //             'ongkir' => $ongkir,
+        //         ]);
+        // } else {
+        //     Cart::where('id', $check_cartId)
+        //     ->update([
+        //         'ongkir' => 0,
+        //         ]);
+        // }
+
+
+        }  
+
+        return redirect()->back()->with('success', 'Sukses menambahkan alamat');
+    }
+
+    public function editAlamat($id)
+    {
+        $id_user= Auth()->user()->id;
+        $artwork= Artwork::find($id);
+        $user=User::find($id_user);
+
+        return view('carts.edit', compact('artwork','user'));
     }
 
 }

@@ -60,7 +60,7 @@
     <div class="row justify-content-between mb-3">
 
       <div class="col-md-7">
-        <img src="{{ $exhibition->thumbnail }}" class="img-exhibition rounded">
+        <img src="{{asset('$exhibition->thumbnail') }}" class="img-exhibition rounded">
       </div>
 
       <div class="col-md-5">

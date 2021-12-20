@@ -12,6 +12,7 @@ class Cart extends Model
     public $fillable = [
         'user_id',
         'subtotal',
+        'ongkir',
         'unique_number',
         'summary',
         'status',

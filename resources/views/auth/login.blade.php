@@ -60,7 +60,7 @@
 
           <div class="col-6">
             <a href="{{ route('home') }}">
-              <img src="/img/logo/pamerin-icon.png" class="img-fluid py-5 px-3">
+              <img src="{{asset('/img/logo/pamerin-icon.png')}}" class="img-fluid py-5 px-3">
             </a>
           </div>
 

@@ -93,7 +93,7 @@
         <div class="row justify-content-center mb-2">
             <div class="col-md-5">
                 <div class="card-info p-3">
-                    <img src="{{ $auction->thumbnail }}" class="img-fluid img-detail rounded">
+                    <img src="{{asset('$auction->thumbnail') }}" class="img-fluid img-detail rounded">
                 </div>
 
                 <div class="card-info p-3" style="margin-top: 25px;">

@@ -75,16 +75,24 @@
         <tbody>   
           @foreach ($details as $detail)
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{ $detail->artwork->takeImage }}" height="100px"></td>
+            <td scope="row" class="text-center py-2"><img src="{{asset('$detail->artwork->takeImage')}}" height="100px"></td>
             <td class="align-middle text-center">{{ $detail->artwork->name }}</td>
             <td class="align-middle text-center">Rp{{ number_format($detail->price)}}</td>
             <td class="align-middle text-center">
-              <form action="{{ route('details.destroy', $detail->id) }}" method="POST">
-                @csrf
-                @method('delete')
-                <input type="hidden" name="unique_number" value="{{ $cart->unique_number }}">
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-              </form>
+              <div class="row justify-content-beetwen">
+                <div class="col-6"> 
+                  <a href="/editalamat/{{$detail->artwork->id}}" class="rounded btn-orange btn-address">Isi Alamat</a>
+                </div>
+                <div class="col-6">
+                <form action="{{ route('details.destroy', $detail->id) }}" method="POST">
+                  @csrf
+                  @method('delete')
+                  <input type="hidden" name="unique_number" value="{{ $cart->unique_number }}">
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </form>
+
+                </div>
+              </div>
             </td>
           </tr>
           @endforeach
@@ -93,11 +101,10 @@
       
     </div>
 
-    <div class="d-flex justify-content-end my-4">
-      <a href="{{ route('carts.edit', $cart) }}" class="rounded btn-orange btn-address">Isi Alamat</a>
-    </div>
+
     
     <div class="row justify-content-end">
+      
       <div class="col-md-5">
         <h5 class="cart-amount-title">Total Keranjang</h5>
 
@@ -108,7 +115,7 @@
           </tr>
           <tr>
             <th>Ongkos Kirim</th>
-            <td>Rp 0</td>
+            <td>Rp {{ number_format($cart->shipping) }}</td>
           </tr>
           <tr>
             <th>Kode Unik</th>
