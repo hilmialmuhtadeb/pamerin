@@ -41,6 +41,10 @@ class ArtistController extends Controller
     {
         return view('users.artists.artworks.finish');
     }
+    public function pengajuan()
+    {
+        return view('users.artists.fair.pengajuan');
+    }
     public function selesai()
     {
         return view('users.artists.fair.selesai');

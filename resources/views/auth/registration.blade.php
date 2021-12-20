@@ -1,4 +1,4 @@
-<x-app-layout title="Daftar Akun">
+ <x-app-layout title="Daftar Akun">
 
   @slot('style')
       <style>
