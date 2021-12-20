@@ -53,6 +53,7 @@ class ExhibitionController extends Controller
     {
         return view('exhibitions.show', compact('exhibition'));
     }
+    
 
     public function detail(Request $request)
     {

@@ -82,11 +82,13 @@
               </div>
               <div class="d-grid">
                 <button type="submit" class="rounded-pill login-button text-center">
-                  LOGIN
+                  Masuk
                 </button>
               </div>
               <div class="d-flex justify-content-center">
                 <a href="{{ route($link) }}" class="bottom-link">Buat Akun</a>
+                <div class="d-flex justify-content-center">
+                  <a href="{{ route('forget')}}" class="bottom-link ms-4">Lupa Kata Sandi</a>
               </div>
             </form>
           </div>

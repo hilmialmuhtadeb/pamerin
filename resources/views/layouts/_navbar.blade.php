@@ -80,7 +80,7 @@
                       Kelola Pameran
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Pengajuan</a></li>
+                    <li><a class="dropdown-item" href="{{ route('artists.fair.pengajuan') }}">Pengajuan</a></li>
                     <li><a class="dropdown-item" href="{{ route('artists.fair.publikasi') }}">Publikasi</a></li>
                     <li><a class="dropdown-item" href="{{ route('artists.fair.berlangsung') }}">Sedang
                             Berlangsung</a></li>
