@@ -59,7 +59,7 @@
       <div class="col-md-10">
         <div class="row home-card shadow">
           <div class="col-md-5">
-            <img src="/img/ilustrasi/ilustrasi1.png">
+            <img src="{{ asset('/img/ilustrasi/ilustrasi1.png')}}">
           </div>
           <div class="col-md-7 px-5 d-flex flex-column justify-content-center">
             <h1 class="home-card-title">Mulai suntuk dan bosan saat pandemi seperti ini?</h1>
