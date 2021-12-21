@@ -266,7 +266,7 @@
 
         <div class="row justify-content-center">
         <div class="col-8">
-                <p>Total Pembayaran : <b>Rp. {{number_format($tiket->pivot->summary)}}</b></p>
+                <p>Total Pembayaran : <b>Rp {{number_format($tiket->pivot->summary)}}</b></p>
                 <p>Metode Pembayaran : </p>
 
                 <form action="/tickets/show/{{$user->id}}/{{$tiket->id}}" method="POST" enctype="multipart/form-data">

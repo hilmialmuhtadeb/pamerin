@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auction;
+use App\Models\bid;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuctionController extends Controller
@@ -36,7 +38,13 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+
+        $user->auction()->attach($request->auction_id,['bidder'=> $request->bidder]);
+        
+        return redirect(route("auctions.show", $request->slug_auctions));
     }
 
     /**
@@ -47,7 +55,11 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        return view('auctions.show', compact('auction'));
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        $bidder = User::find($id)->auction()->orderBy('created_at', 'DESC')->first();
+        // dd($bidder);
+        return view('auctions.show', compact('auction', 'bidder'));
     }
 
     /**
@@ -82,5 +94,9 @@ class AuctionController extends Controller
     public function destroy(Auction $auction)
     {
         //
+    }
+    public function bid(Request $request)
+    {
+        
     }
 }

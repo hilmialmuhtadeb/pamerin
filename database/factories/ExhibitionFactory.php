@@ -27,6 +27,7 @@ class ExhibitionFactory extends Factory
             'name' => $this->faker->sentence(2),
             'slug' => Str::slug($this->faker->sentence(2)),
             'date' => $this->faker->date('Y-m-d'),
+            'stages' => 1,
             'start' => $this->faker->time('H:i:s'),
             'end' => $this->faker->time('H:i:s'),
             'price' => $this->faker->numberBetween(50000, 200000),

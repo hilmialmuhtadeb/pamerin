@@ -66,9 +66,15 @@ class User extends Authenticatable
         return $this->hasOne(Address::class);
     }
 
+    public function auction()
+    {
+        return $this->belongsToMany(Auction::class, 'auction_user', 'user_id', 'auction_id')->withPivot(['bidder'])->withTimeStamps();
+    }
+
     public function bank() {
         return $this->hasOne(Bank::class);
     }
+
 
     public function getCartAttribute()
     {
@@ -86,4 +92,5 @@ class User extends Authenticatable
         $ticket = Ticket::where('user_id', $this->id)->first();
         return $ticket;
     }
+    
 }

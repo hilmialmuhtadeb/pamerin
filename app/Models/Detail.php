@@ -15,6 +15,10 @@ class Detail extends Model
         "price",
     ];
 
+    public function commission()
+    {
+        return $this->belongsTo(commission::class);
+    }
     public function cart()
     {
         return $this->belongsTo(Cart::class);

@@ -96,7 +96,7 @@
 
         <tbody>   
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{ $exhibition->thumbnail }}" class="img-fluid ms-2 img-exhibition rounded"></td>
+            <td scope="row" class="text-center py-2"><img src="{{asset('$exhibition->thumbnail') }}" class="img-fluid ms-2 img-exhibition rounded"></td>
             <td class="align-middle text-left">
             <ul>
               <span class="ms-2 text-black"><b>{{ $exhibition->name }}</b></span><br>
@@ -120,15 +120,15 @@
                  <span class="exhibition-description ms-1"><b>Kode Unik</b></span>
               </div>
               <div class="col-md-8">
-                 <span class="exhibition-description">Rp.{{ number_format($exhibition->price) }}</span><br>
-                 <span class="exhibition-description">Rp. {{$unique}}</span>
+                 <span class="exhibition-description">Rp {{ number_format($exhibition->price) }}</span><br>
+                 <span class="exhibition-description">Rp  {{$unique}}</span>
               </div>
               <div class="col-xl-12 exhibition-description"><hr></div>
               <div class="col-md-4">
                  <span class="exhibition-description ms-1"><b>TOTAL</b></span>
               </div>
               <div class="col-md-8">
-                 <span class="exhibition-description">Rp. {{number_format($exhibition->price + $unique)}}</span>
+                 <span class="exhibition-description">Rp  {{number_format($exhibition->price + $unique)}}</span>
               </div>
               </div>
               <form action="{{ route('tickdt.store') }}" method="post">

@@ -38,7 +38,7 @@
         color: white;
       }  
     </style>
-@endslot
+    @endslot
     <div class="container">
   
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
@@ -56,80 +56,43 @@
             </tr>
           </thead>
           <tbody>   
+            @foreach ($artworks as $artwork)                
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">{{ $artwork->id }}</td>
+              <td class="align-middle text-center">{{ $artwork->name }}</td>
+              <td class="align-middle text-center">{{ $artwork->artist->name }}</td>
               <td class="align-middle text-center">
-              <button type="submit" class="submit-button bg-orange rounded ">Konfirmasi</button>
+                @if ($artwork->status === 3)                    
+                <button type="submit" class="submit-button bg-orange rounded ">Konfirmasi</button>
+                @endif
               <td class="align-middle text-center">
-                <i class="text-warning">Sudah Bayar</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
+                <i class="text-{{ $color[($artwork->status)] }}">{{ $text[($artwork->status)] }}</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia-{{ $artwork->id }}"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr> 
-            <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">
-              
-              <td class="align-middle text-center">
-                <i class="text-warning">Terkonfirmasi</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">
-              
-              <td class="align-middle text-center">
-                <i class="text-warning">Sudah Bayar</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">
-              
-              <td class="align-middle text-center">
-                <i class="text-warning">Dijual</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">
-              
-              <td class="align-middle text-center">
-                <i class="text-warning">Belum Bayar</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia"><i class="fa fa-info-circle"></i></button>
-              </td>
-            </tr>
+            @endforeach
           </tbody>
       </table>
-      <x-modal name="info-sedia">
+
+      @foreach ($artworks as $artwork)          
+      <x-modal name="info-sedia-{{ $artwork->id }}">
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-          <h1 class="text-center page-title">Informasi Pembayaran Lelang</h1>
+          <h1 class="text-center page-title">Informasi Karya Seni</h1>
           <span class="underline-page-title text-center"></span>
         </div>
         <div class="row justify-content-center">
           <div class="col-8">
-            <p>Status : <b class="text-warning">#</b></p>
-            <p>ID Lelang : <b>#</b></p>
-            <p>ID Karya : <b>#</b></p>
-            <p>Nama Pemesan : <b>#</b></p>
-            <p>Total Pembayaran : <b>#</b></p>
-            <p>Alamat : <b>#</b></p>
-            <p>Bukti Pembayaran : </p>
-            <img src="">
+            <p>Kategori : <b>{{ $artwork->category->name }}</b></p>
+            <p>ID Karya : <b>{{ $artwork->id }}</b></p>
+            <p>Nama Karya : <b>{{ $artwork->name }}</b></p>
+            <p>Media : <b>{{ $artwork->media }}</b></p>
+            <p>Ukuran : <b>{{ $artwork->size }}</b></p>
+            <p>Tahun Dibuat : <b>{{ $artwork->year }}</b></p>
+            <p>Deskripsi : {{ $artwork->description }}</p>
           </div>
         </div>
       </x-modal>
+      @endforeach
+
   </div>
   </x-app-layout>

@@ -12,6 +12,7 @@ class Cart extends Model
     public $fillable = [
         'user_id',
         'subtotal',
+        'ongkir',
         'unique_number',
         'summary',
         'status',
@@ -25,6 +26,11 @@ class Cart extends Model
     public function details()
     {
         return $this->hasMany(Detail::class);
+    }
+
+    public function commission()
+    {
+        return $this->belongsTo(Commission::class);
     }
     
     public function getDetailsCountAttribute()

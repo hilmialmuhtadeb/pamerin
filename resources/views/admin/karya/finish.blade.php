@@ -38,7 +38,7 @@
         margin: 0;
       }
     </style>
-@endslot
+    @endslot
     <div class="container">
   
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
@@ -56,18 +56,26 @@
             </tr>
           </thead>
           <tbody>   
+            @foreach ($artworks as $artwork)
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">{{ $artwork->id }}</td>
+              <td class="align-middle text-center">{{ $artwork->name }}</td>
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">
-              <button type="submit" class="submit-button bg-orange rounded ">Transfer</button>
+                @if ($artwork->status === 6)
+                <form action="{{ route('artworks.addStatus', $artwork->slug) }}" method="post">
+                  @csrf
+                  @method('patch')
+                  <button type="submit" class="submit-button bg-orange rounded ">Transfer</button>
+                </form>
+                @endif
               <td class="align-middle text-center">
-                <i class="text-warning">Belum Transfer</i>
+                <i class="text-{{ $color[($artwork->status - 6)] }}">{{ $text[($artwork->status - 6)] }} Transfer</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-pembayaran"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr>
-            <tr>
+            @endforeach
+            {{-- <tr>
               <td scope="row" class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
@@ -77,7 +85,7 @@
                 <i class="text-warning">Sudah Transfer</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="info-pembayaran"><i class="fa fa-info-circle"></i></button>
               </td>
-            </tr>
+            </tr> --}}
           </tbody>
       </table>
 
