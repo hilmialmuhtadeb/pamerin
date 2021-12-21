@@ -131,6 +131,7 @@ Route::get('artists/sale/done', [ArtistController::class, 'done'])->name('artist
 Route::get('artists/sale/kirim', [ArtistController::class, 'kirim'])->name('artists.sale.kirim');
 Route::get('artists/sale/terima', [ArtistController::class, 'terima'])->name('artists.sale.terima');
 Route::get('artists/sale/lelang', [ArtistController::class, 'lelang'])->name('artists.sale.lelang');
+Route::get('artists/sale/create', [ArtistController::class, 'create'])->name('artists.sale.create');
 
 Route::get('artworks/{artwork}/shipping', [ShippingCostController::class, 'create'])->name('artworks.shipping');
 Route::post('artworks/{artwork}/shipping', [ShippingCostController::class, 'store']);

@@ -44,15 +44,15 @@
     <div class="d-flex box-container justify-content-between mx-auto">     
 
         <div class="box exhibition bg-orange">
-          <p class="count">0</p>
+          <p class="count">{{ $exhibitions }}</p>
           <p class="count-title">Pameran</p>
         </div>
         <div class="box exhibition bg-guava">
-          <p class="count">0</p>
+          <p class="count">{{ $artworks }}</p>
           <p class="count-title">Karya Seni</p>
         </div>
         <div class="box exhibition bg-navy">
-          <p class="count">0</p>
+          <p class="count">{{ $auctions }}</p>
           <p class="count-title">Lelang</p>
         </div>
 

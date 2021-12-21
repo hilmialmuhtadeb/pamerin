@@ -15,8 +15,9 @@ class CommissionController extends Controller
     public function show(Cart $cart)
     {
         $details = Detail::where('cart_id', $cart->id)->get();
+        dd($details);
 
-        var_dump($details);
+        // var_dump($details);
         return view('commissions.show', compact('cart', 'details'));
     }
     public function store(Request $request)

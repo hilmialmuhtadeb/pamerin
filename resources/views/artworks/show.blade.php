@@ -72,8 +72,7 @@
       <div class="col-md-5">
       <div class="row">
         <div class="card-info p-3">
-        <!-- <img src="{{asset('$artwork->takeImage') }}" class="img-detail img-fluid rounded"> -->
-        <img src="{{'/img/karya/' . $artwork->thumbnail }}" class="img-detail img-fluid rounded">
+        <img src="{{'/storage/' . $artwork->thumbnail }}" class="img-detail img-fluid rounded">
         </div>
 
       </div>

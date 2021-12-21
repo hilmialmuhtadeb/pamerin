@@ -100,14 +100,14 @@
       </div>
   
       <div class="ms-auto text-end">
-        <a href="{{ route('artworks.create') }}" class="add-button btn-orange rounded"><i class="fas fa-plus"></i> Lelang</a>
+        <a href="{{ route('artists.sale.create') }}" class="add-button btn-orange rounded"><i class="fas fa-plus"></i> Lelang</a>
       </div>
   
       <p class="text-danger my-4">Silakan tambah karya seni untuk mengajukan pameran dan membuat lelang karya seni!</p>
       
       @if ($artworks->count() === 0)
         <div class="alert alert-warning text-center" role="alert">
-          Anda belum menambahkan karya seni apapun, silahkan tambah karya seni <a href="{{ route('artworks.create') }}">disini</a>
+          Anda belum menambahkan karya seni apapun, silahkan tambah karya seni <a href="{{ route('artists.sale.create') }}">disini</a>
         </div>
       @else
         <table class="table-custom table table-borderless table-striped">

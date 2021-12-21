@@ -125,19 +125,19 @@
 
         <tbody>   
          
+          @foreach ($details as $detail)
           <tr>
             <td class="align-middle text-center">32483243T</td>
-            @foreach ($details as $detail)
             <td class="align-middle text-center">{{ $detail->artwork->name}}</td>
-            @endforeach
             <td class="align-middle text-center">Rp {{ number_format($cart->summary)}}</td>
             <td class="align-middle text-center">
               <a href="#" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
             </td>
             <td class="align-middle text-center"><i>Menunggu Pembayaran</i>
-            <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal"><i class="fas fa-info"></i></button>
+              <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal"><i class="fas fa-info"></i></button>
             </td>
           </tr>
+          @endforeach
         
         </tbody>
       </table>
