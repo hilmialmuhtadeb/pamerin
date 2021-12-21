@@ -38,7 +38,6 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-       
         $id=Auth()->user()->id;
         $name=Auth()->user()->name;
         $auction=Auction::find($id);

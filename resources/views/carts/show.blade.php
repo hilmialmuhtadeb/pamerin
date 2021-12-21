@@ -75,24 +75,17 @@
         <tbody>   
           @foreach ($details as $detail)
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{'/img/karya/' . $detail->artwork->thumbnail }}" height="100px"></td>
+            <td scope="row" class="text-center py-2"><img src="{{'/storage/' . $detail->artwork->thumbnail }}" height="100px"></td>
             <td class="align-middle text-center">{{ $detail->artwork->name }}</td>
             <td class="align-middle text-center">Rp {{ number_format($detail->price)}}</td>
             <td class="align-middle text-center">
-              <div class="row justify-content-beetwen">
-                <div class="col-6"> 
-                  <a href="/editalamat/{{$detail->id}}/{{$detail->cart_id}}/{{$detail->artwork->id}}" class="rounded btn-orange btn-address">Isi Alamat</a>
-                </div>
-                <div class="col-6">
-                <form action="{{ route('details.destroy', $detail->id) }}" method="POST">
-                  @csrf
-                  @method('delete')
-                  <input type="hidden" name="unique_number" value="{{ $cart->unique_number }}">
-                  <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </form>
-
-                </div>
-              </div>
+              <a href="/editalamat/{{$detail->id}}/{{$detail->cart_id}}/{{$detail->artwork->id}}" class="rounded btn-orange btn-address">Isi Alamat</a>
+              <form action="{{ route('details.destroy', $detail->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('delete')
+                <input type="hidden" name="unique_number" value="{{ $cart->unique_number }}">
+                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              </form>
             </td>
           </tr>
           @endforeach
