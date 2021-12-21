@@ -38,6 +38,12 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'bidder' => 'required',
+        ],[
+            'bidder.required' => 'Anda tidak mengisi nominal bid',
+        ]);
+       
         $id=Auth()->user()->id;
         $name=Auth()->user()->name;
         $auction=Auction::find($id);
@@ -56,11 +62,7 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        $id=Auth()->user()->id;
-        $user=User::find($id); 
-        $bidder = User::find($id)->auction()->orderBy('created_at', 'DESC')->first();
-        // dd($bidder);
-        return view('auctions.show', compact('auction', 'bidder', 'user'));
+        return view('auctions.show', compact('auction'));
     }
 
     /**
