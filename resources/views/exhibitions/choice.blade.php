@@ -56,35 +56,33 @@
             <span class="underline-page-title text-center"></span>
         </div>
 
-        <div class="ms-auto text-end mb-3">
-            <a href="{{ route('exhibitions.create') }}" class="btn-orange rounded"><i class="fas fa-plus"></i>
-                Pameran</a>
-        </div>
-
         <table class="table-custom table table-borderless table-striped">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">ID Pameran</th>
-                    <th scope="col" class="text-center">Nama Pameran</th>
-                    <th scope="col" class="text-center">Pameran</th>
-                    <th scope="col" class="text-center">status</th>
+                    <th scope="col" class="text-center">ID karya</th>
+                    <th scope="col" class="text-center">Nama Karya</th>
+                    <th scope="col" class="text-center">Karya</th>
+                    <th scope="col" class="text-center">Pilih</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($exhibitions as $exhibition)
+                <form action="{{ route('exhibitions.fix') }}" method="post">
                     <tr>
-                        <td scope="row" class="align-middle text-center">PM-{{ $exhibition->id }}</td>
-                        <td class="align-middle text-center">{{ $exhibition->name }}</td>
-                        <td class="py-2 text-center"><img src="{{ asset($exhibition->name) }}" height="100px"></td>
-                        <td class="align-middle text-center">
-                            <i class="text-warning">Publikasi</i>
-                            <button type="button" class="btn info-button mx-2" data-bs-toggle="modal"
-                                data-bs-target="#info-modal"><i class="fa fa-info-circle"></i></button>
-                        </td>
+                        @foreach ($artworks as $artwork)
+                            <td scope="row" class="align-middle text-center">PM-{{ $artwork->id }}</td>
+                            <td class="align-middle text-center">{{ $artwork->name }}</td>
+                            <td class="py-2 text-center"><img src="#" height="100px">{{ assets($artwork->thumbnail) }}
+                            </td>
+                            <td class="align-middle text-center">
+                                <i class="text-warning">Publikasi</i>
+                                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal"
+                                    data-bs-target="#info-modal"><i c lass="fa fa-info-circle"></i></button>
+                            </td>
+                        @endforeach
 
                     </tr>
-                @endforeach
+                </form>
             </tbody>
         </table>
 

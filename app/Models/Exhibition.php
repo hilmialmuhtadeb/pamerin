@@ -33,7 +33,7 @@ class Exhibition extends Model
         return Exhibition::where('user_id', $id);
     }
 
-    public function artist() 
+    public function artist()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

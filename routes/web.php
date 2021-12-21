@@ -79,6 +79,8 @@ Route::resource('tickdt', TickdtController::class);
 // Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 Route::get('exhibitions/event', [ExhibitionController::class, 'event'])->name('exhibitions.event');
+Route::get('exhibitions/choice/artwork', [ExhibitionController::class, 'choiceArtwork'])->name(('exhibitions.choice'));
+Route::post('exhibitions/choiceartwork', [ExhibitionController::class, 'fixArtwork'])->name(('exhibitions.fix'));
 
 
 
@@ -141,7 +143,7 @@ Route::middleware('guest')->group(function() {
 
   Route::get('artists/registration', [ArtistRegistrationController::class, 'create'])->name('artists.register');
   Route::post('artists/registration', [ArtistRegistrationController::class, 'store']);
-  
+
   Route::get('login', [LoginController::class, 'show'])->name('login');
   Route::post('login', [LoginController::class, 'store']);
 
