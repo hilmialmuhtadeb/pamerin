@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //API route for register new user
-Route::post('/register', [App\Http\Controllers\api\LoginController::class, 'register']);
+Route::post('/register', [App\Http\Controllers\Api\LoginController::class, 'register']);
 //API route for login user
-Route::post('/login', [App\Http\Controllers\api\LoginController::class, 'login']);
+Route::post('/login', [App\Http\Controllers\Api\LoginController::class, 'login']);
 
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
