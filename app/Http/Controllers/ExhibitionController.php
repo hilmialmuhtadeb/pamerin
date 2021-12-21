@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artwork;
 use App\Models\Tickdt;
 use App\Models\Exhibition;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class ExhibitionController extends Controller
      */
     public function create()
     {
-        //
+        return view('exhibitions.create');
     }
 
     /**
@@ -36,11 +37,40 @@ class ExhibitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function ticket(Request $request)
-    // {
-    //     $ticket = Ticket::find($request->ticket_id);
-    //     return view('tickets.detail');
-    // }
+    public function store(Request $request)
+    {
+        $attr = $request->validate([
+            'name' => 'required',
+            'date' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+        ]);
+
+        $thumbnail = $request->file('thumbnail');
+        $name_file =  \Str::random(8) . "." . $thumbnail->getClientOriginalExtension();
+        $name_folder = "exhibition";
+        $path = $thumbnail->storeAs($name_folder, $name_file, "public");
+        $attr['thumbnail'] = $path;
+        $attr['user_id'] = Auth::user()->id;
+        $attr['slug'] = \Str::slug($request->name);
+
+        Exhibition::create($attr);
+
+        return redirect()->route('exhibitions.choice');
+    }
+
+    public function choiceArtwork()
+    {
+        $artworks = Artwork::where('user_id', Auth::user()->id)->get();
+        return view('exhibitions.choice', compact('artworks'));
+    }
+
+    public function fixArtwork()
+    {
+
+    }
 
     /**
      * Display the specified resource.
@@ -52,7 +82,7 @@ class ExhibitionController extends Controller
     {
         return view('exhibitions.show', compact('exhibition'));
     }
-    
+
 
     public function event(Exhibition $exhibition)
     {

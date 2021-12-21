@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use App\Models\Exhibition;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,9 @@ class ArtistController extends Controller
     }
     public function pengajuan()
     {
-        return view('users.artists.fair.pengajuan');
+        $exhibitions = Exhibition::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+
+        return view('users.artists.fair.pengajuan', compact('exhibitions'));
     }
     public function selesai()
     {
@@ -75,7 +78,7 @@ class ArtistController extends Controller
     }
     public function porto()
     {
-        
+
         $artworks=Artwork::where('user_id',Auth::user()->id)->get();
         //dd($artworks);
         return view('users.artists.porto',compact('artworks'));

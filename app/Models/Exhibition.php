@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Exhibition extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['user_id', 'name', 'slug', 'date', 'start', 'end', 'price', 'description', 'thumbnail'];
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    public function artist() 
+    public function artist()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
