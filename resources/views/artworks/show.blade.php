@@ -67,10 +67,15 @@
       @include('components._breadcrumbs')
     </div>
 
-    <div class="row justify-content-between mb-3">
+    <div class="row justify-content-center mb-3">
 
-      <div class="col-md-7">
-        <img src="{{ $artwork->thumbnail }}" class="img-detail rounded">
+      <div class="col-md-5">
+      <div class="row">
+        <div class="card-info p-3">
+        <img src="{{ $artwork->takeImage }}" class="img-detail img-fluid rounded">
+        </div>
+
+      </div>
       </div>
 
       <div class="col-md-5">

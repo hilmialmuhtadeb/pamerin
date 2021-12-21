@@ -21,8 +21,9 @@ class DetailController extends Controller
         return redirect(route('artworks.index'))->with('success', 'Yeay, karya seni berhasil dimasukkan keranjang');
     }
 
-    public function destroy()
+    public function destroy(Detail $detail)
     {
-        dd('destroyed');
+        $detail->delete();
+        return redirect(route('artworks.index'))->with('success', 'Barang berhasil dihapus');
     }
 }

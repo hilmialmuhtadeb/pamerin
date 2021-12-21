@@ -18,6 +18,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ShippingCostController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TickdtController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommissionController;
 use App\Models\Exhibition;
@@ -82,6 +83,16 @@ Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->nam
 Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
 
 
+Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
+
+Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
+
+Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
+Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
+
+
+Route::get('artists/porto', [ArtistController::class, 'porto'])->name('artists.porto');
 Route::get('artists/bank', [BankController::class, 'create'])->name('artists.bank');
 Route::get('artists/dashboard', [ArtistController::class, 'index'])->name('artists.index');
 Route::get('artists/artworks', [ArtistController::class, 'artwork'])->name('artists.artworks');
@@ -90,6 +101,7 @@ Route::get('artists/artworks/accept', [ArtistController::class, 'accept'])->name
 Route::get('artists/artworks/send', [ArtistController::class, 'send'])->name('artists.artworks.send');
 Route::get('artists/artworks/finish', [ArtistController::class, 'finish'])->name('artists.artworks.finish');
 
+Route::get('artists/fair/pengajuan', [ArtistController::class, 'pengajuan'])->name('artists.fair.pengajuan');
 Route::get('artists/fair/selesai', [ArtistController::class, 'selesai'])->name('artists.fair.selesai');
 Route::get('artists/fair/berlangsung', [ArtistController::class, 'berlangsung'])->name('artists.fair.berlangsung');
 Route::get('artists/fair/publikasi', [ArtistController::class, 'publikasi'])->name('artists.fair.publikasi');
@@ -112,6 +124,11 @@ Route::middleware('guest')->group(function() {
   
   Route::get('login', [LoginController::class, 'show'])->name('login');
   Route::post('login', [LoginController::class, 'store']);
+
+  Route::get('forget', [LoginController::class, 'forget'])->name('forget');
+  Route::post('ganti', [LoginController::class, 'ganti'])->name('ganti');
+  Route::get('ubah/{ubah}', [LoginController::class, 'ubah'])->name('ubah');
+  Route::post('lali', [LoginController::class, 'lali'])->name('lali');
 
   Route::get('artists/login', [ArtistLoginController::class, 'show'])->name('artists.login');
   Route::post('artists/login', [ArtistLoginController::class, 'store']);

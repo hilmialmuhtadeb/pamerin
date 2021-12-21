@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auction;
+use App\Models\Exhibition;
+use App\Models\Tickdt;
 use Illuminate\Http\Request;
 
-class AuctionController extends Controller
+class TickdtController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::paginate(9);
-        return view('auctions.index', compact('auctions'));
+        //
     }
 
     /**
@@ -34,29 +34,36 @@ class AuctionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $exhibition = Exhibition::where('id', request('exhibition_id'))->first();
+        Tickdt::create([
+            'ticket_id' => Auth::user()->ticket->id,
+            'exhibition_id' => request('exhibition_id'),
+            'price' => $exhibition->price,
+        ]);
+
+        return redirect(route('exhibitions.index'))->with('success', 'Yeay, karya seni berhasil dimasukkan keranjang');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Auction  $auction
+     * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function show(Auction $auction)
+    public function show(Tickdt $tickdt)
     {
-        return view('auctions.show', compact('auction'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Auction  $auction
+     * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function edit(Auction $auction)
+    public function edit(Tickdt $tickdt)
     {
         //
     }
@@ -65,10 +72,10 @@ class AuctionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Auction  $auction
+     * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Auction $auction)
+    public function update(Request $request, Tickdt $tickdt)
     {
         //
     }
@@ -76,11 +83,14 @@ class AuctionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Auction  $auction
+     * @param  \App\Models\Tickdt  $tickdt
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auction $auction)
+    public function destroy(Tickdt $tickdt)
     {
-        //
+        {
+            $tickdt->delete();
+            return redirect(route('tickets.show'))->with('success', 'Barang berhasil dihapus');
+        }
     }
 }

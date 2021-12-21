@@ -13,17 +13,19 @@ class TicketController extends Controller
     {
         return view('tickets.show');
     }
-    // public function store()
-    // {
-    //     // $exhibition = Exhibition::where('id', request('exhibitions_id'))->first();
-    //     // Ticket::create([
-    //     //     'tickets_id' => Auth::user()->ticket->id,
-    //     //     'exhibitions_id' => request('exhibitions_id'),
-    //     //     'price' => $exhibition->price,
-    //     // ]);
 
-    //     return redirect(route('tickets.show'));
-    // }
+    public function store(Request $request)
+    {
+        $exhibition = Exhibition::find($request->exhibition_id);
+        $attr = $request->all();
+        $attr['exhibition_id'] = $request->exhibition->id;
+        $attr['user_id'] = Auth::user()->id;
+        $attr['slug'] = \Str::slug($request->name);
+
+        $ticket = Ticket::create($attr);
+
+        return redirect(route('exhibitions.index', $exhibition));
+    }
 
     public function confirm()
     { 

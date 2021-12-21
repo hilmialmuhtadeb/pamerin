@@ -145,17 +145,16 @@
 
                     <tr>
                         <td class="align-middle text-center">2496732E</td>
-                        <td class="align-middle text-center">{{ $exhibition->name }}</td>
-                        <td class="align-middle text-center">Rp.{{ number_format($exhibition->price) }}</td>
+                        <td class="align-middle text-center">#</td>
+                        <td class="align-middle text-center">Rp.#</td>
                         <td class="align-middle text-center">
-                            <a href="{{ route('tickets.confirm') }}" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
+                            <a href="#" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
                         </td>
                         <td class="align-middle text-center text-red"><i>Menunggu Pembayaran</i>
                             <button type="button" class="btn" data-bs-toggle="modal"
                                 data-bs-target="#info-modal"><i class="fas fa-info"></i></button>
                         </td>
                     </tr>
-
                 </tbody>
             </table>
 

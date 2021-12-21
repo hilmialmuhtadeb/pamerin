@@ -82,7 +82,7 @@
                 </div>
                 <div class="d-grid">
                   <button type="submit" class="rounded-pill login-button text-center">
-                    LOGIN
+                    Masuk
                   </button>
                 </div>
                 <div class="d-flex justify-content-center">

@@ -41,6 +41,10 @@ class ArtistController extends Controller
     {
         return view('users.artists.artworks.finish');
     }
+    public function pengajuan()
+    {
+        return view('users.artists.fair.pengajuan');
+    }
     public function selesai()
     {
         return view('users.artists.fair.selesai');
@@ -69,5 +73,11 @@ class ArtistController extends Controller
     {
         return view('users.artists.sale.lelang');
     }
-
+    public function porto()
+    {
+        
+        $artworks=Artwork::where('user_id',Auth::user()->id)->get();
+        //dd($artworks);
+        return view('users.artists.porto',compact('artworks'));
+    }
 }

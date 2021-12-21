@@ -9,7 +9,7 @@
       <div class="col-lg-10">
 
         <div class="row">
-          
+          @foreach ($auctions as $auction)
           <div class="col-md-4 my-4">
 
             @include('components._auction')
@@ -19,7 +19,7 @@
         </div>
 
         <div class="d-flex justify-content-center mt-4">
-         
+          {{ $auctions->links() }}
         </div>
 
       </div>

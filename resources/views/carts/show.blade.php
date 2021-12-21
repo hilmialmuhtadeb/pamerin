@@ -75,7 +75,7 @@
         <tbody>   
           @foreach ($details as $detail)
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{ $detail->artwork->thumbnail }}" height="100px"></td>
+            <td scope="row" class="text-center py-2"><img src="{{ $detail->artwork->takeImage }}" height="100px"></td>
             <td class="align-middle text-center">{{ $detail->artwork->name }}</td>
             <td class="align-middle text-center">Rp{{ number_format($detail->price)}}</td>
             <td class="align-middle text-center">
@@ -96,6 +96,10 @@
       <a href="{{ route('carts.edit', $cart) }}" class="rounded btn-orange btn-address">Isi Alamat</a>
     </div>
 
+    <?php  
+      
+      $subtotal=0;
+    ?>
     <div class="row justify-content-end">
       <div class="col-md-5">
         <h5 class="cart-amount-title">Total Keranjang</h5>
@@ -103,7 +107,7 @@
         <table class="table-amount">
           <tr>
             <th>Subtotal</th>
-            <td>Rp350.000</td>
+            <td class="align-middle">Rp{{ number_format($detail->price)}}</td>
           </tr>
           <tr>
             <th>Ongkos Kirim</th>
@@ -125,7 +129,7 @@
         </form>
       </div>
     </div>
-
+      
     
   </div>
   

@@ -17,4 +17,15 @@ class Auction extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    protected $fillable=[
+        'user_id',
+        'name',
+        'slug',
+        'date',
+        'start',
+        'end',
+        'price',
+        'description',
+        'thumbnail',
+    ];
 }
