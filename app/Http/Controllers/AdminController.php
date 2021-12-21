@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Artwork;
+use App\Models\Exhibition;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,35 +24,58 @@ class AdminController extends Controller
     }
     public function pengajuan()
     {
-        return view('admin.pameran.pengajuan');
+        return view('admin.pameran.pengajuan', [
+            'exhibitions' => Exhibition::where('stages', '<', 3)->get(),
+            'color' => ['', 'text-orange', 'text-success'],
+            'text' => ['', 'Pengajuan', 'Telah Disetujui'],
+        ]);
     }
     public function publikasi()
     {
-        return view('admin.pameran.publikasi');
+        $exhibitions = Exhibition::where('stages', 3)->get();
+        return view('admin.pameran.publikasi', compact('exhibitions'));
     } 
     public function berlangsung()
     {
-        return view('admin.pameran.berlangsung');
+        $exhibitions = Exhibition::where('date', date("Y-m-d"))->get();
+        return view('admin.pameran.berlangsung', compact('exhibitions'));
     }
     public function selesai()
     {
-        return view('admin.pameran.selesai');
+        $exhibitions = Exhibition::where('date', '<', date("Y-m-d"))->get();
+        return view('admin.pameran.selesai', [
+            'exhibitions' => $exhibitions,
+            'color' => ['primary', 'success'],
+            'text' => ['Belum', 'Sudah'],
+        ]);
     }
     public function tersedia()
     {
-        return view('admin.karya.tersedia');
+        $artworks = Artwork::get();
+        return view('admin.karya.tersedia', [
+            'artworks' => $artworks,
+            'color' => ['grey', 'orange', 'danger', 'success', 'primary'],
+            'text' => ['Baru Ditambah', 'Dijual', 'Belum Bayar', 'Sudah Bayar', 'Terkonfirmasi'],
+        ]);
     }
     public function dikirim()
     {
-        return view('admin.karya.dikirim');
+        $artworks = Artwork::where('status', 5)->get();
+        return view('admin.karya.dikirim', compact('artworks'));
     }
     public function finish()
     {
-        return view('admin.karya.finish');
+        $artworks = Artwork::where('status', '>=', 6)->get();
+        return view('admin.karya.finish', [
+            'artworks' => $artworks,
+            'color' => ['primary', 'success'],
+            'text' => ['Belum', 'Sudah'],
+        ]);
     }
     public function artikel()
     {
-        return view('admin.artikel');
+        $articles = Article::latest()->paginate(10);
+        return view('admin.artikel', compact('articles'));
     }
     public function artikelcreate()
     {
@@ -79,9 +105,9 @@ class AdminController extends Controller
     {
         return view('admin.lelang.done');
     }
-    public function artikelubah()
+    public function artikelubah(Article $article)
     {
-        return view('admin.artikel-ubah');
+        return view('admin.artikel-ubah', compact('article'));
     }
     public function karyapameran()
     {

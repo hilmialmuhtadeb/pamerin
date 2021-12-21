@@ -18,6 +18,9 @@ class CreateExhibitionsTable extends Migration
             $table->foreignId('user_id');
             $table->string('name');
             $table->string('slug');
+            $table->integer('stages');
+            $table->string('link')->nullable();
+            $table->integer('count')->nullable();
             $table->date('date');
             $table->time('start');
             $table->time('end');

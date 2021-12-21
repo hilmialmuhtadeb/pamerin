@@ -39,38 +39,44 @@
         <div class="ms-3 row d-flex justify-content-center ">
   
           <div class="col-md-5">
-  
-            <div class="mb-2">
-              <label for="name" class="form-label label-small">Nama Artikel</label>
-              <input type="text" name="name" class="form-control" id="name">
-              @error('name')
-                    <span class="error-message">{{ $message }}</span>
-              @enderror
-            </div>
 
-            <div class="mb-3">
+            <form action="{{ route('articles.update', $article) }}" method="post" enctype="multipart/form-data">
+              @csrf
+              @method('patch')
+
+              <div class="mb-2">
+                <label for="title" class="form-label label-small">Nama Artikel</label>
+                <input type="text" name="title" class="form-control" id="title" value="{{ $article->title }}">
+                @error('title')
+                      <span class="error-message">{{ $message }}</span>
+                @enderror
+              </div>
+  
+              <div class="mb-3">
                 <label class="form-label label-small mb-2">Unggah Gambar Artikel (.jpg/.jpeg/.png)</label>
                 <input type="file" name="thumbnail" id="thumbnail" class="form-control">
                 @error('thumbnail')
                       <span class="error-message">{{ $message }}</span>
                 @enderror
               </div>
-
-            <div class="mb-2">
-              <label for="description" class="form-label label-small">Deskripsi</label>
-              <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
-              @error('description')
-                    <span class="error-message">{{ $message }}</span>
-              @enderror
-            </div>
+  
+              <div class="mb-2">
+                <label for="text" class="form-label label-small">Deskripsi</label>
+                <textarea name="text" id="text" class="form-control" cols="30" rows="10">{{ $article->text }}</textarea>
+                @error('text')
+                      <span class="error-message">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="button-wrapper my-3">
+                <button type="button" class="submit-button bg-grey rounded mb-5">Batal</button>
+                <button type="submit" class="submit-button bg-orange rounded mb-5">Update</button>
+              </div>
+            </form>
+            
           </div>
   
         </div>
   
-        <div class="button-wrapper">
-          <button type="submit" class="submit-button bg-grey rounded mb-5">Batal</button>
-          <button type="submit" class="submit-button bg-orange rounded mb-5">Update</button>
-          </div>
       </form>
   
     </div>

@@ -1,8 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
-      <a class="navbar-brand" href="{{ route('home') }}">
-          <img src="{{asset('/img/logo/pamerin-logo.png') }}">
-      </a>
+    @if(!Auth::user() || Auth::user()->type === 3)
+    <a class="navbar-brand" href="{{ route('home') }}">
+        <img src="/img/logo/pamerin-logo.png">
+    </a>
+    @elseif(Auth::user()->type === 2)
+    <a class="navbar-brand" href="{{ route('artists.index') }}">
+        <img src="/img/logo/pamerin-logo.png">
+    </a>
+    @elseif(Auth::user()->type === 1)
+    <a class="navbar-brand" href="{{ route('admin.index') }}">
+        <img src="/img/logo/pamerin-logo.png">
+    </a>
+    @endif
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +90,7 @@
                       Kelola Pameran
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Pengajuan</a></li>
+                    <li><a class="dropdown-item" href="{{ route('artists.fair.pengajuan') }}">Pengajuan</a></li>
                     <li><a class="dropdown-item" href="{{ route('artists.fair.publikasi') }}">Publikasi</a></li>
                     <li><a class="dropdown-item" href="{{ route('artists.fair.berlangsung') }}">Sedang
                             Berlangsung</a></li>

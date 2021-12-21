@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $request->all();
+        $attr['slug'] = Str::slug($request->title);
+        $attr['thumbnail'] = $request->thumbnail->store('/images/articles');
+        Article::create($attr);
+
+        return redirect(route('admin.artikel'))->with('success', 'Berhasil menambahkan artikel baru.');
     }
 
     /**
@@ -71,7 +77,16 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $attr = $request->all();
+        if (request('thumbnail')) {
+            \Storage::delete($article->thumbnail);
+            $attr['thumbnail'] = $request->thumbnail->store('/images/articles');
+        } else {
+            $attr['thumbnail'] = $article->thumbnail;
+        }
+        // dd($attr);
+        $article->update($attr);
+        return redirect(route('admin.artikel'))->with('success', 'Berhasil memperbarui artikel');
     }
 
     /**
@@ -82,6 +97,9 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        \Storage::delete($article->thumbnail);
+        $article->delete();
+
+        return back()->with('success', 'Artikel berhasil dihapus');
     }
 }
