@@ -20,6 +20,7 @@ use App\Http\Controllers\ShippingCostController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TickdtController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\CommissionController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,13 +71,11 @@ Route::resource('tickets', TicketController::class);
 Route::resource('commissions', CommissionController::class);
 Route::resource('tickdt', TickdtController::class);
 
-
 // Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 Route::get('exhibitions/event', [ExhibitionController::class, 'event'])->name('exhibitions.event');
 
-// Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
-Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
+
 
 Route::get('tickets/show/{id}', [TicketController::class, 'show'])->name('tickets.show');
 // Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
@@ -89,18 +88,22 @@ Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.sh
 Route::get('tickets/confirm/payment/{id}', [TicketController::class, 'confirm'])->name('tickets.confirm');
 
 // route untuk edit alamat pesanan per artwork id 
-Route::get('editalamat/{id}', [CartController::class, 'editAlamat']);
+Route::get('editalamat/{id}/{cart_id}/{artwork_id}/', [CartController::class, 'editAlamat']);
 
 // Route untuk edit alamat cart
-Route::post('carts/edit/{id}', [CartController::class, 'edit_alamat']);
+Route::post('carts/edit/{cart_id}/{artwork_id}', [CartController::class, 'edit_alamat'])->name('carts.edit_alamat');
 
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 
+// Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
 Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
+
+// Route::post('commissions/store/{id}', [CommissionController::class, 'store'])->name('commissions.store');
 
 Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
 // Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
 Route::get('ticketsdetail', [TicketController::class, 'joinDetail'])->name('tickets.join');
+
 
 
 Route::get('artists/porto', [ArtistController::class, 'porto'])->name('artists.porto');

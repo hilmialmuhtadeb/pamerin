@@ -1,6 +1,6 @@
 <div class="card shadow">
   <a href="{{ route("artworks.show", $artwork->slug) }}">
-    <img src="{{asset('$artwork->takeImage') }}" class="card-img-top" height="200px">
+    <img src="{{asset('/img/karya/' . $artwork->thumbnail)}}" class="card-img-top" height="200px">
   </a>
   <div class="card-pameran-body">
     <p class="card-pameran-category text-orange">{{ $artwork->category->name }}</p>

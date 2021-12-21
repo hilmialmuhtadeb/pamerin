@@ -17,6 +17,7 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->integer('subtotal')->nullable();
+            $table->integer('ongkir')->nullable();
             $table->integer('id_pesanan')->nullable();
             $table->integer('unique_number')->nullable();
             $table->integer('summary')->nullable();

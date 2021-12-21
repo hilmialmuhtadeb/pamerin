@@ -9,12 +9,6 @@ class Commission extends Model
 {
     use HasFactory;
 
-    public $fillable = [
-        'user_id',
-        'unique_code',
-        'status',
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -22,11 +16,12 @@ class Commission extends Model
     
     public function details()
     {
-        return $this->hasMany(Detail::class);
+        return $this->belongsToMany(Detail::class);
     }
-    public function getDetailsCountAttribute()
+
+    public function cart()
     {
-        $detailsCount = Detail::where('ticket_id', $this->id)->count();
-        return $detailsCount;
+        return $this->belongsToMany(Cart::class);
     }
+
 }

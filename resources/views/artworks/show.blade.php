@@ -72,7 +72,8 @@
       <div class="col-md-5">
       <div class="row">
         <div class="card-info p-3">
-        <img src="{{asset('$artwork->takeImage') }}" class="img-detail img-fluid rounded">
+        <!-- <img src="{{asset('$artwork->takeImage') }}" class="img-detail img-fluid rounded"> -->
+        <img src="{{'/img/karya/' . $artwork->thumbnail }}" class="img-detail img-fluid rounded">
         </div>
 
       </div>
@@ -83,9 +84,9 @@
 
           <a href="{{ route('categories.show', $artwork->category->slug) }}" class="detail-category m-0">KATEGORI : {{ $artwork->category->name }}</a>
           <h1 class="detail-title">{{ $artwork->name }}</h1>
-          <p class="title-2 text-red">Rp{{ number_format($artwork->price) }}</p>
+          <p class="title-2 text-red">Rp {{ number_format($artwork->price) }}</p>
           <div class="detail-info">
-            <p>Ukuran : {{ $artwork->width }} x {{ $artwork->height }} cm</p>
+            <p>Ukuran : {{ $artwork->size}}</p>
             <p>Media : {{ $artwork->media }}</p>
             <p>Tahun Dibuat : {{ $artwork->year }}</p>
           </div>

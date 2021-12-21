@@ -120,15 +120,15 @@
                  <span class="exhibition-description ms-1"><b>Kode Unik</b></span>
               </div>
               <div class="col-md-8">
-                 <span class="exhibition-description">Rp.{{ number_format($exhibition->price) }}</span><br>
-                 <span class="exhibition-description">Rp. {{$unique}}</span>
+                 <span class="exhibition-description">Rp {{ number_format($exhibition->price) }}</span><br>
+                 <span class="exhibition-description">Rp  {{$unique}}</span>
               </div>
               <div class="col-xl-12 exhibition-description"><hr></div>
               <div class="col-md-4">
                  <span class="exhibition-description ms-1"><b>TOTAL</b></span>
               </div>
               <div class="col-md-8">
-                 <span class="exhibition-description">Rp. {{number_format($exhibition->price + $unique)}}</span>
+                 <span class="exhibition-description">Rp  {{number_format($exhibition->price + $unique)}}</span>
               </div>
               </div>
               <form action="{{ route('tickdt.store') }}" method="post">

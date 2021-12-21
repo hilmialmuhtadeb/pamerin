@@ -4,21 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Commission;
 use App\Models\Detail;
-
+use App\Models\Cart;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommissionController extends Controller
 {
-    public function show(Detail $detail, $id)
+    public function show(Cart $cart)
     {
-        $user=User::find($id);
+        $details = Detail::where('cart_id', $cart->id)->get();
+
+        var_dump($details);
+        return view('commissions.show', compact('cart', 'details'));
+    }
+    public function store(Request $request)
+    {
+        // $detail = Detail::find($id);
+        // $cart = Detail::where('cart_id', $detail->cart_id)->get();
         return view('commissions.show');
+        // dd($cart);
     }
-    public function store()
-    {
-        return redirect(route('commissions.show'));
-    }
+
 
     public function confirm()
     {

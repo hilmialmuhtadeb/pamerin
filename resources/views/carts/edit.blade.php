@@ -50,17 +50,19 @@
     </div>
 
     <h5>Alamat Pengiriman</h5>
-    <form action="/carts/edit/{{$artwork->id}}" method="post">
+    <form action="/carts/edit/{{$cart->id}}/{{$artwork->id}}" method="post">
           @csrf
       <div class="row">
-
         <div class="col-md-6">
-
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="address_type" id="default" value="default"  >
+            @if ($details->street == $user->address->street)
+              <input class="form-check-input" type="radio" name="address_type" id="default" value="default" checked>
+            @else
+              <input class="form-check-input" type="radio" name="address_type" id="default" value="default">
+            @endif
+            
             <label class="form-check-label" for="default">Alamat Saya</label>
           </div>
-
           <div class="form-box">
             <div>
               <label for="alamat-default" class="form-label label-small">Alamat</label>
@@ -87,35 +89,88 @@
         </div>
 
         <div class="col-md-6">
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="address_type" id="custom" value="custom">
-            <label class="form-check-label" for="custom">Tambah Alamat</label>
-          </div>
-
-          <div class="form-box">
-            <div>
-              <label for="alamat-custom" class="form-label label-small">Alamat</label>
-              <input type="text" class="form-control" name="alamat" id="alamat-custom">
+          @if (($details->street != $user->address->street) && ($details->street != ""))
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="address_type" id="custom" value="custom" checked>
+              <label class="form-check-label" for="custom">Tambah Alamat</label>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label for="kota-custom" class="form-label label-small">Kota/Kabupaten</label>
-                <input type="text" class="form-control" name="kabupaten" id="kota-custom">
+            <div class="form-box">
+              <div>
+                <label for="alamat-custom" class="form-label label-small">Alamat</label>
+                <input type="text" class="form-control" name="alamat" id="alamat-custom" value="{{ old('alamat', $details->street) }}">
+                @error('alamat')
+                  {{ $message }}
+                @enderror
               </div>
-              <div class="col-md-6">
-                <label for="provinsi-custom" class="form-label label-small">Provinsi</label>
-                <input type="text" class="form-control" name="provinsi" id="provinsi-custom">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="kota-custom" class="form-label label-small">Kota/Kabupaten</label>
+                  <input type="text" class="form-control" name="kabupaten" id="kota-custom" value="{{ old('kabupaten', $details->city) }}">
+                  @error('kabupaten')
+                    {{ $message }}
+                  @enderror
+                </div>
+                <div class="col-md-6">
+                  <label for="provinsi-custom" class="form-label label-small">Provinsi</label>
+                  <input type="text" class="form-control" name="provinsi" id="provinsi-custom" value="{{ old('provinsi', $details->region) }}">
+                  @error('provinsi')
+                    {{ $message }}
+                  @enderror
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="zip-custom" class="form-label label-small">Kode Pos</label>
+                  <input type="number" class="form-control" name="kodepos" id="zip-custom" value="{{ old('kodepos', $details->zipcode) }}">
+                  @error('kodepos')
+                    {{ $message }}
+                  @enderror
+                </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-6">
-                <label for="zip-custom" class="form-label label-small">Kode Pos</label>
-                <input type="text" class="form-control" name="kodepos" id="zip-custom">
+          @else
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="address_type" id="custom" value="custom">
+              <label class="form-check-label" for="custom">Tambah Alamat</label>
+            </div>
+            <div class="form-box">
+              <div>
+                <label for="alamat-custom" class="form-label label-small">Alamat</label>
+                <input type="text" class="form-control" name="alamat" id="alamat-custom" value="{{ old('alamat') }}">
+                @error('alamat')
+                  {{ $message }}
+                @enderror
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="kota-custom" class="form-label label-small">Kota/Kabupaten</label>
+                  <input type="text" class="form-control" name="kabupaten" id="kota-custom" value="{{ old('kabupaten') }}">
+                  @error('kabupaten')
+                    {{ $message }}
+                  @enderror
+                </div>
+                <div class="col-md-6">
+                  <label for="provinsi-custom" class="form-label label-small">Provinsi</label>
+                  <input type="text" class="form-control" name="provinsi" id="provinsi-custom" value="{{ old('provinsi') }}">
+                  @error('provinsi')
+                    {{ $message }}
+                  @enderror
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="zip-custom" class="form-label label-small">Kode Pos</label>
+                  <input type="number" class="form-control" name="kodepos" id="zip-custom" value="{{ old('kodepos') }}">
+                  @error('kodepos')
+                    {{ $message }}
+                  @enderror
+                </div>
               </div>
             </div>
-          </div>
-
+          @endif
+          @error('address_type')
+            {{ $message }}
+          @enderror
         </div>
 
       </div>
@@ -124,35 +179,47 @@
         <div class="col-md-6">
           <h5>Pilihan Ongkos Pengiriman (Karya dikirim dari Kalimantan)</h5>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->jawa}}" id="jawa">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->jawa}}" id="jawa" {{ ($details->shipping) == $artwork->shippingCost->jawa ? "checked" : ""}}>
             <label class="form-check-label" for="jawa">
               Area Jawa Bali | Rp {{number_format($artwork->shippingCost->jawa)}}
             </label>
+  
           </div>
+          
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->sumatera}}" id="sumatera">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->sumatera}}" id="sumatera" {{ ($details->shipping) == $artwork->shippingCost->sumatera ? "checked" : ""}}>
             <label class="form-check-label" for="sumatera">
               Area Sumatera | Rp {{number_format($artwork->shippingCost->sumatera)}}
             </label>
+
           </div>
+          
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->sulawesi}}" id="sulawesi">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->sulawesi}}" id="sulawesi" {{ ($details->shipping) == $artwork->shippingCost->sulawesi ? "checked" : ""}}>
             <label class="form-check-label" for="sulawesi">
               Area Sulawesi | Rp {{number_format($artwork->shippingCost->sulawesi)}}
             </label>
+
           </div>
+          
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->kalimantan}}" id="kalimantan">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->kalimantan}}" id="kalimantan" {{ ($details->shipping) == $artwork->shippingCost->kalimantan ? "checked" : ""}}>
             <label class="form-check-label" for="kalimantan">
               Area Kalimantan | Rp {{number_format($artwork->shippingCost->kalimantan)}}
             </label>
+
           </div>
+          
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->papua}}" id="papua">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->papua}}" id="papua" {{ ($details->shipping) == $artwork->shippingCost->papua ? "checked" : "" }}>
             <label class="form-check-label" for="papua">
               Area Papua | Rp {{number_format($artwork->shippingCost->papua)}}
             </label>
+
           </div>
+          @error('flexRadioDefault')
+            {{ $message }}
+          @enderror
         </div>
       </div>
 
