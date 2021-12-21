@@ -14,7 +14,6 @@ class DetailController extends Controller
     {
         $artwork = Artwork::where('id', request('artwork_id'))->first();
         Detail::create([
-
             'cart_id' => Auth::user()->cart->id,
             'artwork_id' => request('artwork_id'),
             'price' => $artwork->price,
@@ -55,7 +54,6 @@ class DetailController extends Controller
         
         # 3. ambil data cart_id yang masih ada
         $details = Detail::where('cart_id', $check_cartId)->get();
-        
 
         # 4. looping data yang masih ada
         $subtotal = 0;
@@ -90,8 +88,8 @@ class DetailController extends Controller
 
         # 5.2 hapus data ketika data kosong
 
-        return redirect(route('artworks.index'))->with('success', 'Barang berhasil dihapus');
+        return redirect(route("carts.show", Auth::user()->cart))->with('success', 'Barang berhasil dihapus');
     }
 
-    
+
 }

@@ -40,7 +40,7 @@
         color: white;
       }  
     </style>
-@endslot
+    @endslot
     <div class="container">
   
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
@@ -57,39 +57,43 @@
             </tr>
           </thead>
           <tbody>   
+            @foreach ($exhibitions as $exhibition)
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">{{ $exhibition->id }}</td>
+              <td class="align-middle text-center">{{ $exhibition->name }}</td>
+              <td class="align-middle text-center">{{ $exhibition->date }}</td>
               <td class="align-middle text-center">
-                <i class="text-warning">Publikasi</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-publikasi"><i class="fa fa-info-circle"></i></button>
+                <i class="text-navy">Publikasi</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-publikasi-{{ $exhibition->id }}"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr>
+            @endforeach
           </tbody>
       </table>
-      <x-modal name="info-publikasi">
+
+      @foreach ($exhibitions as $exhibition)
+      <x-modal name="info-publikasi-{{ $exhibition->id }}">
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
           <h1 class="text-center page-title">Detail Pameran</h1>
           <span class="underline-page-title text-center"></span>
         </div>
         <div class="row justify-content-center">
           <div class="col-8">
-            <p>Nama Pameran : <b>#</b></p>
-            <p>Poster Pameran : </p>
-            <img src="">
-            <p>Tanggal : <b>#</b></p>
-            <p>Waktu Mulai : <b>#</b></p>
-            <p>Waktu Berakhir : <b>#</b></p>
-            <p>Harga Tiket : <b>#</b></p>
-            <p>Deskripsi : <b>#</b></p>
-            <p>No.Handphone : <b>#</b></p>
-            <p>Email : <b>#</b></p>
-            <p>Jumlah Karya : <b>#</b></p>
+            <p>Nama Pameran : <b>{{ $exhibition->name }}</b></p>
+            <p>Tanggal : <b>{{ $exhibition->date }}</b></p>
+            <p>Waktu Mulai : <b>{{ $exhibition->start }}</b></p>
+            <p>Waktu Berakhir : <b>{{ $exhibition->end }}</b></p>
+            <p>Harga Tiket : <b>{{ $exhibition->price }}</b></p>
+            <p>Deskripsi : <b>{{ $exhibition->description }}</b></p>
+            <p>No.Handphone : <b>{{ $exhibition->artist->phone }}</b></p>
+            <p>Email : <b>{{ $exhibition->artist->email }}</b></p>
+            <p>Jumlah Karya : <b>{{ $exhibition->count }}</b></p>
             <a href="{{ route('admin.tiket-pameran') }}" class=" add-button btn-orange rounded"><i></i> Lihat Status Pembayaran</a>
       
           </div>
         </div>
       </x-modal>
+      @endforeach
+
   </div>
   </x-app-layout>

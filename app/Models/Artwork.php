@@ -20,6 +20,7 @@ class Artwork extends Model
         'size',
         'media',
         'year',
+        'status',
         'description',
         'isReady'
     ];

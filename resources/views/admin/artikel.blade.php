@@ -109,7 +109,7 @@
       </div>
   
       <div class="ms-auto text-end">
-        <a href="{{ route('admin.artikel-create') }}" class="add-button btn-orange rounded"><i class="fas fa-plus"></i> Karya</a>
+        <a href="{{ route('admin.artikel-create') }}" class="add-btn py-1 px-3 btn-orange rounded"><i class="fas fa-plus"></i> Karya</a>
       </div>
       <p class="text-danger my-4"></p>
 
@@ -122,28 +122,33 @@
             </tr>
           </thead>
           <tbody>
+            @foreach ($articles as $article)                
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">{{ $article->id }}</td>
+              <td class="align-middle text-center">{{ $article->title }}</td>
               <td class="align-middle text-center">
                 <button type="button" class="btn trash-button mx-2" data-bs-toggle="modal" data-bs-target="#trash-modal"><i class="fas fa-trash-alt"></i></button>
-                <a href="{{ route('admin.artikel-ubah') }}" type="button" class="btn edit-button mx-2 "><i class="fas fa fa-edit "></i></a>
+                <a href="{{ route('admin.artikel-ubah', $article) }}" type="button" class="btn edit-button mx-2 "><i class="fas fa fa-edit "></i></a>
               </td>
             </tr>
+
+            <x-modal name="trash-modal">
+              <p class="text-center m-title">PERHATIAN!</p>
+              <p class="text-center m-description">Apakah Anda yakin akan menghapus Artikel tersebut dari daftar?</p>
+              <div class="d-flex justify-content-center">
+                <form action="{{ route('articles.destroy', $article) }}" method="post">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="confirm-button">Ya</button>
+                </form>
+                <button type="button" class="decline-button bg-orange" data-bs-dismiss="modal">Tidak</button>
+              </div>
+            </x-modal>
+            @endforeach
           </tbody>
         </table>
-{{-- modal --}}
-<x-modal name="trash-modal">
-  <p class="text-center m-title">PERHATIAN!</p>
-  <p class="text-center m-description">Apakah Anda yakin akan menghapus Artikel tersebut dari daftar?</p>
-  <div class="d-flex justify-content-center">
-    <form action="#" method="post">
-      @csrf
-      @method('delete')
-      <button type="submit" class="confirm-button">Ya</button>
-    </form>
-    <button type="button" class="decline-button bg-orange" data-bs-dismiss="modal">Tidak</button>
-  </div>
-</x-modal>
+        <div class="d-flex justify-content-center mt-4">
+          {{ $articles->links() }}
+        </div>
     </div>    
   </x-app-layout>

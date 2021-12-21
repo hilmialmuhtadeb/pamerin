@@ -129,4 +129,26 @@ class ExhibitionController extends Controller
     {
         //
     }
+
+    public function addStages(Exhibition $exhibition)
+    {
+        $exhibition->update([
+            'stages' => $exhibition->stages + 1,
+        ]);
+        return back();
+    }
+
+    public function publication(Exhibition $exhibition)
+    {
+        return view('admin.pameran.form-publikasi', compact('exhibition'));
+    }
+
+    public function updatePublication(Exhibition $exhibition, Request $request)
+    {
+        $attr = $request->all();
+        $attr['stages'] = $exhibition->stages + 1;
+        $exhibition->update($attr);
+
+        return redirect(route('admin.publikasi'))->with('berhasil melakukan publikasi');
+    }
 }

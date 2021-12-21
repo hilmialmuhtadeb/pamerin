@@ -8,10 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Exhibition extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'name', 'slug', 'date', 'start', 'end', 'price', 'description', 'thumbnail'];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'stages',
+        'count',
+        'link',
+        'date',
+        'start',
+        'end',
+        'price',
+        'description',
+        'thumbnail',
+    ];
+
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getCountArtsAttributes($id)
+    {
+        return Exhibition::where('user_id', $id);
     }
 
     public function artist()

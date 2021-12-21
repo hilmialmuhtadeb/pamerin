@@ -39,7 +39,8 @@
         color: white;
       }  
     </style>
-@endslot
+    @endslot
+    
     <div class="container">
   
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
@@ -52,22 +53,21 @@
               <th scope="col" class="text-center">ID Pameran</th>
               <th scope="col" class="text-center">Nama Pameran</th>
               <th scope="col" class="text-center">Tanggal Berlangsung</th>
-              <th scope="col" class="text-center">Aksi</th>
               <th scope="col" class="text-center">Status</div>
             </tr>
           </thead>
           <tbody>   
+            @foreach ($exhibitions as $exhibition)                
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">{{ $exhibition->id }}</td>
+              <td class="align-middle text-center">{{ $exhibition->name }}</td>
+              <td class="align-middle text-center">{{ $exhibition->date }}</td>
               <td class="align-middle text-center">
-              <button type="submit" class="submit-button bg-orange rounded ">Lihat Pameran</button>
-              <td class="align-middle text-center">
-                <i class="text-orange">Sedang Berlangsung</i>
+                <i class="text-success">Sedang Berlangsung</i>
                 <a class="info-button mx-2"><i class="fa fa-info-circle"></i></a>
               </td>
             </tr>
+            @endforeach
           </tbody>
         </table>
   </div>

@@ -195,32 +195,29 @@
           @csrf
           @method('patch')
           <div class="mb-2">
-            <label for="name" class="form-label">Nama</label>
-            <input type="name" name="name" class="form-control" id="name">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="email">
-            <label for="number" class="form-label">No.Handphone</label>
-            <input type="number" name="number" class="form-control" id="number">
-            <label for="address" class="form-label">Alamat</label>
-            <input type="address" name="address" class="form-control" id="address">
-            <label for="prov" class="form-label">Provinsi</label>
-            <input type="prov" name="prov" class="form-control" id="prov">
-            <label for="city" class="form-label">Kota/Kabupaten</label>
-            <input type="city" name="city" class="form-control" id="city">
-            <label for="kodepos" class="form-label">Kode Pos</label>
-            <input type="kodepos" name="kodepos" class="form-control" id="kodepos">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="password">
-            <label for="bank" class="form-label">Nama Bank</label>
-            <input type="bank" name="bank" class="form-control" id="bank">
-            <label for="norek" class="form-label">Nomor Rekening</label>
-            <input type="norek" name="norek" class="form-control" id="norek">
-            <label for="namarek" class="form-label">Nama Pemilik Rekening</label>
-            <input type="namarek" name="namarek" class="form-control" id="namarek">
+            <label class="form-label">Nama</label>
+            <input type="name" class="form-control" value="{{ $artist->name }}" disabled>
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" value="{{ $artist->email }}" disabled>
+            <label class="form-label">No.Handphone</label>
+            <input type="number" class="form-control" value="{{ $artist->phone }}" disabled>
+            <label class="form-label">Alamat</label>
+            <input type="address" class="form-control" value="{{ $artist->address->street }}" disabled>
+            <label class="form-label">Provinsi</label>
+            <input type="prov" class="form-control" value="{{ $artist->address->region }}" disabled>
+            <label class="form-label">Kota/Kabupaten</label>
+            <input type="city" class="form-control" value="{{ $artist->address->city }}" disabled>
+            <label class="form-label">Kode Pos</label>
+            <input type="kodepos" class="form-control" value="{{ $artist->address->zipcode }}" disabled>
+            <label class="form-label">Nama Bank</label>
+            <input type="bank" class="form-control" value="{{ $artist->bank->name }}" disabled>
+            <label class="form-label">Nomor Rekening</label>
+            <input type="norek" class="form-control" value="{{ $artist->bank->number }}" disabled>
+            <label class="form-label">Nama Pemilik Rekening</label>
+            <input type="namarek" class="form-control" value="{{ $artist->bank->owner }}" disabled>
           </div>
-          <div class="button-wrapper">
-            <button type="submit" class="submit-button bg-grey rounded mb-5">Batal</button>
-            <button type="submit" class="submit-button bg-orange rounded mb-5">Simpan</button>
+          <div class="button-wrapper my-3">
+            <button type="button" class="submit-button bg-grey rounded mb-5"  data-bs-dismiss="modal">Batal</button>
           </div>
           </form>
         </div>
@@ -237,29 +234,22 @@
       <div class="row justify-content-center">
         
           <form action="#" method="post">
-          @csrf
-          @method('patch')
-          <div class="mb-2">
-            <label for="name" class="form-label">Nama</label>
-            <input type="name" name="name" class="form-control" id="name">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="email">
-            <label for="number" class="form-label">No.Handphone</label>
-            <input type="number" name="number" class="form-control" id="number">
-            <label for="address" class="form-label">Alamat</label>
-            <input type="address" name="address" class="form-control" id="address">
-            <label for="prov" class="form-label">Provinsi</label>
-            <input type="prov" name="prov" class="form-control" id="prov">
-            <label for="city" class="form-label">Kota/Kabupaten</label>
-            <input type="city" name="city" class="form-control" id="city">
-            <label for="kodepos" class="form-label">Kode Pos</label>
-            <input type="kodepos" name="kodepos" class="form-control" id="kodepos">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="password">
-          </div>
-          <div class="button-wrapper">
-            <button type="submit" class="submit-button bg-grey rounded mb-5">Batal</button>
-            <button type="submit" class="submit-button bg-orange rounded mb-5">Simpan</button>
+            <label class="form-label">Nama</label>
+            <input type="name" class="form-control" value="{{ $guest->name }}" disabled>
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" value="{{ $guest->email }}" disabled>
+            <label class="form-label">No.Handphone</label>
+            <input type="number" class="form-control" value="{{ $guest->phone }}" disabled>
+            <label class="form-label">Alamat</label>
+            <input type="address" class="form-control" value="{{ $guest->address->street }}" disabled>
+            <label class="form-label">Provinsi</label>
+            <input type="prov" class="form-control" value="{{ $guest->address->region }}" disabled>
+            <label class="form-label">Kota/Kabupaten</label>
+            <input type="city" class="form-control" value="{{ $guest->address->city }}" disabled>
+            <label class="form-label">Kode Pos</label>
+            <input type="kodepos" class="form-control" value="{{ $guest->address->zipcode }}" disabled>
+          <div class="button-wrapper my-3">
+            <button type="button" class="submit-button bg-grey rounded mb-5"  data-bs-dismiss="modal">Batal</button>
           </div>
           </form>
         </div>

@@ -18,7 +18,7 @@
   
       <div class="row justify-content-center">
         <div class="col-md-5 text-center mt-4">
-          <img src="{{ Auth::user()->thumbnail }}">
+          <img src="{{asset('Auth::user()->thumbnail') }}">
         </div>
       </div>
       

@@ -6,6 +6,7 @@ use App\Models\Tickdt;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Exhibition;
+use App\Models\ShippingCost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,9 +20,8 @@ class TicketController extends Controller
         return view('tickets.show', compact('user'));
     }
     
-    public function joinDetail(Ticket $ticket, $id)
+    public function joinDetail()
     {
-        $user=User::find($id);
         return view('tickets.join');
     }
     public function store(Request $request)

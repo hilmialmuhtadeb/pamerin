@@ -18,7 +18,7 @@
 
     <div class="row justify-content-center">
       <div class="col-md-5 text-center mt-4">
-        <img src="{{ $article->thumbnail }}">
+        <img src="{{asset('$article->thumbnail') }}">
       </div>
     </div>
     <div class="row justify-content-center my-5">

@@ -39,7 +39,7 @@
         color: white;
       }  
     </style>
-@endslot
+    @endslot
     <div class="container">
   
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
@@ -56,51 +56,49 @@
               <th scope="col" class="text-center">Status</div>
             </tr>
           </thead>
-          <tbody>   
+          <tbody>
+            @foreach ($exhibitions as $exhibition)                
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">{{ $exhibition->id }}</td>
+              <td class="align-middle text-center">{{ $exhibition->name }}</td>
               <td class="align-middle text-center">#</td>
               <td class="align-middle text-center">
-              <button type="submit" class="submit-button bg-orange rounded ">Transfer</button>
+                @if ($exhibition->stages<=3)                    
+                <form action="{{ route('exhibitions.addStages', $exhibition) }}" method="post">
+                  @csrf
+                  @method('patch')
+                  <button type="submit" class="submit-button bg-orange rounded ">Transfer</button>
+                </form>
+                @endif
+              </td>
               <td class="align-middle text-center">
-                <i class="text-warning">Belum Transfer</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-pembayaran"><i class="fa fa-info-circle"></i></button>
+                <i class="text-{{ $color[($exhibition->stages - 3)] }}">{{ $text[($exhibition->stages - 3)] }} Transfer</i>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-pembayaran-{{ $exhibition->id }}"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr>
-            <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">
-              
-              <td class="align-middle text-center">
-                <i class="text-warning">Sudah Transfer</i>
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="info-pembayaran"><i class="fa fa-info-circle"></i></button>
-              </td>
-            </tr>
+            @endforeach
           </tbody>
       </table>
 
-      <x-modal name="info-pembayaran">
+      @foreach ($exhibitions as $exhibition)          
+      <x-modal name="info-pembayaran-{{ $exhibition->id }}">
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
           <h1 class="text-center page-title">Informasi Pembayaran Karya Seni</h1>
           <span class="underline-page-title text-center"></span>
         </div>
         <div class="row justify-content-center">
           <div class="col-8">
-            <p>Status : <b class="text-warning">#</b></p>
-            <p>ID Pesanan : <b>#</b></p>
-            <p>ID Karya : <b>#</b></p>
-            <p>Nama Pemesan : <b>#</b></p>
-            <p>Total Pembayaran : <b>#</b></p>
-            <p>Alamat : <b>#</b></p>
-            <p>Nama Bank : <b>#</b></p>
-            <p>No.Rekening : <b>#</b></p>
-            <p>Nama Pemilik Rekening : <b>#</b></p>
+            <p>ID Pameran : <b>{{ $exhibition->id }}</b></p>
+            <p>Nama Pameran : <b>{{ $exhibition->name }}</b></p>
+            <p>Tiket Terjual : <b>#</b></p>
+            <p>Seniman : <b>{{ $exhibition->artist->name }}</b></p>
+            <p>Besar Dana : <b>#</b></p>
+            <p>Status : <b class="text-{{ $color[($exhibition->stages - 3)] }}">{{ $text[($exhibition->stages - 3)] }} Transfer</b></p>
           </div>
         </div>
       </x-modal>
+      @endforeach
+
       </table>
   </div>
   </x-app-layout>

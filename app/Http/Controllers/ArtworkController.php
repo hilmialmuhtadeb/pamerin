@@ -18,7 +18,7 @@ class ArtworkController extends Controller
     public function index()
     {
         return view('artworks.index', [
-            'artworks' => Artwork::paginate(9),
+            'artworks' => Artwork::where('isReady','=','1')->paginate(9),
         ]);
     }
 
@@ -41,11 +41,19 @@ class ArtworkController extends Controller
      */
     public function store(ArtworkRequest $request)
     {
+        $gambar = $request->thumbnail;
+        // menmabhakan gambar ke dalam database 
+        $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
+
+        // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
+        $gambar->move('img/karya/', $new_gambar);
+
         $attr = $request->all();
+        $attr['thumbnail'] = $new_gambar;
         $attr['category_id'] = $request->category;
         $attr['user_id'] = Auth::user()->id;
         $attr['slug'] = \Str::slug($request->name);
-        $attr['thumbnail'] = $request->thumbnail->store('/images/artworks');
+
 
         $artwork = Artwork::create($attr);
 
@@ -109,5 +117,13 @@ class ArtworkController extends Controller
         $artwork->delete();
 
         return redirect(route('artists.artworks'))->with('success', 'Karya berhasil dihapus');
+    }
+
+    public function addStatus(Artwork $artwork)
+    {
+        $artwork->update([
+            'status' => $artwork->status + 1,
+        ]);
+        return back();
     }
 }
