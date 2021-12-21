@@ -19,7 +19,7 @@ class Auction extends Model
     }
     public function user()
     {
-        return $this->belongsToMany(User::class, 'auction_user', 'user_id', 'auction_id')->withPivot(['bidder']);
+        return $this->belongsToMany(User::class)->withPivot('user_id', 'auction_id', 'bidder', 'name');
     }
     
     protected $fillable=[

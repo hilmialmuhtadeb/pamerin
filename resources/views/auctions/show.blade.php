@@ -119,9 +119,9 @@
                 <div class="h-100 card-info p-3">
                     <h1 class="detail-title">Bidder</h1>
                     <hr>
-                    @foreach($bidder as $ac)
+                    @foreach($auction->user as $bid)
                         <div class="col-12 rounded border my-2">
-                            <span class="text-black flex justify-start my-2">Rp {{ number_format($bidder->pivot->bidder) }} updated by {{ Auth::user()->name }}</span>
+                            <span class="text-black flex justify-start my-2">Rp {{ number_format($bid->pivot->bidder) }} updated by {{ $bid->pivot->name }}</span>
                         </div>
                     @endforeach
                     <hr>
@@ -129,15 +129,15 @@
                         <div class="col-md-8">
                             <form action="{{ route('auctions.store') }}" method="post">
                                 @csrf
-                                <div class="form-group justify-content-beetwen  ">
+                                <div class="form-group justify-content-beetwen ">
                                     <input type="hidden" name="slug_auctions" value="{{ $auction->slug }}">
                                     <input type="hidden" name="auction_id" value="{{ $auction->id }}">
                                     <input type="text" class="form-control" name="bidder" onkeypress="return event.charCode >= 48 && event.charCode <=57" placeholder="Tawaran Anda">
                                 </div><br>
-                                <button type="submit" class="bidding-button btn rounded-3">Ajukan Tawaran</button>
-                            </form>
-                        </div>
-                        <div class="d-grid col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                            <button type="submit" class="bidding-button btn rounded-3">Ajukan Tawaran</button>
+                        </form>
                         </div>
                     </div>
                 </div>

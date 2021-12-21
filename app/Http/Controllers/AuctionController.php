@@ -40,9 +40,11 @@ class AuctionController extends Controller
     {
        
         $id=Auth()->user()->id;
+        $name=Auth()->user()->name;
+        $auction=Auction::find($id);
         $user=User::find($id); 
 
-        $user->auction()->attach($request->auction_id,['bidder'=> $request->bidder]);
+        $tampil = $auction->user()->attach($request->auction_id,['user_id'=>$id, 'auction_id'=>$request->auction_id, 'bidder'=>$request->bidder, 'name'=>$name]);
         
         return redirect(route("auctions.show", $request->slug_auctions));
     }
@@ -59,7 +61,7 @@ class AuctionController extends Controller
         $user=User::find($id); 
         $bidder = User::find($id)->auction()->orderBy('created_at', 'DESC')->first();
         // dd($bidder);
-        return view('auctions.show', compact('auction', 'bidder'));
+        return view('auctions.show', compact('auction', 'bidder', 'user'));
     }
 
     /**
