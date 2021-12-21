@@ -16,7 +16,12 @@ class LogoutController extends Controller
 
     public function __invoke()
     {
+        $type = Auth::user()->type;
         Auth::logout();
-        return redirect(route('login'));
+        if ($type === 2) {
+            return redirect(route('artists.login'));
+        } else {
+            return redirect(route('login'));
+        }
     }
 }

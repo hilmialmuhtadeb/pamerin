@@ -171,7 +171,7 @@ a.page-link {
   background-color: #B6B6B6;
 }
 .text-grey {
-  color: #B6B6B6;
+  color: #B6B6B6 !important;
 }
 .btn-orange {
   background-color: #F6AE2D;

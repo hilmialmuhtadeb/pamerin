@@ -21,6 +21,7 @@ class CreateArtworksTable extends Migration
             $table->string('slug')->unique();
             $table->string('thumbnail');
             $table->string('price')->nullable();
+            $table->integer('status')->nullable()->default(0);
             $table->boolean('isReady')->default(false);
             $table->string('size');
             $table->string('media');

@@ -1,44 +1,44 @@
 <x-app-layout title="Admin Pengajuan Pameran">
   @slot('style')
-  <style>
-    .table-custom thead {
-      border-top: 1px solid #B6B6B6;
-      border-bottom: 1px solid #B6B6B6;
-    }
-    .table-custom th {
-      padding: 20px 0;
-      width: 20%;
-      font-size: 16px;
-      font-weight: 700;
-    }
-    .table-custom tbody {
-      background-color: white;
-    }
-    .info-button {
-      color: rgb(196, 196, 196);
-      border-radius: 5px;
-      transition: .3s;
-    }
-    .info-button:hover {
-      color: rgb(0, 0, 0);
-    }
-    .modal-body {
-      padding: 80px 0;
-    }
-    .modal-body p {
-      margin: 0;
-    }
-    .submit-button {
-      width: 100px;
-      border-radius: 5px;
-      padding: 1px ;
-      font-weight: 600;
-      font-size: 16px;
-      border: 0;
-      color: white;
-    }  
-  </style>
-@endslot
+    <style>
+      .table-custom thead {
+        border-top: 1px solid #B6B6B6;
+        border-bottom: 1px solid #B6B6B6;
+      }
+      .table-custom th {
+        padding: 20px 0;
+        width: 20%;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .table-custom tbody {
+        background-color: white;
+      }
+      .info-button {
+        color: rgb(196, 196, 196);
+        border-radius: 5px;
+        transition: .3s;
+      }
+      .info-button:hover {
+        color: rgb(0, 0, 0);
+      }
+      .modal-body {
+        padding: 80px 0;
+      }
+      .modal-body p {
+        margin: 0;
+      }
+      .submit-button {
+        width: 100px;
+        border-radius: 5px;
+        padding: 1px ;
+        font-weight: 600;
+        font-size: 16px;
+        border: 0;
+        color: white;
+      }  
+    </style>
+  @endslot
   <div class="container">
 
     <div class="d-flex justify-content-center flex-column align-items-center mb-5">
@@ -55,54 +55,61 @@
             <th scope="col" class="text-center">Status</div>
           </tr>
         </thead>
-  <tbody>   
+  <tbody>
+    @foreach ($exhibitions as $exhibition)        
     <tr>
-      <td scope="row" class="align-middle text-center">#</td>
-      <td class="align-middle text-center">#</td>
-      <td class="align-middle text-center">#</td>
+      <td scope="row" class="align-middle text-center">{{ $exhibition->id }}</td>
+      <td class="align-middle text-center">{{ $exhibition->name }}</td>
+      <td class="align-middle text-center">{{ $exhibition->date }}</td>
       <td class="align-middle text-center">
-      <button type="submit" class="submit-button bg-orange rounded ">Setuju</button>
+        @if ($exhibition->stages === 1) 
+          <form action="{{ route('exhibitions.addStages', $exhibition) }}" method="post">
+            @method('patch')
+            @csrf
+            <button type="submit" class="submit-button bg-orange rounded">Setuju</button>
+          </form>
+        @elseif ($exhibition->stages === 2)
+          <a href="{{ route('exhibitions.publication', $exhibition) }}">
+            <button class="submit-button bg-orange rounded">
+              Publikasi
+            </button>
+          </a>
+        @endif
+      </td>
       <td class="align-middle text-center">
-        <i class="text-orange">Pengajuan</i>
+        <i class="{{ $color[$exhibition->stages] }}">{{ $text[$exhibition->stages] }}</i>
         <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-pengajuan"><i class="fa fa-info-circle"></i></button>
       </td>
     </tr>
-    <tr>
-      <td scope="row" class="align-middle text-center">#</td>
-      <td class="align-middle text-center">#</td>
-      <td class="align-middle text-center">#</td>
-      <td class="align-middle text-center">
-      <a href="{{ route('admin.detail-publikasi') }}" type="submit" class="submit-button bg-orange rounded ">Publikasi</button>
-      <td class="align-middle text-center">
-        <i class="text-orange">Telah Disetujui</i>
-        <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#"><i class="fa fa-info-circle"></i></button>
-      </td>
-    </tr>
+    @endforeach
   </tbody>
 </table>
-<x-modal name="info-pengajuan">
-  <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-    <h1 class="text-center page-title">Detail Pameran</h1>
-    <span class="underline-page-title text-center"></span>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-8">
-      <p>Nama Pameran : <b>#</b></p>
-      <p>Poster Pameran : </p>
-      <img src="">
-      <p>Tanggal : <b>#</b></p>
-      <p>Waktu Mulai : <b>#</b></p>
-      <p>Waktu Berakhir : <b>#</b></p>
-      <p>Harga Tiket : <b>#</b></p>
-      <p>Deskripsi : <b>#</b></p>
-      <p>No.Handphone : <b>#</b></p>
-      <p>Email : <b>#</b></p>
-      <p>Jumlah Karya : <b>#</b></p>
+
+@foreach ($exhibitions as $exhibition)    
+  <x-modal name="info-pengajuan">
+    <div class="d-flex justify-content-center flex-column align-items-center mb-5">
+      <h1 class="text-center page-title">Detail Pameran</h1>
+      <span class="underline-page-title text-center"></span>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <p>Nama Pameran : <b>{{ $exhibition->name }}</b></p>
+        <p>Poster Pameran : </p>
+        <img src="">
+        <p>Tanggal : <b>{{ $exhibition->date }}</b></p>
+        <p>Waktu Mulai : <b>{{ $exhibition->start }}</b></p>
+        <p>Waktu Berakhir : <b>{{ $exhibition->end }}</b></p>
+        <p>Harga Tiket : <b>Rp. {{ number_format($exhibition->price) }}</b></p>
+        <p>Deskripsi : <b>{{ $exhibition->description }}</b></p>
+        <p>No.Handphone : <b>{{ $exhibition->artist->phone }}</b></p>
+        <p>Email : <b>{{ $exhibition->artist->email }}</b></p>
+        <p>Jumlah Karya : <b>{{ $exhibition->countArts }}</b></p>
         <a href="{{ route('admin.karya-pameran') }}" class=" add-button btn-orange rounded"><i></i> Lihat Deatil</a>
 
+      </div>
     </div>
-  </div>
-</x-modal>
+  </x-modal>
+@endforeach
 
 </div>
       </x-app-layout>

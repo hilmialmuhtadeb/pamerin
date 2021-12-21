@@ -20,6 +20,7 @@ use App\Http\Controllers\ShippingCostController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommissionController;
+use App\Models\Exhibition;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,9 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::patch('/pengajuan/{exhibition}', [ExhibitionController::class, 'addStages'])->name('exhibitions.addStages');
+Route::patch('/publikasi/{exhibition}', [ExhibitionController::class, 'updatePublication'])->name('exhibitions.updatePublication');
+Route::get('/publikasi/{exhibition}', [ExhibitionController::class, 'publication'])->name('exhibitions.publication');
 Route::get('/pengajuan', [AdminController::class, 'pengajuan'])->name('admin.pengajuan');
 Route::get('/publikasi', [AdminController::class, 'publikasi'])->name('admin.publikasi');
 Route::get('/berlangsung', [AdminController::class, 'berlangsung'])->name('admin.berlangsung');
@@ -44,10 +48,11 @@ Route::get('/selesai', [AdminController::class, 'selesai'])->name('admin.selesai
 Route::get('/tersedia', [AdminController::class, 'tersedia'])->name('admin.tersedia');
 Route::get('/dikirim', [AdminController::class, 'dikirim'])->name('admin.dikirim');
 Route::get('/finish', [AdminController::class, 'finish'])->name('admin.finish');
+Route::patch('/addStatus/{artwork}', [ArtworkController::class, 'addStatus'])->name('artworks.addStatus');
 Route::get('/artikel', [AdminController::class, 'artikel'])->name('admin.artikel');
 Route::get('/pengguna', [AdminController::class, 'pengguna'])->name('admin.pengguna');
 Route::get('/artikel-create', [AdminController::class, 'artikelcreate'])->name('admin.artikel-create');
-Route::get('/artikel-ubah', [AdminController::class, 'artikelubah'])->name('admin.artikel-ubah');
+Route::get('/artikel-ubah/{article}', [AdminController::class, 'artikelubah'])->name('admin.artikel-ubah');
 Route::get('/sedia', [AdminController::class, 'sedia'])->name('admin.sedia');
 Route::get('/kirim', [AdminController::class, 'kirim'])->name('admin.kirim');
 Route::get('/done', [AdminController::class, 'done'])->name('admin.done');

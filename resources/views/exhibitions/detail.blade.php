@@ -132,10 +132,10 @@
               </div>
               </div>
               <form action="{{ route('tickets.show')}}" method="post" class="d-grid mt-5 my-2">
-              @csrf
-              <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-              <button type="submit" class="card-exhibition-button  btn-checkout rounded-3">Bayar</button>
-            </form>
+                @csrf
+                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                <button type="submit" class="card-exhibition-button  btn-checkout rounded-3">Bayar</button>
+              </form>
             </div>
         </div>
 

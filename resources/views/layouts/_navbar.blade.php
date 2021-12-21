@@ -1,8 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
-      <a class="navbar-brand" href="{{ route('home') }}">
-          <img src="/img/logo/pamerin-logo.png">
-      </a>
+    @if(!Auth::user() || Auth::user()->type === 3)
+    <a class="navbar-brand" href="{{ route('home') }}">
+        <img src="/img/logo/pamerin-logo.png">
+    </a>
+    @elseif(Auth::user()->type === 2)
+    <a class="navbar-brand" href="{{ route('artists.index') }}">
+        <img src="/img/logo/pamerin-logo.png">
+    </a>
+    @elseif(Auth::user()->type === 1)
+    <a class="navbar-brand" href="{{ route('admin.index') }}">
+        <img src="/img/logo/pamerin-logo.png">
+    </a>
+    @endif
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

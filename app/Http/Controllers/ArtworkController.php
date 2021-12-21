@@ -110,4 +110,12 @@ class ArtworkController extends Controller
 
         return redirect(route('artists.artworks'))->with('success', 'Karya berhasil dihapus');
     }
+
+    public function addStatus(Artwork $artwork)
+    {
+        $artwork->update([
+            'status' => $artwork->status + 1,
+        ]);
+        return back();
+    }
 }
