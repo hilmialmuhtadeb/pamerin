@@ -38,7 +38,7 @@
 
     <p class="step">Langkah 1 : <b>Informasi Lelang</b></p>
 
-    <form action="{{ route('auction.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('auctions.store') }}" method="post" enctype="multipart/form-data">
     @csrf
 
       <div class="ms-3 row">
