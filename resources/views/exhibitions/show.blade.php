@@ -60,7 +60,7 @@
     <div class="row justify-content-between mb-3">
 
       <div class="col-md-7">
-        <img src="{{ $exhibition->thumbnail }}" class="img-exhibition rounded">
+        <img src="{{asset('$exhibition->thumbnail') }}" class="img-exhibition rounded">
       </div>
 
       <div class="col-md-5">
@@ -74,7 +74,7 @@
             <i class="text-grey far fa-clock"></i> <span class="ms-2 text-orange">{{ $exhibition->start }} - {{ $exhibition->end }}</span>
           </p>
           <p class="exhibition-sold"><b>Terjual</b> 20 Tiket</p>
-          <p class="title-2 text-red">Rp{{ number_format($exhibition->price) }}</p>
+          <p class="title-2 text-red">Rp {{ number_format($exhibition->price) }}</p>
           <p class="exhibition-description">{{ $exhibition->description }}</p>
           <div class="d-grid">
           <form action="{{ route('exhibitions.detail') }}" method="post">
@@ -97,11 +97,14 @@
           <i class="fas fa-user"></i> {{ $exhibition->artist->name }}, {{ $exhibition->artist->region }}
         </p>
       </div>
+      <div class="col-md-3 mt-2 mb-3">
+        <img src="{{asset('$exhibition->thumbnail') }}" class="img-exhibition rounded">
+      </div>
     </div>
     {{-- <div class=malasngoding-slider> --}}
       {{-- <div class=isi-slider > --}}
        {{-- <div class="card col-md-3 mt-2 mb-3" > --}}
-      {{-- <img class="card-img-top" src="{{ $exhibition->thumbnail }}" alt="Card image cap"> --}}
+      {{-- <img class="card-img-top" src="{{asset('$exhibition->thumbnail') }}" alt="Card image cap"> --}}
         {{-- </div> --}}
       {{-- </div> --}}
       {{-- </div> --}}

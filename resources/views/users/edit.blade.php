@@ -37,8 +37,7 @@
     <div class="row justify-content-center">
       <div class="col-10">
     
-          <div class="row justify-content-center">
-    
+          <div class="row justify-content-center mt-5">
             <div class="col-md-4 me-5">
               
               <h5>Informasi Pribadi</h5>
@@ -85,7 +84,7 @@
                 <div class="col-12">
                   <input type="hidden" name="code" value="1">
               <div class="d-grid">
-                <button type="submit" class="detail-button btn rounded-3">Konfirmasi</button>
+                <button type="submit" class="detail-button btn rounded-3 mb-3">Konfirmasi</button>
               </div>
             </form>
                 </div>

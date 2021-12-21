@@ -19,18 +19,17 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
     public function details()
     {
         return $this->hasMany(Detail::class);
     }
-    public function tickdt()
+    public function tickdts()
     {
         return $this->hasMany(Tickdt::class);
     }
-    public function getDetailsCountAttribute()
+    public function getTicketsCountAttribute()
     {
-        $detailsCount = Detail::where('ticket_id', $this->id)->count();
-        return $detailsCount;
+        $ticketsCount = Ticket::where('ticket_id', $this->id)->count();
+        return $ticketsCount;
     }
 }

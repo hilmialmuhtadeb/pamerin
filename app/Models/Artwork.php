@@ -53,4 +53,8 @@ class Artwork extends Model
     {
         return $this->hasOne(ShippingCost::class);
     }
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

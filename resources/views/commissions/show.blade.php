@@ -124,13 +124,15 @@
         </thead>
 
         <tbody>   
-          
+         
           <tr>
             <td class="align-middle text-center">32483243T</td>
-            <td class="align-middle text-center">Above Sasito</td>
-            <td class="align-middle text-center">Rp. 400.192</td>
+            @foreach ($details as $detail)
+            <td class="align-middle text-center">{{ $detail->artwork->name}}</td>
+            @endforeach
+            <td class="align-middle text-center">Rp {{ number_format($cart->summary)}}</td>
             <td class="align-middle text-center">
-              <a href="{{ route('commissions.confirm')}}" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
+              <a href="#" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
             </td>
             <td class="align-middle text-center"><i>Menunggu Pembayaran</i>
             <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal"><i class="fas fa-info"></i></button>

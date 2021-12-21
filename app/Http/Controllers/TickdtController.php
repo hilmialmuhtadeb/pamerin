@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Exhibition;
 use App\Models\Tickdt;
+use App\Models\User;
+use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TickdtController extends Controller
 {
@@ -34,16 +38,41 @@ class TickdtController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+
+    public function store(Request $request)
     {
-        $exhibition = Exhibition::where('id', request('exhibition_id'))->first();
-        Tickdt::create([
-            'ticket_id' => Auth::user()->ticket->id,
-            'exhibition_id' => request('exhibition_id'),
-            'price' => $exhibition->price,
+        $id=$request->exhibition_id;
+        $exhibition=Exhibition::find($id);
+        $id_tiket= Str::random(8);
+
+        $user=auth()->user()->id;
+        
+        $post= $exhibition->user()->attach($user,['code' =>$id_tiket,'subtotal'=>$request->price,'unique'=>$request->unique,'summary'=>$request->total,'status_id'=>1]);
+
+        return redirect(route('exhibitions.index'))->with('success', 'Silahkan melanjutkan ke pembayaran');
+    }
+
+    public function unggahBayar(Request $request, $id , $idtiket)
+    {
+        $this->validate($request, [
+            'bayar' => 'required|mimes:jpg,jpeg|max:2500'
         ]);
 
-        return redirect(route('exhibitions.index'))->with('success', 'Yeay, karya seni berhasil dimasukkan keranjang');
+        $user=User::find($id);
+        $exhibition=Exhibition::find($idtiket);
+
+        $gambar = $request->bayar;
+
+        // menmabhakan gambar ke dalam database 
+        $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
+        // update data di relasi many to many dan mengubah status id menjadi 2
+        $user->exhibition()->updateExistingPivot($exhibition,['bukti'=>$new_gambar,'status_id'=>2]);
+
+        // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
+        $gambar->move('buktipembayaran/', $new_gambar);
+
+        // return redirect(route('exhibitions.index'))->with('success', 'Silahkan melanjutkan ke pembayaran');
+        return redirect()->back()->with('success', 'Sukses menambahkan bukti pembayaran');
     }
 
     /**
@@ -93,4 +122,12 @@ class TickdtController extends Controller
             return redirect(route('tickets.show'))->with('success', 'Barang berhasil dihapus');
         }
     }
+
+public static function boot()
+{
+    parent::boot();
+    self::creating(function ($model) {
+        $model->ticket_id = Tickdt::where('exhibition_id', $model->exhibition_id)->max('ticket_id') + 1;
+    });
+}
 }

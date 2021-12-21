@@ -92,11 +92,11 @@
             <th scope="col-3" class="text-center">Pameran</th>
             <th scope="col-4" class="text-center">Detail Pameran</th>
           </tr>
-        </thead>
+      </thead>
 
         <tbody>   
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{ $exhibition->thumbnail }}" class="img-fluid ms-2 img-exhibition rounded"></td>
+            <td scope="row" class="text-center py-2"><img src="{{asset('$exhibition->thumbnail') }}" class="img-fluid ms-2 img-exhibition rounded"></td>
             <td class="align-middle text-left">
             <ul>
               <span class="ms-2 text-black"><b>{{ $exhibition->name }}</b></span><br>
@@ -120,22 +120,28 @@
                  <span class="exhibition-description ms-1"><b>Kode Unik</b></span>
               </div>
               <div class="col-md-8">
-                 <span class="exhibition-description">Rp.{{ number_format($exhibition->price) }}</span><br>
-                 <span class="exhibition-description">Rp. 198</span>
+                 <span class="exhibition-description">Rp {{ number_format($exhibition->price) }}</span><br>
+                 <span class="exhibition-description">Rp  {{$unique}}</span>
               </div>
               <div class="col-xl-12 exhibition-description"><hr></div>
               <div class="col-md-4">
                  <span class="exhibition-description ms-1"><b>TOTAL</b></span>
               </div>
               <div class="col-md-8">
-                 <span class="exhibition-description">Rp. 50.198</span>
+                 <span class="exhibition-description">Rp  {{number_format($exhibition->price + $unique)}}</span>
               </div>
               </div>
-              <form action="{{ route('tickets.show')}}" method="post" class="d-grid mt-5 my-2">
-                @csrf
-                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-                <button type="submit" class="card-exhibition-button  btn-checkout rounded-3">Bayar</button>
-              </form>
+              <form action="{{ route('tickdt.store') }}" method="post">
+              @csrf
+              <input type="hidden" name="exhibition_id" value="{{ $exhibition->id }}">
+              <input type="hidden" name="price" value="{{ $exhibition->price }}">
+              <input type="hidden" name="unique" value="{{ $unique }}">
+              <input type="hidden" name="total" value="{{ $exhibition->price + $unique}}">
+              
+              <div class="d-grid my-4">
+                <button type="submit" class="card-exhibition-button  btn-checkout rounded-3">Pesan Sekarang</button>
+              </div>
+            </form>
             </div>
         </div>
 

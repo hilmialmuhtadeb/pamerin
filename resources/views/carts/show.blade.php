@@ -75,15 +75,24 @@
         <tbody>   
           @foreach ($details as $detail)
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{ $detail->artwork->takeImage }}" height="100px"></td>
+            <td scope="row" class="text-center py-2"><img src="{{'/img/karya/' . $detail->artwork->thumbnail }}" height="100px"></td>
             <td class="align-middle text-center">{{ $detail->artwork->name }}</td>
-            <td class="align-middle text-center">Rp{{ number_format($detail->price)}}</td>
+            <td class="align-middle text-center">Rp {{ number_format($detail->price)}}</td>
             <td class="align-middle text-center">
-              <form action="{{ route('details.destroy', $detail->id) }}" method="POST">
-                @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-              </form>
+              <div class="row justify-content-beetwen">
+                <div class="col-6"> 
+                  <a href="/editalamat/{{$detail->id}}/{{$detail->cart_id}}/{{$detail->artwork->id}}" class="rounded btn-orange btn-address">Isi Alamat</a>
+                </div>
+                <div class="col-6">
+                <form action="{{ route('details.destroy', $detail->id) }}" method="POST">
+                  @csrf
+                  @method('delete')
+                  <input type="hidden" name="unique_number" value="{{ $cart->unique_number }}">
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </form>
+
+                </div>
+              </div>
             </td>
           </tr>
           @endforeach
@@ -92,40 +101,39 @@
       
     </div>
 
-    <div class="d-flex justify-content-end my-4">
-      <a href="{{ route('carts.edit', $cart) }}" class="rounded btn-orange btn-address">Isi Alamat</a>
-    </div>
 
-    <?php  
-      
-      $subtotal=0;
-    ?>
+    
     <div class="row justify-content-end">
+      
       <div class="col-md-5">
         <h5 class="cart-amount-title">Total Keranjang</h5>
 
         <table class="table-amount">
           <tr>
             <th>Subtotal</th>
-            <td class="align-middle">Rp{{ number_format($detail->price)}}</td>
+              <td class="align-middle">Rp {{ number_format($cart->subtotal) }}</td>
           </tr>
           <tr>
             <th>Ongkos Kirim</th>
-            <td>Rp0</td>
+            <td>Rp {{ number_format($cart->ongkir) }}</td>
           </tr>
           <tr>
             <th>Kode Unik</th>
-            <td>Rp120</td>
+            <td>Rp {{ number_format($cart->unique_number) }}</td>
           </tr>
           <tr>
             <th>TOTAL</th>
-            <td>Rp350.120</td>
+            <td>Rp {{ number_format($cart->summary) }}</td>
           </tr>
         </table>
         
-        <form action="#" method="post" class="d-grid my-4">
+        <form action="/commissions/{{$cart->id}}" method="get" class="d-grid my-4">
           @csrf
-          <button type="submit" class="btn-orange btn-checkout rounded-3">CHECKOUT</button>
+          @if( number_format($cart->summary) > 0 )
+            <button type="submit" class="btn-orange btn-checkout rounded-3">CHECKOUT</button>
+          @else
+            <button type="button" class="btn-orange btn-checkout rounded-3">CHECKOUT</button>
+          @endif
         </form>
       </div>
     </div>

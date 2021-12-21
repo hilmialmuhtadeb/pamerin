@@ -57,6 +57,13 @@
             @enderror
           </div>
           <div class="mb-2">
+            <label for="sumatera" class="form-label label-small">Area Sumatera</label>
+            <input type="number" name="sumatera" class="form-control" id="sumatera">
+            @error('sumatera')
+                  <span class="error-message">{{ $message }}</span>
+            @enderror
+          </div>
+          <div class="mb-2">
             <label for="kalimantan" class="form-label label-small">Area Kalimantan</label>
             <input type="number" name="kalimantan" class="form-control" id="kalimantan">
             @error('kalimantan')

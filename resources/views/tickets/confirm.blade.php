@@ -49,8 +49,11 @@
       <span class="underline-page-title text-center"></span>
     </div>
 
-    <h5>Total Pembayaran : <b>Rp. 50.198</b></h5>
+    <h5>Total Pembayaran : <b>Rp. </b></h5>
+
     <span>Metode Pembayaran :</span>
+    <form action="" method="POST" >
+      @csrf 
     <div class="form-check">
     <input class="form-check-input" type="radio" name="flexRadioDefault" value="BRI" id="BRI">
             <label class="form-check-label" for="BRI">
@@ -68,11 +71,18 @@
             @error('thumbnail')
                   <span class="error-message">{{ $message }}</span>
             @enderror
-            <div class="mb-3 mt-5">
+            <!-- <div class="mb-3 mt-5">
                <a href="{{ route('tickets.show') }}" class="rounded btn-orange btn-address" >Simpan</a>
+            </div> -->
+
+            <div class="mb-3">
+              <label class="form-label label-small mb-2">Unggah Gambar Karya Seni (.jpg/.jpeg/.png)</label>
+              <input type="text" name="thumbnail" id="thumbnail" class="form-control" value="{{$exhibition->user->id}}">
             </div>
-          </div>
-    
+
+            <button class="rounded btn-orange btn-address" type="submit">Simpan</button>
+    </div>
+    </form> 
   </div>
   
 </x-app-layout>

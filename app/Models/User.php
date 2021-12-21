@@ -44,31 +44,37 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function exhibitions()
+    public function exhibition()
     {
-        return $this->hasMany(Exhibition::class);
+        return $this->belongsToMany(Exhibition::class)->withPivot('code', 'bukti', 'subtotal', 'unique', 'summary', 'status_id');
     }
 
-    public function artworks()
+    public function artwork()
     {
-        return $this->hasMany(Artwork::class);
+        return $this->belongsToMany(Artwork::class);
     }
 
     public function carts() {
-        return $this->hasMany(Cart::class);
+        return $this->belongsToMany(Cart::class);
     }
 
     public function ticket(){
-        return $this->hasMany(Ticket::class);
+        return $this->belongsToMany(Ticket::class);
     }
-
+    
     public function address() {
         return $this->hasOne(Address::class);
+    }
+
+    public function auction()
+    {
+        return $this->belongsToMany(Auction::class, 'auction_user', 'user_id', 'auction_id')->withPivot(['bidder'])->withTimeStamps();
     }
 
     public function bank() {
         return $this->hasOne(Bank::class);
     }
+
 
     public function getCartAttribute()
     {
@@ -86,4 +92,5 @@ class User extends Authenticatable
         $ticket = Ticket::where('user_id', $this->id)->first();
         return $ticket;
     }
+    
 }

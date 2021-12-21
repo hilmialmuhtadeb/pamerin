@@ -61,7 +61,7 @@
           <tr>
             <td scope="row" class="align-middle text-center">M-{{ $artwork->id }}</td>
             <td class="align-middle text-center">{{ $artwork->name }}</td>
-            <td class="py-2 text-center"><img src="{{ $artwork->takeImage }}" height="100px"></td>
+            <td class="py-2 text-center"><img src="{{asset('$artwork->takeImage') }}" height="100px"></td>
             <td class="align-middle text-center">
               <i class="text-orange">Dijual</i>
               <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal-{{ $artwork->id }}"><i class="fas fa-info"></i></button>

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
-use App\Models\Exhibition;
 use App\Models\Tickdt;
+use App\Models\Exhibition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,16 +54,16 @@ class ExhibitionController extends Controller
     }
     
 
+    public function event(Exhibition $exhibition)
+    {
+        return view('exhibitions.event', compact('exhibition'));
+    }
+
     public function detail(Request $request)
     {
-    
+        $unique = random_int(190, 199);
         $exhibition = Exhibition::where('id', request('exhibition_id'))->first();
-        Tickdt::create([
-            'ticket_id' => Auth::user()->ticket->id,
-            'exhibition_id' => request('exhibition_id'),
-            'price' => $exhibition->price,
-        ]);
-        return view('exhibitions.detail', compact('exhibition'));
+    return view('exhibitions.detail', compact('exhibition','unique'));
     }
 
     /**
