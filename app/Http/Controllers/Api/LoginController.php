@@ -17,7 +17,6 @@ class LoginController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'phone' => 'required|unique:users'
-
         ]);
 
         if($validator->fails()){
@@ -28,8 +27,8 @@ class LoginController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'phone' => 0,
-            'type' => 1
+            'phone' => $request->phone,
+            'type' => 3
          ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
