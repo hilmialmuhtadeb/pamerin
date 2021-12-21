@@ -26,11 +26,7 @@
 
     <x-footer></x-footer>
 
-<<<<<<< HEAD
     <script src="{{asset('/js/app.js') }}"></script>
-=======
-    <script src="{{ asset('/js/app.js')}}"></script>
->>>>>>> 527a8ef79be36094ae9f2c893e711c1edac1ee67
 </body>
 
 </html>
