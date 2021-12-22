@@ -26,7 +26,7 @@ class LoginController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'phone' => 0,
+            'phone' => $request->phone,
             'type' => 1
          ]);
 
