@@ -16,11 +16,11 @@ class LoginController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'phone' => 'required|unique:users'
+            'phone' => 'required'
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());       
+            return response()->json($validator->errors(),404);       
         }
 
         $user = User::create([
