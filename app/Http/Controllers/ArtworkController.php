@@ -53,7 +53,7 @@ class ArtworkController extends Controller
         $attr['category_id'] = $request->category;
         $attr['user_id'] = Auth::user()->id;
         $attr['slug'] = \Str::slug($request->name);
-]]]]]]]
+
 
         $artwork = Artwork::create($attr);
 
