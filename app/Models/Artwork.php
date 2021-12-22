@@ -57,4 +57,8 @@ class Artwork extends Model
     {
         return $this->belongsToMany(User::class)->withPivot('code', 'bukti')->withTimeStamps();
     }
+    public function exhibitions()
+    {
+        return $this->belongsToMany(Exhibition::class);
+    }
 }

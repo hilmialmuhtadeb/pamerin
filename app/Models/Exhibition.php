@@ -10,6 +10,7 @@ class Exhibition extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'slug',
         'stages',
@@ -33,7 +34,7 @@ class Exhibition extends Model
         return Exhibition::where('user_id', $id);
     }
 
-    public function artist() 
+    public function artist()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -44,5 +45,9 @@ class Exhibition extends Model
     public function user()
     {
         return $this->belongsToMany(User::class)->withPivot('code', 'bukti', 'subtotal', 'unique', 'summary', 'status_id')->withTimeStamps();
+    }
+    public function artworks()
+    {
+        return $this->belongsToMany(Artwork::class);
     }
 }

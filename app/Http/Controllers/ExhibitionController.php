@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artwork;
 use App\Models\Tickdt;
 use App\Models\Exhibition;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class ExhibitionController extends Controller
      */
     public function create()
     {
-        //
+        return view('exhibitions.create');
     }
 
     /**
@@ -36,11 +37,39 @@ class ExhibitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function ticket(Request $request)
-    // {
-    //     $ticket = Ticket::find($request->ticket_id);
-    //     return view('tickets.detail');
-    // }
+    public function store(Request $request)
+    {
+        $attr = $request->validate([
+            'name' => 'required',
+            'date' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+        ]);
+        $attr['thumbnail'] = $request->thumbnail->store('/images/exhibitions');
+        $attr['user_id'] = Auth::user()->id;
+        $attr['slug'] = \Str::slug($request->name);
+        $exhibition = Exhibition::create($attr);
+
+        return redirect()->route('exhibitions.choice',$exhibition->id);
+    }
+
+    public function choiceArtwork($id)
+    {
+        $exhibition = Exhibition::find($id);
+        $artworks = Artwork::where('user_id', Auth::user()->id)->get();
+        return view('exhibitions.choice', compact('artworks', 'exhibition'));
+    }
+
+    public function fixArtwork(Request $request, $id)
+    {
+        $exhibition = Exhibition::find($id);
+
+        $exhibition->artworks()->attach($request->artwork);
+
+        return redirect()->route('artists.fair.pengajuan')->with('success', 'Berhasil menambahkan pameran baru.');
+    }
 
     /**
      * Display the specified resource.
@@ -52,7 +81,7 @@ class ExhibitionController extends Controller
     {
         return view('exhibitions.show', compact('exhibition'));
     }
-    
+
 
     public function event(Exhibition $exhibition)
     {

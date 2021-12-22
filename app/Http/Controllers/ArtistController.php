@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use App\Models\Auction;
+use App\Models\Exhibition;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,14 +15,18 @@ class ArtistController extends Controller
 {
     public function index()
     {
-        return view('users.artists.dashboard');
+        $exhibitions = Exhibition::where('user_id', Auth::user()->id)->count();
+        $artworks = Artwork::where('user_id', Auth::user()->id)->count();
+        $auctions = Auction::where('user_id', Auth::user()->id)->count();
+
+        return view('users.artists.dashboard', compact('exhibitions', 'artworks', 'auctions'));
     }
 
     public function artwork()
     {
         return view('users.artists.artworks.index', [
             'artist' => Auth::user(),
-            'artworks' => Artwork::where('user_id', Auth::user()->id)->get(),
+            'artworks' => Artwork::where('user_id', Auth::user()->id)->latest()->paginate(10),
         ]);
     }
 
@@ -43,7 +49,9 @@ class ArtistController extends Controller
     }
     public function pengajuan()
     {
-        return view('users.artists.fair.pengajuan');
+        $exhibitions = Exhibition::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+
+        return view('users.artists.fair.pengajuan', compact('exhibitions'));
     }
     public function selesai()
     {
@@ -71,13 +79,18 @@ class ArtistController extends Controller
     }
     public function lelang()
     {
-        return view('users.artists.sale.lelang');
+        $artworks = Artwork::where('user_id', Auth::user()->id);
+        return view('users.artists.sale.lelang', compact('artworks'));
     }
     public function porto()
     {
-        
+
         $artworks=Artwork::where('user_id',Auth::user()->id)->get();
         //dd($artworks);
         return view('users.artists.porto',compact('artworks'));
+    }
+    public function create()
+    {
+        return view('users.artists.sale.create');
     }
 }
