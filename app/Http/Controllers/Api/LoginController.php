@@ -20,7 +20,7 @@ class LoginController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());       
+            return response()->json($validator->errors(),404);       
         }
 
         $user = User::create([
