@@ -76,7 +76,7 @@
                     <tr>
                         <td scope="row" class="align-middle text-center">PM-{{ $exhibition->id }}</td>
                         <td class="align-middle text-center">{{ $exhibition->name }}</td>
-                        <td class="py-2 text-center"><img src="{{ asset('$exhibition->name') }}" height="100px"></td>
+                        <td class="py-2 text-center"><img src="{{ asset('/img/poster/' . $exhibition->thumbnail) }}" height="100px"></td>
                         <td class="align-middle text-center">
                             <i class="text-warning">Publikasi</i>
                             <button type="button" class="btn info-button mx-2" data-bs-toggle="modal"

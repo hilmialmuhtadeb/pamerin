@@ -86,7 +86,7 @@
                         <tr>
                             <td scope="row" class="align-middle text-center">PM-{{ $artwork->id }}</td>
                             <td class="align-middle text-center">{{ $artwork->name }}</td>
-                            <td class="py-2 text-center"><img src="{{ asset('$artwork->thumbnail') }}" height="100px">
+                            <td class="py-2 text-center"><img src="{{ asset('/img/karya/' . $artwork->thumbnail) }}" height="100px">
                             </td>
                             <td class="align-middle text-center">
                                 <input type="checkbox" class="form-check-input mt-2" name="artwork[]"
@@ -115,7 +115,7 @@
 
         <div class="row justify-content-center">
             <div class="col-8">
-                <p>Status : <b class="text-warning">#</b></p>
+                <p>Status : <b class="text-warning">Publikasi</b></p>
                 <p>ID Pameran : <b>#</b></p>
                 <p>Nama Pameran : <b>#</b></p>
                 <p>Total Karya : <b>#</b></p>

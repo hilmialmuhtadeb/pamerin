@@ -47,7 +47,14 @@ class ExhibitionController extends Controller
             'price' => 'required',
             'description' => 'required',
         ]);
-        $attr['thumbnail'] = $request->thumbnail->store('/images/exhibitions');
+        $gambar = $request->thumbnail;
+        // menmabhakan gambar ke dalam database 
+        $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
+
+        // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
+        $gambar->move('img/poster/', $new_gambar);
+
+        $attr['thumbnail'] = $new_gambar;
         $attr['user_id'] = Auth::user()->id;
         $attr['slug'] = \Str::slug($request->name);
         $exhibition = Exhibition::create($attr);
