@@ -7,6 +7,19 @@
                 border-bottom: 1px solid #B6B6B6;
             }
 
+            .submit-button {
+                font-size: 14px;
+                font-weight: 700;
+                width: 250px;
+                padding: 10px;
+                border: 0;
+                color: white;
+            }
+
+            .button-wrapper {
+                text-align: right;
+            }
+
             .btn-orange {
                 border: none;
                 color: white;
@@ -56,36 +69,40 @@
             <span class="underline-page-title text-center"></span>
         </div>
 
-        <table class="table-custom table table-borderless table-striped">
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center">ID karya</th>
-                    <th scope="col" class="text-center">Nama Karya</th>
-                    <th scope="col" class="text-center">Karya</th>
-                    <th scope="col" class="text-center">Pilih</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <form action="{{ route('exhibitions.fix') }}" method="post">
+        <form action="{{ route('exhibitions.fix', $exhibition->id) }}" method="post">
+            @csrf
+            <table class="table-custom table table-borderless table-striped">
+                <thead>
                     <tr>
-                        @foreach ($artworks as $artwork)
+                        <th scope="col" class="text-center">ID karya</th>
+                        <th scope="col" class="text-center">Nama Karya</th>
+                        <th scope="col" class="text-center">Karya</th>
+                        <th scope="col" class="text-center">Pilih</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($artworks as $artwork)
+                        <tr>
                             <td scope="row" class="align-middle text-center">PM-{{ $artwork->id }}</td>
                             <td class="align-middle text-center">{{ $artwork->name }}</td>
-                            <td class="py-2 text-center"><img src="#" height="100px">{{ assets($artwork->thumbnail) }}
+                            <td class="py-2 text-center"><img src="{{ asset($artwork->thumbnail) }}" height="100px">
                             </td>
                             <td class="align-middle text-center">
-                                <i class="text-warning">Publikasi</i>
+                                <input type="checkbox" class="form-check-input mt-2" name="artwork[]"
+                                    value="{{ $artwork->id }}">
                                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal"
-                                    data-bs-target="#info-modal"><i c lass="fa fa-info-circle"></i></button>
+                                    data-bs-target="#info-modal"><i class="fa fa-info-circle"></i></button>
                             </td>
-                        @endforeach
-
-                    </tr>
-                </form>
-            </tbody>
-        </table>
-
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="button-wrapper">
+                <button type="submit" class="submit-button bg-orange rounded mb-5" data-bs-toggle="modal"
+                    data-bs-target="#submitmodal">Submit</button>
+            </div>
+        </form>
     </div>
 
     {{-- modal --}}
@@ -107,6 +124,20 @@
                 <p>Harga Tiket : <b>#</b></p>
                 <p>Tiket Terjual : <b>#</b></p>
 
+            </div>
+        </div>
+
+    </x-modal>
+    <x-modal name="submit-modal">
+
+        <div class="d-flex justify-content-center flex-column align-items-center mb-5">
+            <h1 class="text-center page-title">PERHATIAN!</h1>
+            <span class="underline-page-title text-center"></span>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <p>Apakah anda yakin telah mengisi data dengan benar?</p>
             </div>
         </div>
 

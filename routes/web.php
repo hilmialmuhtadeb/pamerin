@@ -79,8 +79,8 @@ Route::resource('tickdt', TickdtController::class);
 // Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 Route::get('exhibitions/event', [ExhibitionController::class, 'event'])->name('exhibitions.event');
-Route::get('exhibitions/choice/artwork', [ExhibitionController::class, 'choiceArtwork'])->name(('exhibitions.choice'));
-Route::post('exhibitions/choiceartwork', [ExhibitionController::class, 'fixArtwork'])->name(('exhibitions.fix'));
+Route::get('exhibitions/{exhibitions}/choice', [ExhibitionController::class, 'choiceArtwork'])->name(('exhibitions.choice'));
+Route::post('exhibitions/choiceartwork/{exhibitions}', [ExhibitionController::class, 'fixArtwork'])->name(('exhibitions.fix'));
 
 
 
@@ -94,7 +94,7 @@ Route::post('tickets/show/{id}/{idtiket}', [TickdtController::class, 'unggahBaya
 Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
 Route::get('tickets/confirm/payment/{id}', [TicketController::class, 'confirm'])->name('tickets.confirm');
 
-// route untuk edit alamat pesanan per artwork id 
+// route untuk edit alamat pesanan per artwork id
 Route::get('editalamat/{id}/{cart_id}/{artwork_id}/', [CartController::class, 'editAlamat']);
 
 // Route untuk edit alamat cart

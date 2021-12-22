@@ -47,29 +47,28 @@ class ExhibitionController extends Controller
             'price' => 'required',
             'description' => 'required',
         ]);
-
-        $thumbnail = $request->file('thumbnail');
-        $name_file =  \Str::random(8) . "." . $thumbnail->getClientOriginalExtension();
-        $name_folder = "exhibition";
-        $path = $thumbnail->storeAs($name_folder, $name_file, "public");
-        $attr['thumbnail'] = $path;
+        $attr['thumbnail'] = $request->thumbnail->store('/images/exhibitions');
         $attr['user_id'] = Auth::user()->id;
         $attr['slug'] = \Str::slug($request->name);
+        $exhibition = Exhibition::create($attr);
 
-        Exhibition::create($attr);
-
-        return redirect()->route('exhibitions.choice');
+        return redirect()->route('exhibitions.choice',$exhibition->id);
     }
 
-    public function choiceArtwork()
+    public function choiceArtwork($id)
     {
+        $exhibition = Exhibition::find($id);
         $artworks = Artwork::where('user_id', Auth::user()->id)->get();
-        return view('exhibitions.choice', compact('artworks'));
+        return view('exhibitions.choice', compact('artworks', 'exhibition'));
     }
 
-    public function fixArtwork()
+    public function fixArtwork(Request $request, $id)
     {
+        $exhibition = Exhibition::find($id);
 
+        $exhibition->artworks()->attach($request->artwork);
+
+        return redirect()->route('artists.fair.pengajuan')->with('success', 'Berhasil menambahkan pameran baru.');
     }
 
     /**
