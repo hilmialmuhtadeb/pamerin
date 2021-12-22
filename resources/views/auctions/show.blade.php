@@ -104,7 +104,8 @@
                             <span class="title-2 text-black"><b>Start Bid :</b></span><br>
                         </div>
                         <div class="col-md-5">
-                            <span class="title-2 text-red">Rp {{ number_format($auction->price) }}</span><br>
+                            <input type="hidden" name="price" value="{{ $auction->price }}">
+                            <span class="title-2 text-red price-show">Rp {{ number_format($auction->price) }}</span><br>
                         </div>
                     </div>
                     <div class="detail-info">
@@ -119,11 +120,13 @@
                 <div class="h-100 card-info p-3">
                     <h1 class="detail-title">Bidder</h1>
                     <hr>
-                    @foreach($auction->user as $bid)
-                        <div class="col-12 rounded border my-2">
-                            <span class="text-black flex justify-start my-2">Rp {{ number_format($bid->pivot->bidder) }} updated by {{ $bid->pivot->user_id }}</span>
-                        </div>
-                    @endforeach
+                    <div class="bidder-box">
+                        @foreach($auction->user as $bid)
+                            <div class="col-12 rounded border my-2">
+                                <span class="text-black flex justify-start my-2">Rp {{ number_format($bid->pivot->bidder) }} updated by {{ $bid->pivot->name }}</span>
+                            </div>
+                        @endforeach
+                    </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-8">
@@ -148,13 +151,47 @@
             </div>
         </div>
     </div>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script>
         $(document).ready(function() {
 
         });
+        
+        function add_bid(price,name){
+            let bid_element =
+             `<div class="col-12 rounded border my-2">
+                <span class="text-black flex justify-start my-2">Rp ${price} updated by ${name}</span>
+            </div>`;
+            $('.bidder-box').append(bid_element);
+        }
         function bid(){
 
         }
     </script>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script>
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('9428a1aa57e130fe3c16', {
+            cluster: 'ap1'
+            });
+
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('auction-submitted', function(data) {
+                let auction_id = $('input[name=auction_id]').val();
+                let price_now = $('input[name=price]').val();
+                // alert(price_now);
+                // alert(parseInt(data['bidder']) > parseInt(price_now));
+                if(auction_id == data['auction_id']){
+                    if(parseInt(data['bidder']) > parseInt(price_now)){
+                        $('input[name=price]').val(data['bidder']);
+                        $('.price-show').html(data['bidder']);
+                    }
+                    add_bid(data['bidder'],data['name']);
+                }
+
+            });
+        </script> 
 </x-app-layout>

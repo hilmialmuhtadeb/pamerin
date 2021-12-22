@@ -6,6 +6,7 @@ use App\Models\Auction;
 use App\Models\bid;
 use App\Models\User;
 use Illuminate\Http\Request;
+Use App\Events\AuctionEvent;
 
 class AuctionController extends Controller
 {
@@ -38,14 +39,31 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-       
+        // dd($request->bidder);
         $id=Auth()->user()->id;
         $name=Auth()->user()->name;
         $auction=Auction::find($id);
         $user=User::find($id); 
-
+        $auction_item = Auction::where('id',$request->auction_id)->firstOrFail();
+        if($request->bidder > $auction_item->price)
+        {
+            $auction_update = Auction::where('id',$request->auction_id)->update(['price'=> $request->bidder]);
+        }
         $tampil = $auction->user()->attach($request->auction_id,['user_id'=>$id, 'auction_id'=>$request->auction_id, 'bidder'=>$request->bidder, 'name'=>$name]);
-        
+        $auction_send = Array(
+            'user_id' => $id,
+            'auction_id' => $request->auction_id,
+            'bidder' => $request->bidder,
+            'name' => $name
+        );
+        try {
+            //code...
+            event(new AuctionEvent($auction_send));
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd($th);
+        }
+        // return response()->json($message, 201);
         return redirect(route("auctions.show", $request->slug_auctions));
     }
 
