@@ -67,21 +67,33 @@
             <div>
               <label for="alamat-default" class="form-label label-small">Alamat</label>
               <input type="text" class="form-control" id="alamat-default" name="alamat_default" value="{{$user->address->street}}" readonly>
+                @error('alamat_default')
+                  {{ $message }}
+                @enderror
             </div>
             <div class="row">
               <div class="col-md-6">
                 <label for="kota-default" class="form-label label-small">Kota/Kabupaten</label>
                 <input type="text" class="form-control" id="kota-default" name="kota_default" value="{{$user->address->city}}" readonly>
+                @error('kota_default')
+                  {{ $message }}
+                @enderror
               </div>
               <div class="col-md-6">
                 <label for="provinsi-default" class="form-label label-small">Provinsi</label>
                 <input type="text" class="form-control" name="provinsi_default" id="provinsi-default" value="{{$user->address->region}}" readonly>
+                @error('provinsi_default')
+                  {{ $message }}
+                @enderror
               </div>
             </div>
             <div class="row">
               <div class="col-6">
                 <label for="zip-default" class="form-label label-small">Kode Pos</label>
                 <input type="text" class="form-control" name="kodepos_default" id="zip-default" value="{{$user->address->zipcode}}" readonly>
+                @error('kodepos_default')
+                  {{ $message }}
+                @enderror
               </div>
             </div>
           </div>
@@ -167,10 +179,10 @@
                 </div>
               </div>
             </div>
+            @error('address_type')
+              {{ $message }}
+            @enderror
           @endif
-          @error('address_type')
-            {{ $message }}
-          @enderror
         </div>
 
       </div>

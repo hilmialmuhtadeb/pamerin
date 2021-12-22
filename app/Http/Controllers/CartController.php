@@ -6,7 +6,6 @@ use App\Models\Cart;
 use App\Models\Detail;
 use App\Models\User;
 use App\Models\Artwork;
-use App\Models\Commission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\redirect;
@@ -42,8 +41,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        // $kepo = Cart::all();
-        return view('commissions.show');
+        
     }
 
     /**
@@ -54,9 +52,106 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        
+        $details = Detail::where('cart_id', $cart->id)->where('status', 1)->latest()->get();
+
+        # check ongkir detail tidak boleh kosong
+        $ongkir = (float)1;
+        # 1. looping data
+        for ($i=0; $i < count($details); $i++) {
+            # 2. cleaning data is null
+            if ($details[$i]->shipping == NULL){
+                # 3. Handling missing value
+                $details[$i]->shipping = 0;
+            }
+            # multiplication total
+            $ongkir *= (float)$details[$i]->shipping;
+        }
+        // var_dump($ongkir);
+
+        return view('carts.show', compact('cart', 'details', 'ongkir'));
+    }
+
+    public function show_myorder(Cart $cart)
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        # 2 -> menunggu pembayaran
+        # 3 -> pembayaran sedang diproses
+        # 4 -> transaksi selesai
         $details = Detail::where('cart_id', $cart->id)->latest()->get();
-        return view('carts.show', compact('cart', 'details'));
+
+        // var_dump($details);
+        return view('carts.myorder', compact('cart', 'details', 'user'));
+    }
+
+    public function waiting_myorder(Cart $cart)
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        # 2 -> menunggu pembayaran
+        # 3 -> pembayaran sedang diproses
+        # 4 -> transaksi selesai
+        $details = Detail::where('cart_id', $cart->id)->where('status', 2)->latest()->get();
+
+        // var_dump($details);
+        return view('carts.myorder_waiting', compact('cart', 'details', 'user'));
+    }
+
+    public function proses_myorder(Cart $cart)
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        # 2 -> menunggu pembayaran
+        # 3 -> pembayaran sedang diproses
+        # 4 -> transaksi selesai
+        $details = Detail::where('cart_id', $cart->id)->where('status', 3)->latest()->get();
+
+        // var_dump($details);
+        return view('carts.myorder_proses', compact('cart', 'details', 'user'));
+    }
+
+    public function selesai_myorder(Cart $cart)
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        # 2 -> menunggu pembayaran
+        # 3 -> pembayaran sedang diproses
+        # 4 -> transaksi selesai
+        $details = Detail::where('cart_id', $cart->id)->where('status', 4)->latest()->get();
+
+        // var_dump($details);
+        return view('carts.myorder_selesai', compact('cart', 'details', 'user'));
+    }
+
+    public function bayar_pesanan(Request $request, $user_id, $artwork_id)
+    {
+        $request->validate([
+            'bayar' => 'required|mimes:jpg,jpeg,png|max:2500',
+        ],[
+            'bayar.required' => 'Anda belum mengupload bukti pembayaran',
+        ]);
+
+        $user = User::find($user_id); 
+        $artwork = Artwork::find($artwork_id);
+
+        $upload_data = $artwork->user()->attach($artwork->id,['user_id'=>$user->id, 'artwork_id'=>$artwork->id, 'code'=>$request->code]);
+
+        $gambar = $request->bayar;
+        // menmabhakan gambar ke dalam database 
+        $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
+        // update data di relasi many to many dan mengubah status id menjadi 2
+        $user->artwork()->updateExistingPivot($artwork,['bukti'=>$new_gambar]);
+        // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
+        $gambar->move('buktipembayarankarya/', $new_gambar);
+
+
+        # status detail = 3 -> pesanan sedang diproses
+        Detail::where('id_pesanan', $request->code)
+            ->update([
+                'status' => 3,
+            ]);
+
+        return redirect(route('carts.show_myorder', Auth::user()->cart))->with('success', 'Pesanan sedang diproses');
     }
 
     /**
@@ -96,6 +191,42 @@ class CartController extends Controller
         //
     }
 
+    public function cart_checkout($cart_id, Request $request)
+    {
+        $details = Detail::where('cart_id', $cart_id)->get();
+        # edit status detail
+        for ($i=0; $i < count($details); $i++) {
+            $detail_id = $details[$i]->id;
+
+            # status detail = 2 -> menunggu pembayaran
+            Detail::where('id', $detail_id)
+            ->update([
+                'status' => 2,
+            ]);
+        }
+
+        # edit status artwork
+        for ($i=0; $i < count($details); $i++) {
+            $artwork_id = $details[$i]->artwork->id;
+
+            Artwork::where('id', $artwork_id)
+            ->update([
+                'isReady'=>2,
+            ]);
+        }
+
+        Cart::where('id', $cart_id)
+            ->update([
+                'subtotal' => 0,
+                'ongkir' => 0,
+                'unique_number' => 0,
+                'summary' => 0,
+                'status' => 0,
+            ]);
+            
+        return redirect(route('carts.show_myorder', Auth::user()->cart))->with('success', 'Silahkan melakukan pembayaran');
+    }
+
     public function edit_alamat($cart_id, $artwork_id, Request $request)
     {
         $request->validate([
@@ -109,6 +240,19 @@ class CartController extends Controller
         
         # 1. Tambah alamat dan ongkos kirim
         if($request->address_type == 'default'){
+            $request->validate([
+                'alamat_default' => 'required',
+                'kota_default' => 'required',
+                'provinsi_default' => 'required',
+                'kodepos_default' => 'required',
+    
+            ],[
+                'alamat_default.required' => 'Data alamat anda kosong !',
+                'kota_default.required' => 'Data kota/kabupaten anda kosong !',
+                'provinsi_default.required' => 'Data provinsi anda kosong !',
+                'kodepos_default.required' => 'Data kodepos anda kosong !',
+            ]);
+
             Detail::where('cart_id', $cart_id)->where('artwork_id', $artwork_id)
                 ->update([
                     'street'=>$request->alamat_default,
@@ -195,5 +339,4 @@ class CartController extends Controller
 
         return view('carts.edit', compact('artwork','user', 'cart', 'details'));
     }
-
 }

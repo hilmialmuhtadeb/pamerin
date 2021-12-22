@@ -35,14 +35,14 @@ class Artwork extends Model
         return '/storage/' . $this->thumbnail;
     }
 
-    public function artist()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function artist()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function detail()
@@ -55,6 +55,6 @@ class Artwork extends Model
     }
     public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('code', 'bukti')->withTimeStamps();
     }
 }

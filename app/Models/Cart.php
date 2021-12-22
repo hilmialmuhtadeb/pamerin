@@ -27,11 +27,6 @@ class Cart extends Model
     {
         return $this->hasMany(Detail::class);
     }
-
-    public function commission()
-    {
-        return $this->belongsTo(Commission::class);
-    }
     
     public function getDetailsCountAttribute()
     {

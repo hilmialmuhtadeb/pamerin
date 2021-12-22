@@ -21,7 +21,6 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TickdtController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BidController;
-use App\Http\Controllers\CommissionController;
 use App\Models\Exhibition;
 use Illuminate\Support\Facades\Route;
 
@@ -73,7 +72,6 @@ Route::resource('details', DetailController::class);
 Route::resource('users', UserController::class);
 Route::resource('banks', BankController::class);
 Route::resource('tickets', TicketController::class);
-Route::resource('commissions', CommissionController::class);
 Route::resource('tickdt', TickdtController::class);
 
 // Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
@@ -94,16 +92,17 @@ Route::get('tickets/confirm/payment/{id}', [TicketController::class, 'confirm'])
 
 // route untuk edit alamat pesanan per artwork id 
 Route::get('editalamat/{id}/{cart_id}/{artwork_id}/', [CartController::class, 'editAlamat']);
+Route::post('carts/checkout/{cart_id}', [CartController::class, 'cart_checkout']);
 
 // Route untuk edit alamat cart
 Route::post('carts/edit/{cart_id}/{artwork_id}', [CartController::class, 'edit_alamat'])->name('carts.edit_alamat');
+Route::post('cart/bayar/{user_id}/{artwork_id}', [CartController::class, 'bayar_pesanan'])->name('carts.bayar_pesanan');
+Route::get('carts/{cart}/myorder', [CartController::class, 'show_myorder'])->name('carts.show_myorder');
+Route::get('carts/{cart}/myorder/proses', [CartController::class, 'proses_myorder'])->name('carts.proses_myorder');
+Route::get('carts/{cart}/myorder/waiting', [CartController::class, 'waiting_myorder'])->name('carts.waiting_myorder');
+Route::get('carts/{cart}/myorder/selesai', [CartController::class, 'selesai_myorder'])->name('carts.selesai_myorder');
 
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
-
-// Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
-Route::get('commissions/confirm', [CommissionController::class, 'confirm'])->name('commissions.confirm');
-
-// Route::post('commissions/store/{id}', [CommissionController::class, 'store'])->name('commissions.store');
 
 Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
 // Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');

@@ -38,11 +38,6 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'bidder' => 'required',
-        ],[
-            'bidder.required' => 'Anda tidak mengisi nominal bid',
-        ]);
        
         $id=Auth()->user()->id;
         $name=Auth()->user()->name;
@@ -62,6 +57,7 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
+        $auction->orderByDesc('created_at', 'DESC')->take(10)->get();
         return view('auctions.show', compact('auction'));
     }
 

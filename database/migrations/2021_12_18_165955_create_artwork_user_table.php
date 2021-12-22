@@ -18,11 +18,7 @@ class CreateArtworkUserTable extends Migration
             $table->foreignId('artwork_id');
             $table->foreignId('user_id');
             $table->string('code');
-            $table->string('street');
-            $table->string('city');
-            $table->string('region');
-            $table->string('zipcode');
-            $table->integer('status_id');
+            $table->string('bukti')->nullable();
             $table->timestamps();
         });
     }

@@ -54,7 +54,7 @@
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
                 <a class="nav-link{{ str_contains(request()->path(), 'carts') ? ' active' : '' }}"
-                    href="{{ route("carts.show", Auth::user()->cart) }}"><i class="fas fa-shopping-cart me-1"></i>
+                    href="{{ route('carts.show', Auth::user()->cart) }}"><i class="fas fa-shopping-cart me-1"></i>
                     Keranjang
                     @if (Auth::user()->cart->detailsCount)
                     <span class="badge rounded-pill bg-danger">{{ Auth::user()->cart->detailsCount }}</span>
@@ -71,7 +71,7 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">Profil</a></li>
                     <li><a class="dropdown-item" href="/tickets/show/{{auth()->user()->id}}">Tiket Saya</a></li>
-                    <li><a class="dropdown-item" href="{{ route('commissions.show', Auth::user()) }}">Pesanan Saya</a></li>    
+                    <li><a class="dropdown-item" href="{{ route('carts.show_myorder', Auth::user()->cart) }}">Pesanan Saya</a></li>  
                     <li>
                         <form action="{{ route('logout') }}" method="post">
                             @csrf

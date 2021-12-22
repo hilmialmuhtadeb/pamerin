@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Detail;
 use App\Models\Cart;
+use App\Models\Commision;
 use App\Models\Artwork;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +18,9 @@ class DetailController extends Controller
         Detail::create([
             'cart_id' => Auth::user()->cart->id,
             'artwork_id' => request('artwork_id'),
+            'id_pesanan' => (string)random_int(50000000, 59999999) . strtoupper(Str::random(1)),
             'price' => $artwork->price,
+            'status' => 1,
         ]);
 
         # cart
@@ -61,16 +65,22 @@ class DetailController extends Controller
             $subtotal += (float)$details[$item]->price;
         }
 
+        $ongkir = 0;
+        for ($item=0; $item < count($details); $item++) {
+            $ongkir += (float)$details[$item]->shipping;
+        }
+
         #5. update data pada cart setelah dilakukan looping
         # 5.1 hapus data ketika data tidak kosong
         if (count($details))
         {
             $old_unique = request('unique_number');
-            $summary = $subtotal + (float)$old_unique;
+            $summary = $subtotal + (float)$old_unique + $ongkir;
             
             Cart::where('id', $check_cartId)
                 ->update([
                     'subtotal' => $subtotal,
+                    'ongkir' => $ongkir,
                     'unique_number' => $old_unique,
                     'summary' => $summary,
                     'status' => 1,
@@ -79,6 +89,7 @@ class DetailController extends Controller
             Cart::where('id', $check_cartId)
             ->update([
                 'subtotal' => 0,
+                'ongkir' => 0,
                 'unique_number' => 0,
                 'summary' => 0,
                 'status' => 0,

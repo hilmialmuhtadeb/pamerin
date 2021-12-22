@@ -134,12 +134,6 @@
                     <li><a class="dropdown-item item-turun" href="#">Menunggu Pembayaran</a></li>
                     <li><a class="dropdown-item item-turun" href="#">Akan Datang</a></li>
                     <li><a class="dropdown-item item-turun" href="#">Selesai</a></li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button type="submit" class="dropdown-item">Keluar</button>
-                        </form>
-                    </li>
                 </ul>
         </div>
 
@@ -182,7 +176,7 @@
                         </td>
                         </td>
                         @if($tiket->pivot->status_id == 1)
-                            <td class="align-middle text-center text-red"><i>Menunggu Pembayaran</i>
+                        <td class="align-middle text-center text-red"><i>Menunggu Pembayaran</i>
                         @elseif($tiket->pivot->status_id == 2)
                         <td class="align-middle text-center text-orange"><i>Akan Datang</i>
                         @endif
@@ -213,7 +207,7 @@
                 <p>Tanggal Pameran : <b>{{$tiket->date}}</b></p>
                 <p>Waktu Pameran : <b>{{$tiket->start}}-{{$tiket->end}}</b></p>
                 <p>Total Harga : <b>Rp.{{ number_format($tiket->price)}}</b></p>
-                <p>Status : <i>Menunggu Pembayaran</i></p> 
+                <p>Status : <i class="text-red">Menunggu Pembayaran</i></p> 
 
             </div>
         </div>
@@ -260,7 +254,7 @@
     <x-modal name="pembayaran{{ $tiket->id }}">
 
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-            <h1 class="text-center page-title">Kirim Bukti Pemabayaran</h1>
+            <h1 class="text-center page-title">Kirim Bukti Pembayaran</h1>
             <span class="underline-page-title text-center"></span>
         </div>
 
@@ -272,13 +266,9 @@
                 <form action="/tickets/show/{{$user->id}}/{{$tiket->id}}" method="POST" enctype="multipart/form-data">
                         @csrf 
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="BRI" id="BRI">
-                                <label class="form-check-label" for="BRI">
                                 <b>BANK BRI</b> 1029382131923<br>(DEODIA LORENSA)
                                 </label></div>
                                 <div class="form-check mb-5">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="Dana" id="Dana">
-                                <label class="form-check-label" for="Dana">
                                 <b>OVO & DANA</b> 085612345678<br>(DEODIA LORENSA)
                                 </label></div>
                                 <p>Unggah Bukti Pembayaran (.jpg / .jpeg)</p>

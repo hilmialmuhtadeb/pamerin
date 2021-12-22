@@ -81,7 +81,11 @@
             <td class="align-middle text-center">
               <div class="row justify-content-beetwen">
                 <div class="col-6"> 
-                  <a href="/editalamat/{{$detail->id}}/{{$detail->cart_id}}/{{$detail->artwork->id}}" class="rounded btn-orange btn-address">Isi Alamat</a>
+                  @if ($detail->shipping != NULL)
+                    <a href="/editalamat/{{$detail->id}}/{{$detail->cart_id}}/{{$detail->artwork->id}}" class="rounded btn-green btn-address">Isi Alamat</a>
+                  @else
+                    <a href="/editalamat/{{$detail->id}}/{{$detail->cart_id}}/{{$detail->artwork->id}}" class="rounded btn-orange btn-address">Isi Alamat</a>
+                  @endif
                 </div>
                 <div class="col-6">
                 <form action="{{ route('details.destroy', $detail->id) }}" method="POST">
@@ -127,18 +131,26 @@
           </tr>
         </table>
         
-        <form action="/commissions/{{$cart->id}}" method="get" class="d-grid my-4">
+        <form action="/carts/checkout/{{$cart->id}}" method="post" class="d-grid my-4">
+          @if( number_format($cart->summary) > 0 && $ongkir != 0)
           @csrf
-          @if( number_format($cart->summary) > 0 )
             <button type="submit" class="btn-orange btn-checkout rounded-3">CHECKOUT</button>
-          @else
-            <button type="button" class="btn-orange btn-checkout rounded-3">CHECKOUT</button>
-          @endif
         </form>
+          @elseif (count($details) == 0)
+            <button type="button" class="btn-orange btn-checkout rounded-3" data-bs-toggle="modal" data-bs-target="#danger-kosong">CHECKOUT</button>
+          @else
+            <button type="button" class="btn-orange btn-checkout rounded-3" data-bs-toggle="modal" data-bs-target="#danger-data-kosong">CHECKOUT</button>
+          @endif
       </div>
     </div>
-      
-    
   </div>
   
+  <x-modal name="danger-kosong">
+    <h4 class="text-center text-red">Anda belum menambahkan apapun !</h4>
+  </x-modal>
+
+  <x-modal name="danger-data-kosong">
+    <h4 class="text-center text-red">Harap isi alamat tujuan pengiriman!</h4>
+  </x-modal>
+
 </x-app-layout>

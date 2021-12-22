@@ -23,6 +23,7 @@ class CreateDetailsTable extends Migration
             $table->string('region')->nullable();
             $table->string('zipcode')->nullable();
             $table->integer('shipping')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

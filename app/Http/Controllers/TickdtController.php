@@ -69,7 +69,7 @@ class TickdtController extends Controller
         $user->exhibition()->updateExistingPivot($exhibition,['bukti'=>$new_gambar,'status_id'=>2]);
 
         // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
-        $gambar->move('buktipembayaran/', $new_gambar);
+        $gambar->move('buktipembayarantiket/', $new_gambar);
 
         // return redirect(route('exhibitions.index'))->with('success', 'Silahkan melanjutkan ke pembayaran');
         return redirect()->back()->with('success', 'Sukses menambahkan bukti pembayaran');

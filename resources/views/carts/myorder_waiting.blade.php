@@ -96,18 +96,13 @@
     <div class="ms-auto mb-5 text-end">
     <li class="nav-item dropdown">
             <a class="btn turun-btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menunggu Pembayaran
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item item-turun" href="#">Semua Pesanan</a></li>
+              <li><a class="dropdown-item item-turun" href="{{ route('carts.show_myorder', Auth::user()->cart) }}">Semua Pesanan</a></li>
               <li><a class="dropdown-item item-turun" href="#">Menunggu Pembayaran</a></li>
-              <li><a class="dropdown-item item-turun" href="#">Akan Datang</a></li>
-              <li><a class="dropdown-item item-turun" href="#">Selesai</a></li>
-              <li>
-                <form action="{{ route('logout') }}" method="post">
-                  @csrf
-                  <button type="submit" class="dropdown-item">Keluar</button>
-                </form>
-              </li>
+              <li><a class="dropdown-item item-turun" href="{{ route('carts.proses_myorder', Auth::user()->cart) }}">Akan Datang</a></li>
+              <li><a class="dropdown-item item-turun" href="{{ route('carts.selesai_myorder', Auth::user()->cart) }}">Selesai</a></li>
             </ul>
 </div>
     
@@ -124,46 +119,85 @@
         </thead>
 
         <tbody>   
-         
+          @foreach ($details as $detail)
           <tr>
-            <td class="align-middle text-center">32483243T</td>
-            @foreach ($details as $detail)
-            <td class="align-middle text-center">{{ $detail->artwork->name}}</td>
-            @endforeach
-            <td class="align-middle text-center">Rp {{ number_format($cart->summary)}}</td>
+            <td class="align-middle text-center">{{ $detail->id_pesanan }}</td>
+            <td class="align-middle text-center">{{ $detail->artwork->name }}</td>
+            <td class="align-middle text-center">Rp {{ number_format( (float)$detail->price + (float)$detail->shipping ) }}</td>
             <td class="align-middle text-center">
-              <a href="#" class="rounded btn-orange btn-address">Unggah Pembayaran</a>
+              <button type="button" class="rounded btn-orange btn-address" data-bs-toggle="modal"
+              data-bs-target="#pembayaran{{$detail->id}}">Unggah Pembayaran</button>
             </td>
-            <td class="align-middle text-center"><i>Menunggu Pembayaran</i>
-            <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal"><i class="fas fa-info"></i></button>
+              @if ($detail->status == 2)
+                <td class="align-middle text-center text-red"><i>Menunggu Pembayaran</i>
+              @elseif ($detail->status == 3)
+                <td class="align-middle text-center text-red"><i>Dalam pengiriman</i>
+              @elseif ($detail->status == 4)
+                <td class="align-middle text-center text-red"><i>Selesai</i>
+              @endif
+            <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal{{$detail->id}}"><i class="fas fa-info"></i></button>
             </td>
           </tr>
-        
+          @endforeach        
         </tbody>
       </table>
       
     </div>
   </div>
 </div>
-  <x-modal name="info-modal">
 
+  @foreach ($details as $detail)
+  <x-modal name="pembayaran{{$detail->id}}">
+
+    <div class="d-flex justify-content-center flex-column align-items-center mb-5">
+        <h1 class="text-center page-title">Kirim Bukti Pembayaran</h1>
+        <span class="underline-page-title text-center"></span>
+    </div>
+
+    <div class="row justify-content-center">
+    <div class="col-8">
+            <p>Total Pembayaran : <b>Rp {{ number_format( (float)$detail->price + (float)$detail->shipping ) }}</b></p>
+            <p>Metode Pembayaran : </p>
+            <form action="/cart/bayar/{{$user->id}}/{{$detail->artwork->id}}" method="POST" enctype="multipart/form-data">
+                    @csrf 
+                    <input type="hidden" name="code" value="{{ $detail->id_pesanan }}">
+                    <div class="form-check">
+                            <b>BANK BRI</b> 1029382131923<br>(DEODIA LORENSA)
+                            </label></div>
+                            <div class="form-check mb-5">
+                            <b>OVO & DANA</b> 085612345678<br>(DEODIA LORENSA)
+                            </label></div>
+                            <p>Unggah Bukti Pembayaran (.jpg / .jpeg)</p>
+                            <div class="mb-3">
+                            <input type="file" name="bayar" id="thumbnail" class="form-control">
+                            @error('bayar')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                            <br>
+                            <button class="rounded btn-orange btn-address" type="submit">Simpan</button>
+                    </div>
+            </form> 
+        </div>
+    </div>
+  </x-modal>
+  
+    <x-modal name="info-modal{{$detail->id}}">
       <div class="d-flex justify-content-center flex-column align-items-center mb-5">
         <h1 class="text-center page-title">Informasi Karya Seni</h1>
         <span class="underline-page-title text-center"></span>
       </div>
-
       <div class="row justify-content-center">
         <div class="col-8">
 
-          <p>ID Pesanan : <b>32483243T</b></p>
-          <p>Nama Karya : <b>Above Sasito</b></p>
-          <p>Seniman : <b>Mahera Lim</b></p>
-          <p>Total Harga : <b>Rp. 400.192</b></p>
-          <p>Status : <i>Menunggu Pembayaran</i></p>
+          <p>ID Pesanan : <b>{{ $detail->id_pesanan }}</b></p>
+          <p>Nama Karya : <b>{{ $detail->artwork->name }}</b></p>
+          <p>Seniman : <b>{{ $detail->artwork->artist->name }}</b></p>
+          <p>Total Harga : <b>Rp {{ number_format( (float)$detail->price + (float)$detail->shipping ) }}</b></p>
+          <p>Status : <i class="text-red">Menunggu Pembayaran</i></p>
           
         </div>
       </div>
-      
     </x-modal>
+  @endforeach
   
 </x-app-layout>

@@ -11,14 +11,12 @@ class Detail extends Model
 
     protected $fillable = [
         "cart_id",
+        "id_pesanan",
         "artwork_id",
         "price",
+        "status",
     ];
 
-    public function commission()
-    {
-        return $this->belongsTo(commission::class);
-    }
     public function cart()
     {
         return $this->belongsTo(Cart::class);

@@ -184,6 +184,17 @@ a.page-link {
   color: white;
 }
 
+.btn-green {
+  background-color: #27883c;
+  color: white;
+  text-decoration: none;
+  transition: .2s;
+}
+.btn-green:hover {
+  background-color: #257937;
+  color: white;
+}
+
 /* modal */
 .modal-body {
   padding: 80px 0;
