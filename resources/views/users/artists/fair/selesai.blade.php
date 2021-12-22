@@ -55,7 +55,7 @@
             <tr>
               <td scope="row" class="align-middle text-center">#</td>
               <td class="align-middle text-center">#</td>
-              <td class="py-2 text-center"><img src="asset('#')" height="100px"></td>
+              <td class="py-2 text-center"><img src="{{asset('#')}}" height="100px"></td>
               <td class="align-middle text-center">
                 <i class="text-warning">Belum Dikirim</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal"><i class="fa fa-info-circle"></i></button>

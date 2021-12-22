@@ -2,15 +2,15 @@
   <div class="container">
     @if(!Auth::user() || Auth::user()->type === 3)
     <a class="navbar-brand" href="{{ route('home') }}">
-        <img src="/img/logo/pamerin-logo.png">
+        <img src="{{asset('/img/logo/pamerin-logo.png')}}">
     </a>
     @elseif(Auth::user()->type === 2)
     <a class="navbar-brand" href="{{ route('artists.index') }}">
-        <img src="/img/logo/pamerin-logo.png">
+        <img src="{{asset('/img/logo/pamerin-logo.png')}}">
     </a>
     @elseif(Auth::user()->type === 1)
     <a class="navbar-brand" href="{{ route('admin.index') }}">
-        <img src="/img/logo/pamerin-logo.png">
+        <img src="{{asset('/img/logo/pamerin-logo.png')}}">
     </a>
     @endif
 

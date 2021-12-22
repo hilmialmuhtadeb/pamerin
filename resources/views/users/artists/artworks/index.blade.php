@@ -125,7 +125,7 @@
           <tr>
             <td scope="row" class="align-middle text-center">M-{{ $artwork->id }}</td>
             <td class="align-middle text-center">{{ $artwork->name }}</td>
-            <td class="py-2 text-center"><img src="{{'/img/karya/' . $artwork->thumbnail }}" height="100px"></td>
+            <td class="py-2 text-center"><img src="{{ asset('/img/karya/' . $artwork->thumbnail) }}" height="100px"></td>
             <td class="align-middle text-center">
 
               <button type="button" class="btn trash-button mx-2" data-bs-toggle="modal" data-bs-target="#trash-modal-{{ $artwork->id }}"><i class="fas fa-trash-alt"></i></button>

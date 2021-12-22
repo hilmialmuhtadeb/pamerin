@@ -95,7 +95,7 @@
       <div class="col-8">
         <p>Nama Pameran : <b>{{ $exhibition->name }}</b></p>
         <p>Poster Pameran : </p>
-        <img src="">
+        <img src="{{asset('#')}}">
         <p>Tanggal : <b>{{ $exhibition->date }}</b></p>
         <p>Waktu Mulai : <b>{{ $exhibition->start }}</b></p>
         <p>Waktu Berakhir : <b>{{ $exhibition->end }}</b></p>

@@ -115,7 +115,7 @@
             <p>Nama Pemesan : <b>#</b></p>
             <p>Total Pembayaran : <b>#</b></p>
             <p>Bukti Pembayaran : </p>
-            <img src="">
+            <img src="{{asset('#') }}">
           </div>
         </div>
       </x-modal>

@@ -79,7 +79,7 @@
           <label for="name" class="form-label label-small">Nama Pameran</label>
           <input type="text" name="name" class="form-control" id="name">
           <p class="form-label label-small">Poster Pameran</p>
-          <img src="">
+          <img src="{{asset('#') }}">
           <label for="address" class="form-label label-small">Tanggal</label>
           <input type="address" name="address" class="form-control" id="address">
           <label for="prov" class="form-label label-small">Waktu Mulai</label>
