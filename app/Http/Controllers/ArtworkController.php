@@ -39,17 +39,18 @@ class ArtworkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(ArtworkRequest $request)
     {
-        // $gambar = $request->thumbnail;
+        $gambar = $request->thumbnail;
         // menmabhakan gambar ke dalam database 
-        // $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
+        $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
 
         // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
-        // $gambar->move('img/karya/', $new_gambar);
+        $gambar->move('img/karya/', $new_gambar);
 
         $attr = $request->all();
-        $attr['thumbnail'] = $request->thumbnail->store('/images/artworks');
+        $attr['thumbnail'] = $new_gambar;
         $attr['category_id'] = $request->category;
         $attr['user_id'] = Auth::user()->id;
         $attr['slug'] = \Str::slug($request->name);
@@ -57,7 +58,7 @@ class ArtworkController extends Controller
 
         $artwork = Artwork::create($attr);
 
-        return redirect(route('artworks.shipping', $artwork))->with('berhasil menambahkan karya');
+        return redirect(route('artworks.shipping', $artwork));
     }
 
     /**
