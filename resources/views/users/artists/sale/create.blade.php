@@ -38,12 +38,20 @@
 
     <p class="step">Langkah 1 : <b>Informasi Lelang</b></p>
 
-    <form action="{{ route('auctions.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('artists.sale.store') }}" method="post" enctype="multipart/form-data">
     @csrf
 
       <div class="ms-3 row">
 
         <div class="col-md-5">
+
+          <div class="mb-2">
+            <label for="name" class="form-label label-small">Nama Karya</label>
+            <input type="name" name="name" class="form-control" id="name">
+            @error('date')
+                  <span class="error-message">{{ $message }}</span>
+            @enderror
+          </div>
 
           <div class="mb-2">
             <label for="date" class="form-label label-small">Tanggal Berakhir Lelang</label>
@@ -55,16 +63,38 @@
 
           <div class="mb-2">
             <label for="time" class="form-label label-small">Waktu Berakhir (dalam WIB)</label>
-            <input type="time" name="time" class="form-control" id="time">
+            <input type="time" name="start" class="form-control" id="start">
             @error('time')
                   <span class="error-message">{{ $message }}</span>
             @enderror
           </div>
 
           <div class="mb-2">
-            <label for="price" class="form-label label-small">Waktu Berakhir (dalam WIB)</label>
+            <label for="time" class="form-label label-small">Waktu Berakhir (dalam WIB)</label>
+            <input type="time" name="end" class="form-control" id="end">
+            @error('price')
+                  <span class="error-message">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <div class="mb-2">
+            <label for="price" class="form-label label-small">Harga Mulai Lelang</label>
             <input type="number" name="price" class="form-control" id="price">
             @error('price')
+                  <span class="error-message">{{ $message }}</span>
+            @enderror
+          </div>
+          <div class="mb-2">
+            <label for="description" class="form-label label-small">Deskripsi</label>
+            <input type="text" name="description" class="form-control" id="description">
+            @error('price')
+                  <span class="error-message">{{ $message }}</span>
+            @enderror
+          </div>
+          <div class="mb-3">
+            <label class="form-label label-small mb-2">Unggah Gambar Karya Lelang (.jpg/.jpeg/.png)</label>
+            <input type="file" name="thumbnail" id="thumbnail" class="form-control">
+            @error('thumbnail')
                   <span class="error-message">{{ $message }}</span>
             @enderror
           </div>
@@ -74,7 +104,7 @@
       </div>
 
       <div class="button-wrapper">
-        <button type="submit" class="submit-button bg-orange rounded mb-5">LANJUT</button>
+        <button type="submit" class="submit-button bg-orange rounded mb-5">Tambah</button>
       </div>
     </form>
 

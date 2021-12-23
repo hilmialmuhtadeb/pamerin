@@ -49,12 +49,13 @@ class AuctionController extends Controller
         {
             $auction_update = Auction::where('id',$request->auction_id)->update(['price'=> $request->bidder]);
         }
-        $tampil = $auction->user()->attach($request->auction_id,['user_id'=>$id, 'auction_id'=>$request->auction_id, 'bidder'=>$request->bidder, 'name'=>$name]);
+        $tampil = $auction->user()->attach($request->auction_id,['user_id'=>$id, 'auction_id'=>$request->auction_id, 'bidder'=>$request->bidder, 'name'=>$name, 'status'=>1]);
         $auction_send = Array(
             'user_id' => $id,
             'auction_id' => $request->auction_id,
             'bidder' => $request->bidder,
-            'name' => $name
+            'name' => $name,
+            'status' => 1,
         );
         try {
             //code...

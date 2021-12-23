@@ -1,6 +1,7 @@
 <div class="card shadow">
   <a href="{{ route('auctions.show', $auction->slug) }}">
-    <img src="{{asset('/img/dummy/artwork.jpg')}}" class="card-img-top">
+    {{-- {{asset('/img/dummy/artwork.jpg')}} --}}
+    <img src="{{asset('/img/poster/' . $auction->thumbnail)}}" class="card-img-top">
   </a>
   <div class="card-pameran-body">
     <div class="d-flex justify-content-between">

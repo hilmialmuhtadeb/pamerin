@@ -48,9 +48,9 @@
           </thead>
           <tbody>   
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">L-06</td>
+              <td class="align-middle text-center">K-04</td>
+              <td class="align-middle text-center">Karyaku yang lucu</td>
               <td class="align-middle text-center">
                 <i class="text-warning">Belum Bayar</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-dikirim"><i class="fa fa-info-circle"></i></button>

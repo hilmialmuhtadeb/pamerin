@@ -339,4 +339,16 @@ class CartController extends Controller
 
         return view('carts.edit', compact('artwork','user', 'cart', 'details'));
     }
+    public function tunggu_bayar()
+    {
+        return view('bayar_lelang.tunggu_bayar');
+    }
+    public function proses_bayar()
+    {
+        return view('bayar_lelang.proses_bayar');
+    }
+    public function selesai_bayar()
+    {
+        return view('bayar_lelang.selesai_bayar');
+    }
 }

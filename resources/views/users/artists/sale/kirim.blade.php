@@ -57,9 +57,9 @@
           </thead>
           <tbody>   
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">L-01</td>
+              <td class="align-middle text-center">K-09</td>
+              <td class="align-middle text-center">Karyaku Ini</td>
               <td class="align-middle text-center">
               <button type="submit" class="submit-button bg-orange rounded ">Kirim</button>
               <td class="align-middle text-center">
@@ -68,9 +68,9 @@
               </td>
             </tr>
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">L-03</td>
+              <td class="align-middle text-center">K-08</td>
+              <td class="align-middle text-center">Karyamu Itu</td>
               <td class="align-middle text-center">
                 <button type="submit" class="submit-button bg-grey rounded ">Kirim</button>
               <td class="align-middle text-center">
