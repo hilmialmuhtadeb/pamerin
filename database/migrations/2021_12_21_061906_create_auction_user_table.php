@@ -19,6 +19,8 @@ class CreateAuctionUserTable extends Migration
             $table->integer('user_id');
             $table->integer('bidder');
             $table->string('name');
+            $table->integer('status')->nullable();
+            $table->string('bukti', 255)->nullable();
             $table->timestamps();
         });
     }

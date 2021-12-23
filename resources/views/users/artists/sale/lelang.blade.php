@@ -104,8 +104,7 @@
       </div>
   
       <p class="text-danger my-4">Silakan tambah karya seni untuk mengajukan pameran dan membuat lelang karya seni!</p>
-      
-      @if ($artworks->count() === 0)
+      @if ($auctions->count() === 0)
         <div class="alert alert-warning text-center" role="alert">
           Anda belum menambahkan karya seni apapun, silahkan tambah karya seni <a href="{{ route('artists.sale.create') }}">disini</a>
         </div>
@@ -113,7 +112,7 @@
         <table class="table-custom table table-borderless table-striped">
           <thead>
             <tr>
-              <th scope="col" class="text-center">ID Karya</th>
+              <th scope="col" class="text-center">ID Lelang</th>
               <th scope="col" class="text-center">Nama Karya</th>
               <th scope="col" class="text-center">Karya</th>
               <th scope="col" class="text-center">Aksi</th>
@@ -121,18 +120,13 @@
           </thead>
   
           <tbody>   
-            @foreach ($artworks as $artwork)
+            @foreach ($auctions as $auction)
             <tr>
-              <td scope="row" class="align-middle text-center">M-{{ $artwork->id }}</td>
-              <td class="align-middle text-center">{{ $artwork->name }}</td>
-              <td class="py-2 text-center"><img src="{{asset('$artwork->takeImage') }}" height="100px"></td>
+              <td scope="row" class="align-middle text-center">M-{{ $auction->id }}</td>
+              <td class="align-middle text-center">{{ $auction->name }}</td>
+              <td class="py-2 text-center"><img src="{{ asset('/img/poster/' . $auction->thumbnail) }}" height="100px"></td>
               <td class="align-middle text-center">
-  
-                <button type="button" class="btn trash-button mx-2" data-bs-toggle="modal" data-bs-target="#trash-modal-{{ $artwork->id }}"><i class="fas fa-trash-alt"></i></button>
-  
-                <button type="button" class="btn sell-button mx-2{{ $artwork->price === null ? '' : ' disabled' }}" data-bs-toggle="modal" data-bs-target="#sell-modal-{{ $artwork->id }}"><i class="fas fa-dollar-sign"></i></button>
-  
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal-{{ $artwork->id }}"><i class="fas fa-info"></i></button>
+                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal-{{ $auction->id }}"><i class="fas fa-info"></i></button>
                 
               </td>
             </tr>
@@ -145,72 +139,25 @@
   
     {{-- modal --}}
   
-    @foreach ($artworks as $artwork)    
-      <x-modal name="trash-modal-{{ $artwork->id }}">
-        <p class="text-center m-title">PERHATIAN!</p>
-        <p class="text-center m-description">Apakah Anda yakin akan menghapus karya seni tersebut dari daftar?</p>
-  
-        <div class="d-flex justify-content-center">
-          <form action="{{ route('artworks.destroy', $artwork) }}" method="post">
-            @csrf
-            @method('delete')
-            <button type="submit" class="confirm-button">Ya</button>
-          </form>
-          <button type="button" class="decline-button bg-orange" data-bs-dismiss="modal">Tidak</button>
-        </div>
-      </x-modal>
-  
-  
-      <x-modal name="sell-modal-{{ $artwork->id }}">
-        <div class="row justify-content-center">
-          <div class="col-8">
-            
-            <form action="{{ route('artworks.sell', $artwork) }}" method="post">
-              @csrf
-              @method('patch')
-  
-              <p>Silahkan masukkan harga karya seni tersebut</p>
-              <div class="mb-2">
-                <label for="price" class="form-label label-small mb-2">Harga Jual</label>
-                <input type="number" name="price" class="form-control" id="price">
-                @error('price')
-                      <span class="error-message">{{ $message }}</span>
-                @enderror
-              </div>
-              <p class="my-4">Apakah Anda yakin akan menjual karya seni tersebut?</p>
-              <div class="d-flex justify-content-center">
-                <button type="submit" class="confirm-button">Ya</button>
-                <button type="button" class="decline-button bg-orange" data-bs-dismiss="modal">Tidak</button>
-              </div>
-              
-            </form>
-  
-          </div>
-        </div>
-      </x-modal>
-  
-      <x-modal name="info-modal-{{ $artwork->id }}">
+    @foreach ($auctions as $auction)
+      <x-modal name="info-modal-{{ $auction->id }}">
   
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-          <h1 class="text-center page-title">Informasi Karya Seni</h1>
+          <h1 class="text-center page-title">Informasi Karya Lelang</h1>
           <span class="underline-page-title text-center"></span>
         </div>
   
         <div class="row justify-content-center">
           <div class="col-8">
   
-            <p>Kategori : <b>{{ $artwork->category->name }}</b></p>
-            <p>ID Karya : <b>M-{{ $artwork->id }}</b></p>
-            <p>Nama Karya : <b>{{ $artwork->name }}</b></p>
-            <p>Media : <b>{{ $artwork->media }}</b></p>
-            <p>Ukuran : <b>{{ $artwork->size }}</b></p>
-            <p>Tahun Dibuat : <b>{{ $artwork->year }}</b></p>
-            <p>Deskripsi : {{ $artwork->description }}</></p>
-            
+            <p>Nama Karya : <b>{{ $auction->name }}</b></p>
+            <p>Tanggal : <b>{{ $auction->date }}</b></p>
+            <p>Waktu Dimulai : <b>{{ $auction->start }}</b></p>
+            <p>Waktu Berakir : <b>{{ $auction->end }}</b></p>
+            <p>Deskripsi : {{ $auction->description }}</></p>
           </div>
         </div>
         
       </x-modal>
-    @endforeach
-    
+      @endforeach
   </x-app-layout>

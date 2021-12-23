@@ -72,6 +72,7 @@
                     <li><a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">Profil</a></li>
                     <li><a class="dropdown-item" href="/tickets/show/{{auth()->user()->id}}">Tiket Saya</a></li>
                     <li><a class="dropdown-item" href="{{ route('carts.show_myorder', Auth::user()->cart) }}">Pesanan Saya</a></li>  
+                    <li><a class="dropdown-item" href="{{ route('bayar_lelang.lelang', Auth::user()->cart) }}">Lelang Saya</a></li>  
                     <li>
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
@@ -119,6 +120,7 @@
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ route('artists.sale.lelang') }}">Sedang Berlangsung</a>
                     </li>
+                    <li><a class="dropdown-item" href="{{ route('artists.sale.daftar') }}">Daftar Lelang</a></li>
                     <li><a class="dropdown-item" href="{{ route('artists.sale.terima') }}">Pesanan Diterima</a>
                     </li>
                     <li><a class="dropdown-item" href="{{ route('artists.sale.kirim') }}">Perlu Dikirim</a></li>

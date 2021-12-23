@@ -46,16 +46,16 @@
             <tr>
               <th scope="col" class="text-center">ID Lelang</th>
               <th scope="col" class="text-center">Nama Lelang</th>
-              <th scope="col" class="text-center">Lelang</th>
+              <th scope="col" class="text-center">Nama Karya</th>
               <th scope="col" class="text-center">status</th>
             </tr>
           </thead>
   
           <tbody>   
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="py-2 text-center"><img src="{{asset('#')}}" height="100px"></td>
+              <td scope="row" class="align-middle text-center">L-03</td>
+              <td class="align-middle text-center">K-01</td>
+              <td class="py-2 text-center">Bumi Langit</td>
               <td class="align-middle text-center">
                 <i class="text-warning">Belum Transfer</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal"><i class="fa fa-info-circle"></i></button>

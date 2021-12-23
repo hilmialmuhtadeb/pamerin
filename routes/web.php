@@ -104,6 +104,14 @@ Route::get('carts/{cart}/myorder/proses', [CartController::class, 'proses_myorde
 Route::get('carts/{cart}/myorder/waiting', [CartController::class, 'waiting_myorder'])->name('carts.waiting_myorder');
 Route::get('carts/{cart}/myorder/selesai', [CartController::class, 'selesai_myorder'])->name('carts.selesai_myorder');
 
+# Bayar
+Route::patch('bayar_lelang/tunggu_bayar', [CartController::class, 'bayar_lelang'])->name('bayar_lelang.bayar_lelang');
+Route::get('bayar_lelang/tunggu_bayar', [CartController::class, 'tunggu_bayar'])->name('bayar_lelang.tunggu_bayar');
+
+Route::get('bayar_lelang/lelang', [CartController::class, 'lelang'])->name('bayar_lelang.lelang');
+Route::get('bayar_lelang/lelang_waiting', [CartController::class, 'lelang_waiting'])->name('bayar_lelang.lelang_waiting');
+Route::get('bayar_lelang/selesai_bayar', [CartController::class, 'selesai_bayar'])->name('bayar_lelang.selesai_bayar');
+
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 
 // Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
@@ -131,6 +139,9 @@ Route::get('artists/sale/kirim', [ArtistController::class, 'kirim'])->name('arti
 Route::get('artists/sale/terima', [ArtistController::class, 'terima'])->name('artists.sale.terima');
 Route::get('artists/sale/lelang', [ArtistController::class, 'lelang'])->name('artists.sale.lelang');
 Route::get('artists/sale/create', [ArtistController::class, 'create'])->name('artists.sale.create');
+Route::post('artists/sale/store', [ArtistController::class, 'store'])->name('artists.sale.store');
+Route::get('artists/sale/daftar', [ArtistController::class, 'daftar'])->name('artists.sale.daftar');
+Route::post('artists/sale/daftar', [ArtistController::class, 'confirm_lelang'])->name('artists.sale.confirm');
 
 Route::get('artworks/{artwork}/shipping', [ShippingCostController::class, 'create'])->name('artworks.shipping');
 Route::post('artworks/{artwork}/shipping', [ShippingCostController::class, 'store']);

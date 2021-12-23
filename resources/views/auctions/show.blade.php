@@ -93,7 +93,7 @@
         <div class="row justify-content-center mb-2">
             <div class="col-md-5">
                 <div class="card-info p-3">
-                    <img src="{{asset('/img/dummy/artwork.jpg')}}" class="img-fluid img-detail rounded">
+                    <img src="{{asset('/img/poster/' . $auction->thumbnail)}}" class="img-fluid img-detail rounded">
                 </div>
 
                 <div class="card-info p-3" style="margin-top: 25px;">
@@ -101,7 +101,7 @@
                     <h1 class="detail-title">{{ $auction->name }}</h1>
                     <div class="row">
                         <div class="col-sm-4">
-                            <span class="title-2 text-black"><b>Start Bid :</b></span><br>
+                            <span class="title-4 text-black"><b>Harga Lelang :</b></span><br>
                         </div>
                         <div class="col-md-5">
                             <input type="hidden" name="price" value="{{ $auction->price }}">
@@ -118,7 +118,7 @@
             </div>
             <div class="col-md-5">
                 <div class="h-100 card-info p-3">
-                    <h1 class="detail-title">Bidder</h1>
+                    <h1 class="detail-title">Lelang</h1>
                     <hr>
                     <div class="bidder-box">
                         @foreach($auction->user as $bid)
