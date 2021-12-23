@@ -124,29 +124,27 @@
             <td class="align-middle text-center">{{ $detail->id_pesanan }}</td>
             <td class="align-middle text-center">{{ $detail->artwork->name }}</td>
             <td class="align-middle text-center">Rp {{ number_format( (float)$detail->price + (float)$detail->shipping ) }}</td>
+            <td class="align-middle text-center">
             @if ($detail->status == 2)
-            <td class="align-middle text-center">
-              <button type="button" class="rounded btn-orange btn-address" data-bs-toggle="modal"
-              data-bs-target="#pembayaran{{$detail->id}}">Unggah Pembayaran</button>
-            </td>
-            <td class="align-middle text-center text-red"><i>Menunggu Pembayaran</i>
-            @elseif ($detail->status == 3)
-            <td class="align-middle text-center">
-              <a> - </a>
-            </td>
-            <td class="align-middle text-center text-red"><i>Dalam pengiriman</i>
-            @elseif ($detail->status == 4)
-            <td class="align-middle text-center">
-              <a> - </a>
-            </td>
-            <td class="align-middle text-center text-red"><i>Selesai</i>
+            <button type="button" class="rounded btn-orange btn-address" data-bs-toggle="modal" data-bs-target="#pembayaran{{$detail->id}}">Unggah Pembayaran</button>
+            @else
+            <a> - </a>
             @endif
-                <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal{{$detail->id}}"><i class="fas fa-info"></i></button>
+            </td>
+            <td class="align-middle text-center text-red">
+            @if ($detail->status == 2)
+            <i>Menunggu Pembayaran</i>
+            @elseif ($detail->status == 3)
+            <i>Dalam pengiriman</i>
+            @elseif ($detail->status == 4)
+            <i>Selesai</i>
+            @endif
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#info-modal{{$detail->id}}"><i class="fas fa-info"></i></button>
             </td>
           </tr>
-          @endforeach        
-        </tbody>
-      </table>
+        @endforeach        
+      </tbody>
+    </table>
       
     </div>
   </div>

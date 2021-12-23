@@ -75,7 +75,7 @@
         <tbody>   
           @foreach ($details as $detail)
           <tr>
-            <td scope="row" class="text-center py-2"><img src="{{asset('/storage/' . $detail->artwork->thumbnail) }}" height="100px"></td>
+            <td scope="row" class="text-center py-2"><img src="{{asset('/img/karya/' . $detail->artwork->thumbnail) }}" height="100px"></td>
             <td class="align-middle text-center">{{ $detail->artwork->name }}</td>
             <td class="align-middle text-center">Rp {{ number_format($detail->price)}}</td>
             <td class="align-middle text-center">

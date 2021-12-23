@@ -189,7 +189,7 @@
 
       <div class="row my-5">
         <div class="col-md-6">
-          <h5>Pilihan Ongkos Pengiriman (Karya dikirim dari Kalimantan)</h5>
+          <h5>Pilihan Ongkos Pengiriman (Karya dikirim dari {{$artwork->artist->region}})</h5>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" value="{{$artwork->shippingCost->jawa}}" id="jawa" {{ ($details->shipping) == $artwork->shippingCost->jawa ? "checked" : ""}}>
             <label class="form-check-label" for="jawa">

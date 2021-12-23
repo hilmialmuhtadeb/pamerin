@@ -20,10 +20,18 @@ class TicketController extends Controller
         return view('tickets.show', compact('user'));
     }
     
-    public function joinDetail()
+    public function joinDetail(Request $request)
     {
-        return view('tickets.join');
+        $data = User::with('exhibition')->find(Auth::user()->id);
+        $exhibition = $data->exhibition()->where('exhibition_id',$request->exhibition_id)->firstOrFail(); 
+        if($exhibition->pivot->code == $request->id_tiket){
+            return view('tickets.join');
+        }else{
+            return redirect()->back()->with('error', 'ID Tiket yang anda masukkan salah');
+        }
+        // if($request->id_tiket )
     }
+
     public function store(Request $request)
     {
         // $exhibition = Exhibition::find($request->exhibition_id);
@@ -43,7 +51,6 @@ class TicketController extends Controller
         return view('tickets.confirm', compact('exhibition'));
         
     }
-
 
     public function destroy(Ticket $ticket)
     {
