@@ -87,7 +87,7 @@ Route::get('tickets/show/{id}', [TicketController::class, 'show'])->name('ticket
 Route::get('tickets/join', [TicketController::class, 'join'])->name('tickets.join');
 
 // mengirim edit untuk unggah bukti pembayaran
-Route::post('tickets/show/{id}/{idtiket}', [TickdtController::class, 'unggahBayar']);
+Route::post('tickets/show/{id}/{idtiket}', [TickdtController::class, 'unggahBayar'])->name('tickets.bayar');
 
 Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
 Route::get('tickets/confirm/payment/{id}', [TicketController::class, 'confirm'])->name('tickets.confirm');
@@ -106,7 +106,7 @@ Route::get('carts/{cart}/myorder/selesai', [CartController::class, 'selesai_myor
 
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');
 
-Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
+// Route::post('tickets/show', [TicketController::class, 'show'])->name('tickets.show');
 // Route::get('tickets/confirm/payment', [TicketController::class, 'confirm'])->name('tickets.confirm');
 Route::get('ticketsdetail', [TicketController::class, 'joinDetail'])->name('tickets.join');
 

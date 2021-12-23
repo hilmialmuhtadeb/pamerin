@@ -27,9 +27,4 @@ class Ticket extends Model
     {
         return $this->hasMany(Tickdt::class);
     }
-    public function getTicketsCountAttribute()
-    {
-        $ticketsCount = Ticket::where('ticket_id', $this->id)->count();
-        return $ticketsCount;
-    }
 }

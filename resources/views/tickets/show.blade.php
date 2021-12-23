@@ -9,13 +9,13 @@
 
         .table-cart th {
             padding: 20px 0;
-            width: 20%;
+            width: 10%;
             font-size: 16px;
             font-weight: 700;
         }
 
         .table-cart th.w-30 {
-            width: 30%;
+            width: 15%;
         }
 
         .table-cart tbody {
@@ -146,7 +146,7 @@
                         <th scope="col" class="text-center">Total Bayar</th>
                         <th scope="col" class="text-center">Aksi</th>
                         <th scope="col" class="text-center">Cetak</th>
-                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center w-30 align-item-center">Status</th>
                     </tr>
                 </thead>
 
@@ -158,12 +158,11 @@
                         <td class="align-middle text-center">Rp. {{ number_format($tiket->pivot->summary)}}</td>
                         <td class="align-middle text-center">
                         @if($tiket->pivot->status_id == 1)
-                            <!-- <a href="/tickets/confirm/payment/{{$tiket->id}}" class="rounded btn-orange btn-address">Unggah Pembayaran</a> -->
                             <button type="button" class="rounded btn-orange btn-address" data-bs-toggle="modal"
-                                data-bs-target="#pembayaran{{ $tiket->id }}">Unggah Pembayaran</button>
+                            data-bs-target="#pembayaran{{ $tiket->id }}">Unggah Pembayaran</button>
                         @elseif($tiket->pivot->status_id == 3)
                             <button type="button" class="rounded btn-orange btn-address" data-bs-toggle="modal"
-                                data-bs-target="#masuk{{ $tiket->id }}">Tautkan Tiket</button>
+                            data-bs-target="#masuk{{ $tiket->id }}">Tautkan Tiket</button>
                         @else
                         <a> - </a>
                         @endif
@@ -179,9 +178,12 @@
                         <td class="align-middle text-center text-red"><i>Menunggu Pembayaran</i>
                         @elseif($tiket->pivot->status_id == 2)
                         <td class="align-middle text-center text-orange"><i>Akan Datang</i>
+                        @elseif($tiket->pivot->status_id == 3)
+                        <td class="align-middle text-center text-green"><i>Sedang berlangsung</i>
+                        @elseif($tiket->pivot->status_id == 4)
+                        <td class="align-middle text-center text-green"><i>Selesai</i>
                         @endif
-                            <button type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#info{{ $tiket->id }}"><i class="fas fa-info"></i></button>
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#info{{ $tiket->id }}"><i class="fas fa-info"></i></button>
                         </td>
                     </tr>
                     @endforeach
@@ -200,15 +202,22 @@
         </div>
 
         <div class="row justify-content-center">
-        <div class="col-8">
+             <div class="col-8">
 
                 <p>ID Tiket : <b>{{ $tiket->pivot->code}}</b></p>
                 <p>Nama Pameran : <b>{{$tiket->name}}</b></p>
                 <p>Tanggal Pameran : <b>{{$tiket->date}}</b></p>
                 <p>Waktu Pameran : <b>{{$tiket->start}}-{{$tiket->end}}</b></p>
                 <p>Total Harga : <b>Rp.{{ number_format($tiket->price)}}</b></p>
-                <p>Status : <i class="text-red">Menunggu Pembayaran</i></p> 
-
+                @if($tiket->pivot->status_id == 1)
+                <p>Status : <i class="text-red">Menunggu Pembayaran</i></p>
+                @elseif($tiket->pivot->status_id == 2)
+                <p>Status : <i class="text-orange">Akan Datang</i></p>
+                @elseif($tiket->pivot->status_id == 3)
+                <p>Status : <i class="text-green">Sedang berlangsung</i>
+                @elseif($tiket->pivot->status_id == 4)
+                <p>Status : <i class="text-green">Selesai</i>
+                @endif
             </div>
         </div>
     </x-modal>
@@ -216,12 +225,10 @@
     
     @foreach($user->exhibition as $tiket)
     <x-modal name="masuk{{ $tiket->id }}">
-
         <div class="d-flex justify-content-beetwen flex-column align-items-center mb-5">
             <h1 class="text-left page-title">{{$tiket->name}}</h1>
             <span class="underline-page-title text-center"></span>
         </div>
-
         <div class="row justify-content-beetwen">
             <div class="col-7   ">
 
@@ -237,12 +244,15 @@
                 <div class="row justify-content-center align-items-center">
                     <p>ID Tiket</p>
                     <div class="col-sm-8">
-                    <form action="{{ route('tickdt.store') }}" method="post">
+                    <form action="{{ route('tickets.join') }}" method="get">
+                        <input type="hidden" name="exhibition_id" value="{{ $tiket->id }}">
                         <input type="text" name="id_tiket" id="id_tiket"></input>
                     </div>
                     <div class="col-sm-4">
-                        <a href="/ticketsdetail" class="btn-masuk-pameran rounded btn-orange"><i class="fa fa-sign-in"></i></a>
+                        <!-- <a href="/ticketsdetail" class="btn-masuk-pameran rounded btn-orange"><i class="fa fa-sign-in"></i></a> -->
+                        <button type="submit" class="btn-masuk-pameran rounded btn-orange"><i class="fa fa-sign-in"></i><</button>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -252,7 +262,6 @@
 
     @foreach($user->exhibition as $tiket)
     <x-modal name="pembayaran{{ $tiket->id }}">
-
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
             <h1 class="text-center page-title">Kirim Bukti Pembayaran</h1>
             <span class="underline-page-title text-center"></span>

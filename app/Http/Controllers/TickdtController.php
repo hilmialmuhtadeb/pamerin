@@ -58,7 +58,9 @@ class TickdtController extends Controller
             'bayar' => 'required|mimes:jpg,jpeg|max:2500'
         ]);
 
-        $user=User::find($id);
+        $id_user=Auth()->user()->id;
+        $user = User::find($id_user); 
+
         $exhibition=Exhibition::find($idtiket);
 
         $gambar = $request->bayar;
@@ -71,8 +73,7 @@ class TickdtController extends Controller
         // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
         $gambar->move('buktipembayarantiket/', $new_gambar);
 
-        // return redirect(route('exhibitions.index'))->with('success', 'Silahkan melanjutkan ke pembayaran');
-        return redirect()->back()->with('success', 'Sukses menambahkan bukti pembayaran');
+        return redirect()->back()->with()->with('success', 'Silahkan melanjutkan ke pembayaran');
     }
 
     /**
@@ -117,10 +118,10 @@ class TickdtController extends Controller
      */
     public function destroy(Tickdt $tickdt)
     {
-        {
-            $tickdt->delete();
-            return redirect(route('tickets.show'))->with('success', 'Barang berhasil dihapus');
-        }
+        
+        $tickdt->delete();
+        return redirect(route('tickets.show'))->with('success', 'Barang berhasil dihapus');
+
     }
 
 public static function boot()
