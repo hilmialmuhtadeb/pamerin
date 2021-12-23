@@ -60,7 +60,7 @@
     <div class="row justify-content-between mb-3">
 
       <div class="col-md-7">
-        <img src="{{asset('/img/poster/' . $exhibition->thumbnail) }}" class="img-detail img-fluid rounded">
+        <img src="{{asset($exhibition->thumbnail) }}" class="img-detail img-fluid rounded">
       </div>
 
       <div class="col-md-5">
@@ -98,13 +98,13 @@
         </p>
       </div>
       <div class="col-md-3 mt-2 mb-3">
-        <img src="{{asset('$exhibition->thumbnail') }}" class="img-exhibition rounded">
+        <img src="{{asset($exhibition->thumbnail) }}" class="img-exhibition rounded">
       </div>
     </div>
     {{-- <div class=malasngoding-slider> --}}
       {{-- <div class=isi-slider > --}}
        {{-- <div class="card col-md-3 mt-2 mb-3" > --}}
-      {{-- <img class="card-img-top" src="{{asset('$exhibition->thumbnail') }}" alt="Card image cap"> --}}
+      {{-- <img class="card-img-top" src="{{asset($exhibition->thumbnail) }}" alt="Card image cap"> --}}
         {{-- </div> --}}
       {{-- </div> --}}
       {{-- </div> --}}

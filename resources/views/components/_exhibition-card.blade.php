@@ -1,6 +1,6 @@
 <div class="card shadow">
   <a href="{{ route('exhibitions.show', $exhibition->slug) }}">
-    <img src="{{asset('/img/poster/' . $exhibition->thumbnail) }}" class="card-img-top" height="200px">
+    <img src="{{asset($exhibition->thumbnail) }}" class="card-img-top" height="200px">
   </a>
   <div class="card-pameran-body">
     <div class="d-flex justify-content-between">
