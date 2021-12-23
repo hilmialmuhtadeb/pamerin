@@ -110,9 +110,9 @@
                 </td>
               </form>
               @else
-              <td class="align-middle text-center">
-                <button type="button" class="submit-button bg-green rounded ">Pilih</button>
-              </td>
+                <td class="align-middle text-center">
+                  <button type="button" class="submit-button bg-green rounded ">Pilih</button>
+                </td>
               @endif
             </tr>
             @endforeach

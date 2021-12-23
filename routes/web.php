@@ -104,8 +104,12 @@ Route::get('carts/{cart}/myorder/proses', [CartController::class, 'proses_myorde
 Route::get('carts/{cart}/myorder/waiting', [CartController::class, 'waiting_myorder'])->name('carts.waiting_myorder');
 Route::get('carts/{cart}/myorder/selesai', [CartController::class, 'selesai_myorder'])->name('carts.selesai_myorder');
 
+# Bayar
+Route::patch('bayar_lelang/tunggu_bayar', [CartController::class, 'bayar_lelang'])->name('bayar_lelang.bayar_lelang');
 Route::get('bayar_lelang/tunggu_bayar', [CartController::class, 'tunggu_bayar'])->name('bayar_lelang.tunggu_bayar');
-Route::get('bayar_lelang/proses_bayar', [CartController::class, 'proses_bayar'])->name('bayar_lelang.proses_bayar');
+
+Route::get('bayar_lelang/lelang', [CartController::class, 'lelang'])->name('bayar_lelang.lelang');
+Route::get('bayar_lelang/lelang_waiting', [CartController::class, 'lelang_waiting'])->name('bayar_lelang.lelang_waiting');
 Route::get('bayar_lelang/selesai_bayar', [CartController::class, 'selesai_bayar'])->name('bayar_lelang.selesai_bayar');
 
 Route::post('exhibitions/detail', [ExhibitionController::class, 'detail'])->name('exhibitions.detail');

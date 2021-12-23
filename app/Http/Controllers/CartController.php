@@ -6,6 +6,8 @@ use App\Models\Cart;
 use App\Models\Detail;
 use App\Models\User;
 use App\Models\Artwork;
+use App\Models\Auction;
+use App\Models\AuctionUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\redirect;
@@ -122,6 +124,87 @@ class CartController extends Controller
         // var_dump($details);
         return view('carts.myorder_selesai', compact('cart', 'details', 'user'));
     }
+
+    public function lelang()
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        // # 1 -> sedang lelang
+        // # 2 -> menunggu pembayaran
+        // # 3 -> pembayaran sedang diproses
+
+        $auction_user = $user->auction()->where('status', 2)->orWhere('status', 3)->orWhere('status', 4)->latest()->get();
+
+        return view('bayar_lelang.lelang', compact('user', 'auction_user'));
+    }
+
+    
+    public function tunggu_bayar()
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        // # 1 -> sedang lelang
+        // # 2 -> menunggu pembayaran
+        // # 3 -> pembayaran sedang diproses
+        
+        $auction_user = $user->auction()->Where('status', 2)->latest()->get();
+        
+        return view('bayar_lelang.tunggu_bayar', compact('user', 'auction_user'));
+    }
+
+    public function bayar_lelang(Request $request)
+    {
+        $request->validate([
+            'bayar' => 'required|mimes:jpg,jpeg,png|max:2500',
+        ],[
+            'bayar.required' => 'Anda belum mengupload bukti pembayaran',
+        ]);
+
+        $id = Auth()->user()->id;
+        $user = User::find($id); 
+
+        $gambar = $request->bayar;
+        // menmabhakan gambar ke dalam database 
+        $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
+        // update data di relasi many to many dan mengubah status id menjadi 2
+        AuctionUser::where('id', $request->id_auctionUser)->where('auction_id', $request->id_auction)->where('user_id', $user->id)->update(['bukti'=>$new_gambar, 'status'=>3]);
+        // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
+        $gambar->move('buktipembayaranlelang/', $new_gambar);
+
+        return redirect(route('bayar_lelang.tunggu_bayar', Auth::user()->cart))->with('success', 'Pesanan sedang diproses');
+    }
+
+    public function lelang_waiting()
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        // # 1 -> sedang lelang
+        // # 2 -> menunggu pembayaran
+        // # 3 -> pembayaran sedang diproses
+
+        $auction_user = $user->auction()->where('status', 3)->orWhere('status', 3)->orWhere('status', 4)->latest()->get();
+
+        return view('bayar_lelang.lelang', compact('user', 'auction_user'));
+    }
+    
+
+    public function selesai_bayar()
+    {
+        $id=Auth()->user()->id;
+        $user=User::find($id); 
+        // # 1 -> sedang lelang
+        // # 2 -> menunggu pembayaran
+        // # 3 -> pembayaran sedang diproses
+
+        $auction_user = $user->auction()->where('status', 4)->latest()->get();
+
+        return view('bayar_lelang.selesai_bayar', compact('user', 'auction_user'));
+    }
+
+
+
+
+
 
     public function bayar_pesanan(Request $request, $user_id, $artwork_id)
     {
@@ -338,17 +421,5 @@ class CartController extends Controller
         $details = Detail::find($id);
 
         return view('carts.edit', compact('artwork','user', 'cart', 'details'));
-    }
-    public function tunggu_bayar()
-    {
-        return view('bayar_lelang.tunggu_bayar');
-    }
-    public function proses_bayar()
-    {
-        return view('bayar_lelang.proses_bayar');
-    }
-    public function selesai_bayar()
-    {
-        return view('bayar_lelang.selesai_bayar');
     }
 }

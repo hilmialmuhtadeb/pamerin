@@ -106,12 +106,6 @@ class ArtistController extends Controller
        
    public function confirm_lelang(Request $request)
    {
-    //    $auction = Auction::find($request->id_auction); 
-    //    $user = User::find($request->id_user);
-
-    //    $user->auction()->updateExistingPivot($auction,['status'=>2]); // return all value where acution_id and user_id
-        // $auction->user()->updateExistingPivot($user,['status' => 2]); // return all value where acution_id and user_id
-
         AuctionUser::where('id', $request->id_auctionUser)->where('auction_id', $request->id_auction)->where('user_id', $request->id_user)->update(['status' => 2]);
 
        return redirect(route('artists.sale.confirm'))->with('success', 'Pesanan sedang diproses');

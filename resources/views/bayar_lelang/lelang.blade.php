@@ -96,11 +96,11 @@
       <div class="ms-auto mb-5 text-end">
       <li class="nav-item dropdown">
               <a class="btn turun-btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Menunggu Pembayaran
+              Semua Lelang
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item item-turun" href="{{ route('bayar_lelang.lelang') }}">Semua Lelang</a></li>                
-                <li><a class="dropdown-item item-turun" href="#">Menunggu Pembayaran</a></li>
+                <li><a class="dropdown-item item-turun" href="#">Semua Lelang</a></li>                
+                <li><a class="dropdown-item item-turun" href="{{ route('bayar_lelang.tunggu_bayar') }}">Menunggu Pembayaran</a></li>
                 <li><a class="dropdown-item item-turun" href="{{ route('bayar_lelang.lelang_waiting') }}">Akan Datang</a></li>
                 <li><a class="dropdown-item item-turun" href="{{ route('bayar_lelang.selesai_bayar') }}">Selesai</a></li>
               </ul>

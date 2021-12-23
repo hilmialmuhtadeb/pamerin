@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function auction()
     {
-        return $this->belongsToMany(Auction::class, 'auction_user', 'user_id', 'auction_id')->withPivot(['id', 'user_id', 'auction_id', 'bidder', 'name', 'status'])->withTimeStamps();
+        return $this->belongsToMany(Auction::class, 'auction_user', 'user_id', 'auction_id')->withPivot(['id', 'user_id', 'auction_id', 'bidder', 'name', 'status', 'bukti'])->withTimeStamps();
     }
 
     public function bank() {

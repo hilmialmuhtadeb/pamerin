@@ -139,8 +139,8 @@
             <td class="align-middle text-center">
               <a> - </a>
             </td>
-                <td class="align-middle text-center text-red"><i>Selesai</i>
-                @endif
+            <td class="align-middle text-center text-red"><i>Selesai</i>
+            @endif
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal{{$detail->id}}"><i class="fas fa-info"></i></button>
             </td>
           </tr>
