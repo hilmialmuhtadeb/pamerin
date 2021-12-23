@@ -72,7 +72,7 @@
                 @endif
               </td>
               <td class="align-middle text-center">
-                <i class="text-{{ $color[($exhibition->stages - 3)] }}">{{ $text[($exhibition->stages - 3)] }} Transfer</i>
+                <i class="text-{{ $color[($exhibition->stages == 3)] }}">{{ $text[($exhibition->stages == 3)] }} Transfer</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-pembayaran-{{ $exhibition->id }}"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr>
@@ -93,7 +93,7 @@
             <p>Tiket Terjual : <b>#</b></p>
             <p>Seniman : <b>{{ $exhibition->artist->name }}</b></p>
             <p>Besar Dana : <b>#</b></p>
-            <p>Status : <b class="text-{{ $color[($exhibition->stages - 3)] }}">{{ $text[($exhibition->stages - 3)] }} Transfer</b></p>
+            <p>Status : <b class="text-{{ $color[($exhibition->stages == 3)] }}">{{ $text[($exhibition->stages == 3)] }} Transfer</b></p>
           </div>
         </div>
       </x-modal>

@@ -60,12 +60,12 @@ class AdminController extends Controller
     }
     public function dikirim()
     {
-        $artworks = Artwork::where('status', 5)->get();
+        $artworks = Artwork::where('isReady', 2)->get();
         return view('admin.karya.dikirim', compact('artworks'));
     }
     public function finish()
     {
-        $artworks = Artwork::where('status', '>=', 6)->get();
+        $artworks = Artwork::where('isReady', 3)->get();
         return view('admin.karya.finish', [
             'artworks' => $artworks,
             'color' => ['primary', 'success'],
