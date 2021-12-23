@@ -66,7 +66,7 @@
                 <button type="submit" class="submit-button bg-orange rounded ">Konfirmasi</button>
                 @endif
               <td class="align-middle text-center">
-                <i class="text-{{ $color[($artwork->status)] }}">{{ $text[($artwork->status)] }}</i>
+                <i class="text-{{ $color[($artwork->isReady)] }}">{{ $text[($artwork->isReady)] }}</i>
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-sedia-{{ $artwork->id }}"><i class="fa fa-info-circle"></i></button>
               </td>
             </tr> 
