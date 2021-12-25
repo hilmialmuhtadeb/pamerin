@@ -21,6 +21,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TickdtController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\LikeController;
 use App\Models\Exhibition;
 use Illuminate\Support\Facades\Route;
 
@@ -167,3 +168,6 @@ Route::middleware('guest')->group(function() {
 });
 
 Route::post('logout', LogoutController::class)->name('logout');
+
+Route::get('/make/like/{pameran_id}',[LikeController::class,'add_like'])->name('web.add-like');
+Route::get('/make/unlike/{pameran_id}',[LikeController::class,'min_like'])->name('web.min-like');

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\ExhibitionController;
 // use App\Http\Controllers\Api\PasswordController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\LikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +40,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::resource('article', ArticleController::class);
  Route::resource('exhibitions', ExhibitionController::class);
  Route::resource('users',UserController::class);
+ Route::get('/make/like/{pameran_id}',[LikeController::class,'add_like'])->name('api.add-like');
 //  Route::resource('password_resets',PasswordController::class);

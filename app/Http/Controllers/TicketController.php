@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tickdt;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\LikePameran;
 use App\Models\Exhibition;
 use App\Models\ShippingCost;
 use Illuminate\Http\Request;
@@ -25,7 +26,11 @@ class TicketController extends Controller
         $data = User::with('exhibition')->find(Auth::user()->id);
         $exhibition = $data->exhibition()->where('exhibition_id',$request->exhibition_id)->firstOrFail(); 
         if($exhibition->pivot->code == $request->id_tiket){
-            return view('tickets.join');
+            $like = LikePameran::where('exhibition_id',$request->exhibition_id)->where('islike',1)->get();
+            return view('tickets.join',[
+                'exhibition' => $exhibition,
+                'jumlah_like' => $like
+            ]);
         }else{
             return redirect()->back()->with('error', 'ID Tiket yang anda masukkan salah');
         }

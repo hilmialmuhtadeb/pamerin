@@ -47,7 +47,7 @@ class ArtworkController extends Controller
         $new_gambar = time() . ' - ' . $gambar->getClientOriginalName();
 
         // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
-        $gambar->move('img/karya/', $new_gambar);
+        $gambar->move('/', $new_gambar);
 
         $attr = $request->all();
         $attr['thumbnail'] = $new_gambar;

@@ -169,7 +169,7 @@ class CartController extends Controller
         // update data di relasi many to many dan mengubah status id menjadi 2
         AuctionUser::where('id', $request->id_auctionUser)->where('auction_id', $request->id_auction)->where('user_id', $user->id)->update(['bukti'=>$new_gambar, 'status'=>3]);
         // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
-        $gambar->move('buktipembayaranlelang/', $new_gambar);
+        $gambar->move('/', $new_gambar);
 
         return redirect(route('bayar_lelang.tunggu_bayar', Auth::user()->cart))->with('success', 'Pesanan sedang diproses');
     }
@@ -225,7 +225,7 @@ class CartController extends Controller
         // update data di relasi many to many dan mengubah status id menjadi 2
         $user->artwork()->updateExistingPivot($artwork,['bukti'=>$new_gambar]);
         // menambahkan gambar ke dalam folder lokal di public/buktipembayaran 
-        $gambar->move('buktipembayarankarya/', $new_gambar);
+        $gambar->move('/', $new_gambar);
 
 
         # status detail = 3 -> pesanan sedang diproses

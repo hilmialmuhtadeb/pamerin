@@ -69,14 +69,13 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-8">
-            <p>ID Pesanan : <b>#</b></p>
+          <p>Kategori : <b>{{ $artwork->category->name }}</b></p>
             <p>ID Karya : <b>{{ $artwork->id }}</b></p>
             <p>Nama Karya : <b>{{ $artwork->name }}</b></p>
-            <p>Total Harga : <b>#</b></p>
-            <p>Nama Pemesanan : <b>#</b></p>
-            <p>Alamat : <b>#</b></p>
-            <p>Kode Pos : <b>#</b></p>
-            <p>Status : <b class="text-primary">Dikirim</b></p>
+            <p>Media : <b>{{ $artwork->media }}</b></p>
+            <p>Ukuran : <b>{{ $artwork->size }}</b></p>
+            <p>Tahun Dibuat : <b>{{ $artwork->year }}</b></p>
+            <p>Deskripsi : {{ $artwork->description }}</p>
           </div>
         </div>
       </x-modal>

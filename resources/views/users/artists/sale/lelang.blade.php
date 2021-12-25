@@ -124,7 +124,7 @@
             <tr>
               <td scope="row" class="align-middle text-center">M-{{ $auction->id }}</td>
               <td class="align-middle text-center">{{ $auction->name }}</td>
-              <td class="py-2 text-center"><img src="{{ asset('/img/poster/' . $auction->thumbnail) }}" height="100px"></td>
+              <td class="py-2 text-center"><img src="{{ asset($auction->thumbnail) }}" height="100px"></td>
               <td class="align-middle text-center">
                 <button type="button" class="btn info-button mx-2" data-bs-toggle="modal" data-bs-target="#info-modal-{{ $auction->id }}"><i class="fas fa-info"></i></button>
                 

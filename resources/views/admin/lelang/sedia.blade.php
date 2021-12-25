@@ -57,9 +57,9 @@
           </thead>
           <tbody>
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+              <td scope="row" class="align-middle text-center">{{ $auction->id }}</td>
+              <td class="align-middle text-center">{{ $auction->name }}</td>
+              <td class="align-middle text-center">{{ $auction->seniman }}</td>
               <td class="align-middle text-center">
               <button type="submit" class="submit-button bg-orange rounded ">Konfirmasi</button>
               <td class="align-middle text-center">
@@ -68,9 +68,9 @@
               </td>
             </tr>
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+            <td scope="row" class="align-middle text-center">{{ $auction->id }}</td>
+              <td class="align-middle text-center">{{ $auction->name }}</td>
+              <td class="align-middle text-center">{{ $auction->seniman }}</td>
               <td class="align-middle text-center">
               
               <td class="align-middle text-center">
@@ -79,9 +79,9 @@
               </td>
             </tr>
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+            <td scope="row" class="align-middle text-center">{{ $auction->id }}</td>
+              <td class="align-middle text-center">{{ $auction->name }}</td>
+              <td class="align-middle text-center">{{ $auction->seniman }}</td>
               <td class="align-middle text-center">
               
               <td class="align-middle text-center">
@@ -90,9 +90,9 @@
               </td>
             </tr>
             <tr>
-              <td scope="row" class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
-              <td class="align-middle text-center">#</td>
+            <td scope="row" class="align-middle text-center">{{ $auction->id }}</td>
+              <td class="align-middle text-center">{{ $auction->name }}</td>
+              <td class="align-middle text-center">{{ $auction->seniman }}</td>
               <td class="align-middle text-center">
               
               <td class="align-middle text-center">
@@ -109,13 +109,13 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-8">
-            <p>Status : <b class="text-warning">#</b></p>
-            <p>ID Lelang : <b>#</b></p>
-            <p>ID Karya : <b>#</b></p>
-            <p>Nama Pemesan : <b>#</b></p>
-            <p>Total Pembayaran : <b>#</b></p>
-            <p>Bukti Pembayaran : </p>
-            <img src="{{asset('#') }}">
+            <p>Kategori : <b>{{ $artwork->category->name }}</b></p>
+            <p>ID Karya : <b>{{ $artwork->id }}</b></p>
+            <p>Nama Karya : <b>{{ $artwork->name }}</b></p>
+            <p>Media : <b>{{ $artwork->media }}</b></p>
+            <p>Ukuran : <b>{{ $artwork->size }}</b></p>
+            <p>Tahun Dibuat : <b>{{ $artwork->year }}</b></p>
+            <p>Deskripsi : {{ $artwork->description }}</p>
           </div>
         </div>
       </x-modal>

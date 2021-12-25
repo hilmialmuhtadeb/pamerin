@@ -57,9 +57,9 @@
       @include('components._breadcrumbs')
     </div>
 
-    <div class="row justify-content-between mb-3">
+    <div class="row justify-content-center mb-3">
 
-      <div class="col-md-7">
+      <div class="col-md-5">
         <img src="{{asset($exhibition->thumbnail) }}" class="img-detail img-fluid rounded">
       </div>
 
@@ -96,9 +96,6 @@
         <p class="exhibition-user">
           <i class="fas fa-user"></i> {{ $exhibition->artist->name }}, {{ $exhibition->artist->region }}
         </p>
-      </div>
-      <div class="col-md-3 mt-2 mb-3">
-        <img src="{{asset($exhibition->thumbnail) }}" class="img-exhibition rounded">
       </div>
     </div>
     {{-- <div class=malasngoding-slider> --}}

@@ -249,7 +249,6 @@
                         <input type="text" name="id_tiket" id="id_tiket"></input>
                     </div>
                     <div class="col-sm-4">
-                        <!-- <a href="/ticketsdetail" class="btn-masuk-pameran rounded btn-orange"><i class="fa fa-sign-in"></i></a> -->
                         <button type="submit" class="btn-masuk-pameran rounded btn-orange"><i class="fa fa-sign-in"></i><</button>
                     </div>
                 </form>
